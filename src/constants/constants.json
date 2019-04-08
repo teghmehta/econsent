@@ -1,0 +1,115 @@
+[
+  { "title": "Study Title:",
+    "numOfRows": 1,
+    "value": ""
+  },
+
+  {
+    "title": "Principal Investigator:",
+    "numOfRows": 1,
+    "value": ""
+  },
+
+  {
+    "title": "Funder:",
+    "numOfRows": 1,
+    "value": ""
+  },
+
+  {
+    "title": "Co-Investigators:",
+    "numOfRows": 1,
+    "value": ""
+  },
+
+  {
+    "title": "INTRODUCTION:",
+    "numOfRows": 9,
+    "value": ""
+
+  },
+
+  {
+    "title": "WHY IS THIS STUDY BEING DONE?",
+    "numOfRows": 4,
+    "value": ""
+  },
+
+  {
+    "title": "WHAT IS THE USUAL TREATMENT?",
+    "numOfRows": 4,
+    "value": ""
+  },
+
+  {
+    "title": "WHAT WILL HAPPEN DURING THIS STUDY?",
+    "numOfRows": 4,
+    "value": ""
+  },
+
+  {
+    "title": "HOW MANY PEOPLE WILL TAKE PART IN THIS STUDY?",
+    "numOfRows": 4,
+    "value": ""
+  },
+
+  {
+    "title": "WHAT ARE THE RESPONSIBILITIES OF STUDY PARTICIPANTS?",
+    "numOfRows": 4,
+    "value": ""
+  },
+
+  {
+    "title": "WHAT ARE THE RISKS OR HARMS OF PARTICIPATING IN THIS STUDY?",
+    "numOfRows": 4,
+    "value": ""
+  },
+
+  {
+    "title": "WHAT ARE THE RISKS OR HARMS OF PARTICIPATING IN THIS STUDY?",
+    "numOfRows": 4,
+    "value": ""
+  },
+
+  {
+    "title": "CAN PARTICIPATION IN THIS STUDY END EARLY?",
+    "numOfRows": 4,
+    "value": ""
+  },
+
+  {
+    "title": "WHAT HAPPENS IF I HAVE A RESEARCH RELATED INJURY?",
+    "numOfRows": 4,
+    "value": ""
+  },
+
+  {
+    "title": "ARE STUDY PARTICIPANTS PAID TO PARTICIPATE IN THIS STUDY?",
+    "numOfRows": 4,
+    "value": ""
+  },
+
+  {
+    "title": "HOW WILL MY INFORMATION BE KEPT CONFIDENTIAL?",
+    "numOfRows": 4,
+    "value": ""
+  },
+
+  {
+    "title": "ARE STUDY PARTICIPANTS PAID TO PARTICIPATE IN THIS STUDY?",
+    "numOfRows": 4,
+    "value": ""
+  },
+
+  {
+    "title": "WHAT ARE THE RIGHTS OF PARTICIPANTS IN A RESEARCH STUDY?",
+    "numOfRows": 4,
+    "value": ""
+  },
+
+  {
+    "title": "DOCUMENTATION OF INFORMED CONSENT",
+    "numOfRows": 4,
+    "value": ""
+  }
+]

@@ -16,16 +16,15 @@
 }
 
 .consent-form-container {
-    max-width: 1100px;
     background-color: white;
     margin: auto;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    padding: 20px 70px 50px 70px;
+    padding: 20px 40px 50px 40px;
     position: relative;
     overflow: hidden;
     transition: margin-left .5s;
-    width: 670px; /* width: 7in; */
-    height: 900px; /* or height: 9.5in; */
+    width: 8.5in;
+    height: 11in;
     clear: both;
     page-break-after: always;
 }
@@ -38,8 +37,10 @@
     width: 180px
 }
 
-h4 {
+.consent-form-title {
     padding-top: 70px;
+    font-size: 0.95em;
+    font-weight: 700;
 }
 
 .text-container {
@@ -53,8 +54,13 @@ h4 {
 
 .singleline-heading {
     flex: 1;
+    font-weight: 600;
 }
 
 .singleline-text {
     flex: 3;
+}
+
+p {
+    text-align: left;
 }

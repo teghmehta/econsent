@@ -7,7 +7,7 @@ class SingleLineText extends Component {
     render() {
         return (
             <div className={'text-container singleline-container'}>
-                <h6 className={'singleline-heading'}>{this.props.heading}</h6>
+                <p className={'singleline-heading'}>{this.props.heading}</p>
                 <p className={'singleline-text'}>{this.props.text}</p>
             </div>
         );

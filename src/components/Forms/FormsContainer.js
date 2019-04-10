@@ -36,7 +36,7 @@ class FormsContainer extends Component {
     loadJson = () => {
         const json = window.localStorage.getItem(LOCALSTORAGE_KEY) || JSON.stringify(formData, null, 2);
         console.log('JSON LOADJSON', json);
-        this.setState({formData: json })
+        this.setState({formData: JSON.parse(json) })
     }
 
     saveJson = () => {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../Forms/Forms.css';
 import {ButtonToolbar, Button, Container, Row, Col, Image} from "react-bootstrap";
 import ImageHeader from "./ImageHeader";
-import SingleLineText from "./SingleLineText";
+import ConsentText from "./ConsentText";
 import * as html2canvas from "html2canvas";
 import * as jsPDF from 'jspdf'
 import FormTextArea from "../Forms/FormsContainer";
@@ -51,7 +51,7 @@ class ConsentForm extends Component {
                 <ImageHeader/>
                 <h6 className={'consent-form-title'}>PATIENT INFORMED CONSENT TO PARTICIPATE IN A RESEARCH STUDY</h6>
 
-                {this.state.formData.map((form, index) => <SingleLineText key={index} heading={form.title} text={form.value}/>)}
+                {this.state.formData.map((form, index) => <ConsentText key={index} numOfRows={form.numOfRows} heading={form.title} text={form.value}/>)}
 
                 {/*<button onClick={this.createPDF}></button>*/}
             </div>

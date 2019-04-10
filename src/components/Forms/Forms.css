@@ -61,6 +61,19 @@
     flex: 3;
 }
 
+.multiline-container {
+    display: flex;
+}
+
+.multiline-heading {
+    flex: 1;
+    font-weight: 600;
+}
+
+.multiline-text {
+    flex: 3;
+}
+
 p {
     text-align: left;
 }

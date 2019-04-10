@@ -14,3 +14,47 @@
 .btn {
     margin: 10px !important;
 }
+
+.consent-form-container {
+    max-width: 1100px;
+    background-color: white;
+    margin: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 20px 70px 50px 70px;
+    position: relative;
+    overflow: hidden;
+    transition: margin-left .5s;
+    width: 670px; /* width: 7in; */
+    height: 900px; /* or height: 9.5in; */
+    clear: both;
+    page-break-after: always;
+}
+
+.uhn-consent-logo {
+    width: 240px
+}
+
+.ehi-consent-logo {
+    width: 180px
+}
+
+h4 {
+    padding-top: 70px;
+}
+
+.text-container {
+    padding: 30px;
+}
+
+.singleline-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.singleline-heading {
+    flex: 1;
+}
+
+.singleline-text {
+    flex: 3;
+}

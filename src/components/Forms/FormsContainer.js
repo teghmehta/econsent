@@ -24,8 +24,6 @@ class FormsContainer extends Component {
 
 
     componentWillMount () {
-        // this.setState({formData});
-        //This clears the arrows when you route to a new file path
         this.unlisten = this.props.history.listen((location, action) => {
             window.scrollTo(0, 0)
         });
@@ -47,7 +45,6 @@ class FormsContainer extends Component {
     loadJson = () => {
         // window.localStorage.getItem(LOCALSTORAGE_KEY) ||
         const json = JSON.stringify(formData, null, 2);
-        console.log('JSON LOADJSON', json);
         this.setState({formData: JSON.parse(json) })
     }
 
@@ -74,7 +71,7 @@ class FormsContainer extends Component {
     render() {
         return (
             <div className={'app-container'}>
-                <Header/>
+                <Header formName={this.props.formName}/>
                 <div className={'forms-container'}>
                     {formData.map((form, index) => <FormTextArea key={index} index={index} formTitle={form.title} formValue={form.value} placeholder={form.title} numOfRows={form.numOfRows} changeValue={(value, index) => this.changeValue(value, index)}/> )}
                     <ButtonToolbar>

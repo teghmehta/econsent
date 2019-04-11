@@ -10,7 +10,7 @@ class Header extends Component {
                     <img src={require("../../res/ehealth-logo.png")} alt={'ehealth-logo'} className="logo"/>
                 </div>
                 <div className={'title-div'}>
-                    <h1 className={"title"}>eConsent</h1>
+                    <h1 className={"title"}>{this.props.formName ? "eConsent - " + this.props.formName : "eConsent"}</h1>
                 </div>
                 <div className={'spacer-div'}>
                 </div>

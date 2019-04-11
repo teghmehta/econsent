@@ -6,24 +6,10 @@ import ConsentText from "./ConsentText";
 import * as html2canvas from "html2canvas";
 import * as jsPDF from 'jspdf'
 import FormTextArea from "../Forms/FormsContainer";
+import {withRouter} from "react-router";
 const LOCALSTORAGE_KEY = "formJSON";
 
 class ConsentForm extends Component {
-
-    createPDF() {
-        const input = document.getElementById('consent-form-container');
-        html2canvas(input)
-            .then((canvas) => {
-                const imgData = canvas.toDataURL('image/png');
-            });
-        html2canvas(input)
-            .then((canvas) => {
-                const imgData = canvas.toDataURL('image/png');
-                const pdf = new jsPDF();
-                pdf.addImage(imgData, 'PNG', 0, 0);
-                pdf.save("ConsentForm.pdf");
-            });
-    }
 
     constructor (props) {
         super(props);
@@ -33,7 +19,6 @@ class ConsentForm extends Component {
     componentWillMount () {
         this.loadJson()
     }
-
 
     loadJson = () => {
         const json = window.localStorage.getItem(LOCALSTORAGE_KEY);
@@ -53,7 +38,7 @@ class ConsentForm extends Component {
 
                 {this.state.formData.map((form, index) => <ConsentText key={index} numOfRows={form.numOfRows} heading={form.title} text={form.value}/>)}
 
-                {/*<button onClick={this.createPDF}></button>*/}
+                {/*<Button onClick={this.createPDF.bind(this)} variant="primary">Save</Button>*/}
             </div>
         );
     }

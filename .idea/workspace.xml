@@ -2,12 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c02733d7-d4a9-4ce8-a87a-d7686d50c11f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/Consent/StartupForm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Consent/ConsentForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Consent/ConsentForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Consent/SingleLineText.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Consent/ConsentText.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Consent/ConsentText.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Consent/ConsentText.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Forms/FormTextArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Forms/FormTextArea.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Forms/Forms.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Forms/Forms.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Forms/FormsContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Forms/FormsContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/Header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constants/constants.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/constants.json" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -20,11 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="12" lean-forward="true" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
+            <state relative-caret-position="120">
+              <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -35,8 +40,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Header/Header.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="41" selection-start-column="41" selection-end-line="1" selection-end-column="22" />
+            <state relative-caret-position="105">
+              <caret line="7" column="36" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -44,8 +52,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Forms/FormsContainer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="570">
-              <caret line="38" column="22" lean-forward="true" selection-start-line="38" selection-start-column="22" selection-end-line="38" selection-end-column="22" />
+            <state relative-caret-position="834">
+              <caret line="90" column="20" lean-forward="true" selection-start-line="90" selection-start-column="20" selection-end-line="90" selection-end-column="20" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -53,14 +61,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Consent/ConsentForm.js">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/constants/constants.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
-              <caret line="42" column="49" lean-forward="true" selection-start-line="42" selection-start-column="33" selection-end-line="42" selection-end-column="49" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="330">
+              <caret line="22" column="4" lean-forward="true" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -68,8 +73,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Consent/ConsentText.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="50" selection-start-line="10" selection-start-column="50" selection-end-line="10" selection-end-column="50" />
+            <state>
+              <caret column="41" lean-forward="true" selection-start-column="41" selection-end-column="41" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Forms/Forms.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="585">
+              <caret line="39" column="21" lean-forward="true" selection-start-line="39" selection-start-column="21" selection-end-line="39" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Consent/ConsentForm.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="22" column="22" lean-forward="true" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -78,10 +101,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Forms/Forms.css">
+        <entry file="file://$PROJECT_DIR$/src/components/Consent/StartupForm.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="28" lean-forward="true" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="28" />
+            <state relative-caret-position="285">
+              <caret line="19" column="5" lean-forward="true" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -94,20 +120,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Forms/FormTextArea.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="25" column="40" lean-forward="true" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="40" />
+            <state relative-caret-position="675">
+              <caret line="45" column="69" lean-forward="true" selection-start-line="45" selection-start-column="69" selection-end-line="45" selection-end-column="69" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Header/Header.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1125">
-              <caret line="75" column="1" selection-start-line="75" selection-start-column="1" selection-end-line="75" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -150,19 +167,20 @@
         <option value="$PROJECT_DIR$/src/components/Forms/forms.css" />
         <option value="$PROJECT_DIR$/src/components/Header/Header.css" />
         <option value="$PROJECT_DIR$/src/components/Forms/FormSingleLine.js" />
-        <option value="$PROJECT_DIR$/src/components/Forms/FormTextArea.js" />
         <option value="$PROJECT_DIR$/src/constants/constants.js" />
-        <option value="$PROJECT_DIR$/src/constants/constants.json" />
-        <option value="$PROJECT_DIR$/src/components/Header/Header.js" />
         <option value="$PROJECT_DIR$/src/components/Forms/ConsentForm.js" />
         <option value="$PROJECT_DIR$/src/components/Consent/ImageHeader.js" />
         <option value="$PROJECT_DIR$/src/components/Consent/SingleLineText.js" />
         <option value="$PROJECT_DIR$/src/components/Consent/MultiLineText.js" />
+        <option value="$PROJECT_DIR$/src/components/Header/Header.js" />
+        <option value="$PROJECT_DIR$/src/components/Consent/StartupForm.js" />
+        <option value="$PROJECT_DIR$/src/App.js" />
+        <option value="$PROJECT_DIR$/src/components/Forms/FormTextArea.js" />
+        <option value="$PROJECT_DIR$/src/components/Forms/FormsContainer.js" />
+        <option value="$PROJECT_DIR$/src/components/Consent/ConsentForm.js" />
         <option value="$PROJECT_DIR$/src/components/Consent/ConsentText.js" />
         <option value="$PROJECT_DIR$/src/components/Forms/Forms.css" />
-        <option value="$PROJECT_DIR$/src/components/Consent/ConsentForm.js" />
-        <option value="$PROJECT_DIR$/src/components/Forms/FormsContainer.js" />
-        <option value="$PROJECT_DIR$/src/App.js" />
+        <option value="$PROJECT_DIR$/src/constants/constants.json" />
       </list>
     </option>
   </component>
@@ -219,6 +237,12 @@
               <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="components" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="Forms" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="econsent" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="constants" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="econsent" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
@@ -340,7 +364,8 @@
       <workItem from="1554484797152" duration="989000" />
       <workItem from="1554485966971" duration="12483000" />
       <workItem from="1554752282344" duration="951000" />
-      <workItem from="1554753434748" duration="8802000" />
+      <workItem from="1554753434748" duration="8835000" />
+      <workItem from="1555001382171" duration="6565000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1554742894433</created>
@@ -370,11 +395,18 @@
       <option name="project" value="LOCAL" />
       <updated>1554925460303</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Minor bugs">
+      <created>1554926171403</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1554926171403</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23225000" />
+    <option name="totallyTimeSpent" value="29823000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-519" y="-1440" width="2560" height="1440" extended-state="0" />
@@ -384,10 +416,9 @@
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" weight="0.3293944" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.20384048" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.2732644" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.2732644" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -397,6 +428,7 @@
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.3264402" />
       <window_info anchor="bottom" id="TypeScript" order="11" weight="0.3293944" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.3293944" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -410,7 +442,8 @@
     <MESSAGE value="Removed the other text fields, made it dynamic, added it from JSOn data" />
     <MESSAGE value="FInished writing to JSON to local storage and started the consent form and makign it a pdf" />
     <MESSAGE value="Added the JSON into ConsentForm" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added the JSON into ConsentForm" />
+    <MESSAGE value="Minor bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Minor bugs" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/public/favicon.ico" />
@@ -437,20 +470,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Forms/FormSingleLine.js" />
     <entry file="file://$PROJECT_DIR$/src/components/Forms/FormDoubleLine.js" />
-    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="2194" column="4" selection-start-line="2194" selection-start-column="4" selection-end-line="2194" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/write-json-file/index.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="71" selection-start-line="3" selection-start-column="71" selection-end-line="3" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/write-json-file/index.d.ts" />
     <entry file="file://$PROJECT_DIR$/src/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -474,19 +494,6 @@
     <entry file="file://$PROJECT_DIR$/src/index.css">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/constants/constants.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Header/Header.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1125">
-          <caret line="75" column="1" selection-start-line="75" selection-start-column="1" selection-end-line="75" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/res/UHN.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Consent/ImageHeader.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -504,47 +511,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Consent/MultiLineText.js" />
+    <entry file="file://$PROJECT_DIR$/src/components/Header/Header.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1125">
+          <caret line="75" column="1" selection-start-line="75" selection-start-column="1" selection-end-line="75" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Header/Header.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="41" selection-start-column="41" selection-end-line="1" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Consent/MultiLineText.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Forms/FormTextArea.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="40" lean-forward="true" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="40" />
+        <state relative-caret-position="105">
+          <caret line="7" column="36" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Forms/Forms.css">
+    <entry file="file://$PROJECT_DIR$/src/res/UHN.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="28" lean-forward="true" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="28" />
+        <state relative-caret-position="15">
+          <caret line="6073" column="13" selection-start-line="6073" selection-start-column="13" selection-end-line="6073" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Consent/ConsentText.js">
+    <entry file="file://$PROJECT_DIR$/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="50" selection-start-line="10" selection-start-column="50" selection-end-line="10" selection-end-column="50" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Consent/ConsentForm.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="42" column="49" lean-forward="true" selection-start-line="42" selection-start-column="33" selection-end-line="42" selection-end-column="49" />
+        <state relative-caret-position="120">
+          <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
@@ -553,21 +551,62 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Forms/FormsContainer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="38" column="22" lean-forward="true" selection-start-line="38" selection-start-column="22" selection-end-line="38" selection-end-column="22" />
+        <state relative-caret-position="834">
+          <caret line="90" column="20" lean-forward="true" selection-start-line="90" selection-start-column="20" selection-end-line="90" selection-end-column="20" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.js">
+    <entry file="file://$PROJECT_DIR$/src/components/Consent/ConsentForm.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="12" lean-forward="true" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
+        <state relative-caret-position="330">
+          <caret line="22" column="22" lean-forward="true" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Forms/FormTextArea.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="675">
+          <caret line="45" column="69" lean-forward="true" selection-start-line="45" selection-start-column="69" selection-end-line="45" selection-end-column="69" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Consent/StartupForm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="5" lean-forward="true" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Forms/Forms.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="585">
+          <caret line="39" column="21" lean-forward="true" selection-start-line="39" selection-start-column="21" selection-end-line="39" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Consent/ConsentText.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="41" lean-forward="true" selection-start-column="41" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/constants/constants.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="4" lean-forward="true" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="4" />
         </state>
       </provider>
     </entry>

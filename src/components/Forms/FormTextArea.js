@@ -30,7 +30,7 @@ class FormTextArea extends Component {
                         {this.props.formTitle}
                     </Form.Label>
                     <Col sm="10">
-                        <Form.Control type="text" placeholder={this.props.placeholder} value={this.state.formValue} onChange={e => this.handleChange(e.target.value)}/>
+                        <Form.Control type="textarea" placeholder={this.props.placeholder} value={this.state.formValue} onChange={e => this.handleChange(e.target.value)}/>
                     </Col>
                 </Form.Group>
             );

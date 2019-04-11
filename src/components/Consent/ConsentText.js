@@ -4,7 +4,7 @@ import '../Forms/Forms.css';
 class ConsentText extends Component {
 
     render() {
-        if (this.props.numOfRows <= 1) {
+        if (this.props.numOfRows <= 2) {
             return (
                 <div className={'text-container singleline-container'}>
                     <p className={'singleline-heading'}>{this.props.heading}</p>

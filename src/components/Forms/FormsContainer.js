@@ -4,6 +4,8 @@ import './Forms.css';
 
 import {ButtonToolbar, Button} from "react-bootstrap";
 import Header from "../Header/Header";
+import {Link} from "react-router-dom";
+import {withRouter} from "react-router";
 let formData = require('../../constants/constants');
 
 const LOCALSTORAGE_KEY = "formJSON";
@@ -11,18 +13,27 @@ const LOCALSTORAGE_KEY = "formJSON";
 class FormsContainer extends Component {
 
     constructor (props) {
-        super(props)
+        super(props);
         
         this.formData = {}
     }
 
+    componentWillUnmount() {
+        this.unlisten();
+    }
+
+
     componentWillMount () {
-        this.setState({formData});
+        // this.setState({formData});
+        //This clears the arrows when you route to a new file path
+        this.unlisten = this.props.history.listen((location, action) => {
+            window.scrollTo(0, 0)
+        });
         this.loadJson()
     }
 
     validateJson (json) {
-        let validJson
+        let validJson;
 
         try{
             validJson = JSON.stringify(JSON.parse(json), null, 2)
@@ -34,7 +45,8 @@ class FormsContainer extends Component {
     }
 
     loadJson = () => {
-        const json = window.localStorage.getItem(LOCALSTORAGE_KEY) || JSON.stringify(formData, null, 2);
+        // window.localStorage.getItem(LOCALSTORAGE_KEY) ||
+        const json = JSON.stringify(formData, null, 2);
         console.log('JSON LOADJSON', json);
         this.setState({formData: JSON.parse(json) })
     }
@@ -42,7 +54,7 @@ class FormsContainer extends Component {
     saveJson = () => {
         const validJson = this.validateJson(JSON.stringify(this.state.formData, null, 2))
 
-        console.log('invalid json', this.state.formData);
+        console.log('Save:', this.state.formData);
         if (!validJson) {
             return;
         }
@@ -53,7 +65,8 @@ class FormsContainer extends Component {
         )
     };
 
-    changeValue(value, index, form) {
+
+    changeValue(value, index) {
         this.state.formData[index].value = value;
         console.log(this.state.formData);
     }
@@ -63,11 +76,11 @@ class FormsContainer extends Component {
             <div className={'app-container'}>
                 <Header/>
                 <div className={'forms-container'}>
-                    {formData.map((form, index) => <FormTextArea key={index} index={index} formTitle={form.title} formValue={form.value} placeholder={form.title} numOfRows={form.numOfRows} changeValue={(value, index) => this.changeValue(value, index, form)}/> )}
+                    {formData.map((form, index) => <FormTextArea key={index} index={index} formTitle={form.title} formValue={form.value} placeholder={form.title} numOfRows={form.numOfRows} changeValue={(value, index) => this.changeValue(value, index)}/> )}
                     <ButtonToolbar>
                         <Button onClick={this.saveJson.bind(this)} variant="primary">Save</Button>
-                        <Button variant="secondary">Save and Continue Later</Button>
-                        <Button onClick={this.loadJson.bind(this)} variant="outline-danger">Save and Submit</Button>
+                        <Link className={'app-div-link'} to={'/'}><Button variant="secondary" onClick={this.saveJson.bind(this)} >Save and Continue Later</Button></Link>
+                        <Link className={'app-div-link'} to={'/submit'}><Button onClick={this.saveJson.bind(this)} variant="outline-danger">Save and Submit</Button></Link>
                     </ButtonToolbar>
                 </div>
             </div>
@@ -75,4 +88,4 @@ class FormsContainer extends Component {
     }
 }
 
-export default FormsContainer;
+export default withRouter(FormsContainer);

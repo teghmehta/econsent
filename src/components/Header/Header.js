@@ -6,11 +6,9 @@ class Header extends Component {
     render() {
         return (
             <div className="header">
-                {/*<Link to={"/"}>*/}
                 <div className={'logo-div'}>
                     <img src={require("../../res/ehealth-logo.png")} alt={'ehealth-logo'} className="logo"/>
                 </div>
-                {/*</Link>*/}
                 <div className={'title-div'}>
                     <h1 className={"title"}>eConsent</h1>
                 </div>

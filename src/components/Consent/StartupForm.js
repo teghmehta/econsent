@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from "../Header/Header";
-import {Button, ButtonToolbar, Col, DropdownButton, Form, InputGroup, Dropdown} from "react-bootstrap";
+import {Button, ButtonToolbar, Col, DropdownButton, Form, Dropdown} from "react-bootstrap";
 import './Consent.css'
 
 class StartupForm extends Component {
@@ -25,7 +25,7 @@ class StartupForm extends Component {
             event.preventDefault();
             event.stopPropagation();
         } else {
-            this.props.history.push('/new/' + this.state.formName)
+            this.props.history.push('/form/' + this.state.formName)
         }
         this.setState({ validated: true });
     }
@@ -38,7 +38,7 @@ class StartupForm extends Component {
         let rows = [];
         let myThis = this;
         Object.keys(localStorage).forEach(function(key, i){
-            rows.push(<div key={i} className={"dropdown-div"}><Dropdown.Item key={i} href={"/new/" + key}>{key}</Dropdown.Item>
+            rows.push(<div key={i} className={"dropdown-div"}><Dropdown.Item key={i} href={"/form/" + key}>{key}</Dropdown.Item>
                 <Button onClick={myThis.deleteForm(key)} variant="danger">Delete</Button></div>)
         });
         if (rows.length > 0) {

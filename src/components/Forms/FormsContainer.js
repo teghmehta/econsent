@@ -44,12 +44,7 @@ class FormsContainer extends Component {
         console.log(window.localStorage.getItem(this.props.formName));
         const json = window.localStorage.getItem(this.props.formName) || JSON.stringify(formData, null, 2);
         this.setState({formData: JSON.parse(json) })
-    }
-
-    openJson(key) {
-        const json = window.localStorage.getItem(this.props.formName)
-        this.setState({formData: JSON.parse(json) })
-    }
+    };
 
     saveJson = () => {
         const validJson = this.validateJson(JSON.stringify(this.state.formData, null, 2))
@@ -64,6 +59,10 @@ class FormsContainer extends Component {
         )
     };
 
+    submitForm() {
+        this.saveJson();
+        this.props.history.push('/submit/' + this.props.formName)
+    }
 
     changeValue(value, index) {
         this.state.formData[index].value = value;
@@ -79,7 +78,7 @@ class FormsContainer extends Component {
                     <ButtonToolbar>
                         <Button onClick={this.saveJson.bind(this)} variant="primary">Save</Button>
                         <Link className={'app-div-link'} to={'/'}><Button variant="secondary" onClick={this.saveJson.bind(this)} >Save and Continue Later</Button></Link>
-                        <Link className={'app-div-link'} to={'/submit'}><Button onClick={this.saveJson.bind(this)} variant="outline-danger">Save and Submit</Button></Link>
+                        <Button onClick={this.submitForm.bind(this)} variant="outline-danger">Save and Submit</Button>
                     </ButtonToolbar>
                 </div>
             </div>

@@ -14,3 +14,8 @@
 .btn {
     margin: 10px !important;
 }
+
+.dropdown-div {
+    display: flex;
+    align-items: center;
+}

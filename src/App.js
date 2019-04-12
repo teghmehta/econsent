@@ -16,7 +16,7 @@ class App extends Component {
             <Switch>
               <Route exact path={"/"} component={StartupForm}/>
               <Route exact path ={"/new/:formName"} render={(props)=> <FormsContainer formName={props.match.params.formName}/>}/>
-              <Route exact path ={"/submit"}   render={(props)=> <ConsentForm/>}/>
+              <Route exact path ={"/submit/:formName"}   render={(props)=> <ConsentForm formName={props.match.params.formName}/>}/>
             </Switch>
           </div>
         </BrowserRouter>

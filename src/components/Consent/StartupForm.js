@@ -13,6 +13,7 @@ class StartupForm extends Component {
             formName: '' };
 
         this.handleChange = this.handleChange.bind(this);
+        this.deleteForm = this.deleteForm.bind(this);
     }
     handleChange(text) {
         this.setState({formName: text });
@@ -29,15 +30,25 @@ class StartupForm extends Component {
         this.setState({ validated: true });
     }
 
+    deleteForm(key) {
+        // localStorage.removeItem(key)
+    }
+
     openForms() {
         let rows = [];
+        let myThis = this;
         Object.keys(localStorage).forEach(function(key, i){
-            rows.push(<Dropdown.Item key={i} href={"/new/" + key}>{key}</Dropdown.Item>)
+            rows.push(<div key={i} className={"dropdown-div"}><Dropdown.Item key={i} href={"/new/" + key}>{key}</Dropdown.Item>
+                <Button onClick={myThis.deleteForm(key)} variant="danger">Delete</Button></div>)
         });
-        // for(let i in localStorage) {
-        //     console.log(localStorage.length)
-        // }
-        return rows
+        if (rows.length > 0) {
+            return <DropdownButton id="dropdown-basic-button" title="Open Forms">
+                {rows}
+            </DropdownButton>
+        } else {
+            return ""
+        }
+
     }
 
     render() {
@@ -61,9 +72,7 @@ class StartupForm extends Component {
 
                     <ButtonToolbar>
                         <Button type='submit' variant="primary">New Form</Button>
-                        <DropdownButton id="dropdown-basic-button" title="Dropdown button">
-                            {this.openForms()}
-                        </DropdownButton>
+                        {this.openForms()}
                     </ButtonToolbar>
                 </Form>
 

@@ -21,7 +21,7 @@ class ConsentForm extends Component {
     }
 
     loadJson = () => {
-        const json = window.localStorage.getItem(LOCALSTORAGE_KEY);
+        const json = window.localStorage.getItem(this.props.formName);
 
         console.log('ConsentForm', JSON.parse(json));
 

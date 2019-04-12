@@ -8,8 +8,6 @@ import {Link} from "react-router-dom";
 import {withRouter} from "react-router";
 let formData = require('../../constants/constants');
 
-const LOCALSTORAGE_KEY = "formJSON";
-
 class FormsContainer extends Component {
 
     constructor (props) {
@@ -43,21 +41,25 @@ class FormsContainer extends Component {
     }
 
     loadJson = () => {
-        // window.localStorage.getItem(LOCALSTORAGE_KEY) ||
-        const json = JSON.stringify(formData, null, 2);
+        console.log(window.localStorage.getItem(this.props.formName));
+        const json = window.localStorage.getItem(this.props.formName) || JSON.stringify(formData, null, 2);
+        this.setState({formData: JSON.parse(json) })
+    }
+
+    openJson(key) {
+        const json = window.localStorage.getItem(this.props.formName)
         this.setState({formData: JSON.parse(json) })
     }
 
     saveJson = () => {
         const validJson = this.validateJson(JSON.stringify(this.state.formData, null, 2))
 
-        console.log('Save:', this.state.formData);
         if (!validJson) {
             return;
         }
 
         window.localStorage.setItem(
-            LOCALSTORAGE_KEY,
+            this.props.formName,
             validJson
         )
     };
@@ -73,7 +75,7 @@ class FormsContainer extends Component {
             <div className={'app-container'}>
                 <Header formName={this.props.formName}/>
                 <div className={'forms-container'}>
-                    {formData.map((form, index) => <FormTextArea key={index} index={index} formTitle={form.title} formValue={form.value} placeholder={form.title} numOfRows={form.numOfRows} changeValue={(value, index) => this.changeValue(value, index)}/> )}
+                    {this.state.formData.map((form, index) => <FormTextArea key={index} index={index} formTitle={form.title} formValue={form.value} placeholder={form.title} numOfRows={form.numOfRows} changeValue={(value, index) => this.changeValue(value, index)}/> )}
                     <ButtonToolbar>
                         <Button onClick={this.saveJson.bind(this)} variant="primary">Save</Button>
                         <Link className={'app-div-link'} to={'/'}><Button variant="secondary" onClick={this.saveJson.bind(this)} >Save and Continue Later</Button></Link>

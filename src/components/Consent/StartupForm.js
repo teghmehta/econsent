@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from "../Header/Header";
-import {Button, ButtonToolbar, Col, Form, InputGroup} from "react-bootstrap";
+import {Button, ButtonToolbar, Col, DropdownButton, Form, InputGroup, Dropdown} from "react-bootstrap";
 import './Consent.css'
 
 class StartupForm extends Component {
@@ -29,6 +29,17 @@ class StartupForm extends Component {
         this.setState({ validated: true });
     }
 
+    openForms() {
+        let rows = [];
+        Object.keys(localStorage).forEach(function(key, i){
+            rows.push(<Dropdown.Item key={i} href={"/new/" + key}>{key}</Dropdown.Item>)
+        });
+        // for(let i in localStorage) {
+        //     console.log(localStorage.length)
+        // }
+        return rows
+    }
+
     render() {
         return (
             <div className="startup-container">
@@ -50,7 +61,9 @@ class StartupForm extends Component {
 
                     <ButtonToolbar>
                         <Button type='submit' variant="primary">New Form</Button>
-                        <Button variant="secondary" >Open Form</Button>
+                        <DropdownButton id="dropdown-basic-button" title="Dropdown button">
+                            {this.openForms()}
+                        </DropdownButton>
                     </ButtonToolbar>
                 </Form>
 

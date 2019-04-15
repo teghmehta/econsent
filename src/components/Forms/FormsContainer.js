@@ -25,7 +25,8 @@ class FormsContainer extends Component {
         this.unlisten = this.props.history.listen((location, action) => {
             window.scrollTo(0, 0)
         });
-        this.loadJson()
+        this.loadJson();
+        this.saveJson();
     }
 
     validateJson (json) {
@@ -47,7 +48,12 @@ class FormsContainer extends Component {
     };
 
     saveJson = () => {
-        const validJson = this.validateJson(JSON.stringify(this.state.formData, null, 2))
+        let  validJson;
+        try {
+            validJson = this.validateJson(JSON.stringify(this.state.formData, null, 2));
+        } catch(e) {
+            validJson = this.validateJson(JSON.stringify(formData, null, 2));
+        }
 
         if (!validJson) {
             return;

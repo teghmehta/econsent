@@ -1,45 +1,44 @@
 [
   { "title": "Study Title:",
     "numOfRows": 2,
-    "value": "Effect of a mobile phone-based telemonitoring program on\nthe outcome of heart failure patients After an Incidence of\nacute Decompensation: “Medly-AID”"
+    "value": ""
   },
 
   {
     "title": "Principal Investigator:",
     "numOfRows": 2,
-    "value": "Dr. Stephanie Poon, Cardiology, 416-480-6100 Ext. 2484"
+    "value": ""
   },
 
   {
     "title": "Funder:",
     "numOfRows": 2,
-    "value": "This study is being funded by the Ted Rogers Centre for\nHeart Research"
+    "value": ""
   },
 
   {
     "title": "Co-Investigators:",
     "numOfRows": 2,
-    "value": "Dr. Heather Ross\nDr. Emily Seto\nDr. Edward Etchells"
+    "value": ""
   },
 
   {
   "title": "INFORMED CONSENT",
   "numOfRows": 9,
-  "value": "You are being asked to consider participating in a research study. A research study is a\nway of gathering information on a treatment, procedure or medical device or to answer\na question about something that is not well understood.\nThis form explains the purpose of this research study, provides information about the\nMedly application, the procedures involved, possible risks and benefits, and the rights of\nparticipants.\nPlease read this form carefully and ask any questions you may have. You may have\nthis form and all information concerning the study explained to you. The study staff will\ntell you if there are any study timelines for making your decision. Please ask the study\nstaff or one of the investigator(s) to clarify anything you do not understand or would like\nto know more about. Make sure all your questions are answered to your satisfaction\nbefore deciding whether to participate in this research study.\nParticipating in this study is your choice (voluntary). You have the right to choose not to\nparticipate, or to stop participating in this study at any time."
-
-},
+  "value": ""
+  },
 
   {
     "title": "INTRODUCTION",
     "numOfRows": 4,
-    "value": "You are being asked to consider participating in this study because you have been\ndiagnosed with heart failure (HF) and are currently being treated in hospital."
+    "value": ""
 
   },
 
   {
     "title": "WHY IS THIS STUDY BEING DONE?",
     "numOfRows": 9,
-    "value": "Digital health interventions, including telemonitoring and mobile phone applications,\nhave been shown to allow patients to receive cohesive and well-coordinated care from\ntheir home instead of a hospital setting. These applications make it possible for patients\nto monitor their medical conditions (such as measuring blood pressure and weight),\ntrack symptoms and receive automated instructions and medical care from their homes.\nThis can help patients take better care of themselves and gives their healthcare\nproviders (doctors or nurses) important information to base their decisions on.\nThe University Health Network (UHN) team has developed a smartphone-based\nsystem, Medly, which allows for the telemonitoring of patients diagnosed with heart\nfailure. The Medly system includes an app that is loaded on a smartphone. Using the\nappropriate wireless medical devices (such as blood pressure monitor and weight\nscale), patients can monitor their condition and symptoms, get immediate feedback, and\nautomatically send data to their healthcare providers.\nThe purpose of this study is to determine whether patients are able to comply the Medly\napplication after discharge from a hospital and whether using the Medly system\nimproves patients’ self-care management and quality of life."
+    "value": ""
   },
 
   {

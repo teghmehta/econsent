@@ -10,10 +10,10 @@ class StartupForm extends Component {
 
         this.state = {
             validated: false,
-            formName: '' };
+            formName: '',
+            refresh: false};
 
         this.handleChange = this.handleChange.bind(this);
-        this.deleteForm = this.deleteForm.bind(this);
     }
     handleChange(text) {
         this.setState({formName: text });
@@ -31,16 +31,17 @@ class StartupForm extends Component {
     }
 
     deleteForm(key) {
-        // localStorage.removeItem(key)
+        localStorage.removeItem(key)
+        this.setState({refresh: true})
+
     }
 
     openForms() {
         let rows = [];
-        let myThis = this;
         Object.keys(localStorage).forEach(function(key, i){
             rows.push(<div key={i} className={"dropdown-div"}><Dropdown.Item key={i} href={"/form/" + key}>{key}</Dropdown.Item>
-                <Button onClick={myThis.deleteForm(key)} variant="danger">Delete</Button></div>)
-        });
+                <Button onClick={() => this.deleteForm(key)} variant="danger">Delete</Button></div>)
+        }.bind(this));
         if (rows.length > 0) {
             return <DropdownButton id="dropdown-basic-button" title="Open Forms">
                 {rows}

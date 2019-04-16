@@ -11,6 +11,10 @@
     padding-bottom: 15px;
 }
 
+.form-control {
+    width: 201% !important;
+}
+
 .btn {
     margin: 10px !important;
 }

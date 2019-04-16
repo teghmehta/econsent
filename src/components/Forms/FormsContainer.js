@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import FormTextArea from "./FormTextArea";
 import './Forms.css';
-
 import {ButtonToolbar, Button, Modal} from "react-bootstrap";
 import Header from "../Header/Header";
 import {withRouter} from "react-router";
@@ -80,7 +79,7 @@ class FormsContainer extends Component {
 
     submitForm() {
         this.saveJson();
-        this.props.history.push('/submit/' + this.props.formName)
+        this.props.history.push('/submit/' + encodeURIComponent(this.props.formName))
     }
 
     changeValue(value, index) {

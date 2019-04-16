@@ -11,7 +11,8 @@ class StartupForm extends Component {
         this.state = {
             validated: false,
             formName: '',
-            refresh: false};
+            refresh: false,
+            isInvalid: null};
 
         this.handleChange = this.handleChange.bind(this);
     }
@@ -21,25 +22,41 @@ class StartupForm extends Component {
 
     handleSubmit(event) {
         const form = event.currentTarget;
-        if (form.checkValidity() === false) {
+        if (form.checkValidity() === false || this.isNameInvalid(this.state.formName)) {
             event.preventDefault();
             event.stopPropagation();
+            this.setState({validated: false , isInvalid: true})
         } else {
-            this.props.history.push('/form/' + this.state.formName)
+            this.setState({ validated: true });
+            this.props.history.push('/form/' + encodeURIComponent(this.state.formName))
         }
-        this.setState({ validated: true });
     }
-
     deleteForm(key) {
         localStorage.removeItem(key)
         this.setState({refresh: true})
+    }
 
+    isNameInvalid(name) {
+        console.log(localStorage.getItem(name));
+        if (localStorage.getItem(name) !== null || name.length === 250 || !name.replace(/\s/g, '').length) {
+            if (!name.replace(/\s/g, '').length) {
+                return true;
+            }
+            try {
+                encodeURIComponent(name);
+                console.log(name, encodeURIComponent(name))
+            } catch (e) {
+                return false
+                console.log(name, encodeURIComponent(name))
+            }
+        }
+        return false
     }
 
     openForms() {
         let rows = [];
         Object.keys(localStorage).forEach(function(key, i){
-            rows.push(<div key={i} className={"dropdown-div"}><Dropdown.Item key={i} href={"/form/" + key}>{key}</Dropdown.Item>
+            rows.push(<div key={i} className={"dropdown-div"}><Dropdown.Item key={i} href={"/form/" + key}>{key.length > 20 ? key.substring(0, Math.min(key.length, 70)) + '...' : key}</Dropdown.Item>
                 <Button onClick={() => this.deleteForm(key)} variant="danger">Delete</Button></div>)
         }.bind(this));
         if (rows.length > 0) {
@@ -64,9 +81,9 @@ class StartupForm extends Component {
                 >
                     <Form.Row>
                         <Form.Group as={Col} md="6" controlId="validationName">
-                            <Form.Control type="text" placeholder="Form Name" required value={this.state.formName} onChange={e => this.handleChange(e.target.value)}/>
+                            <Form.Control isInvalid={this.state.isInvalid} maxLength="250" type="text" placeholder="Form Name" required value={this.state.formName} onChange={e => this.handleChange(e.target.value)}/>
                             <Form.Control.Feedback type="invalid">
-                                Please provide a valid name
+                                That name is either invalid or taken. Please provide a valid name.
                             </Form.Control.Feedback>
                         </Form.Group>
                     </Form.Row>

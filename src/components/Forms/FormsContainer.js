@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import FormTextArea from "./FormTextArea";
 import './Forms.css';
-import {ButtonToolbar, Button, Modal} from "react-bootstrap";
+import {ButtonToolbar, Button, Modal, Form} from "react-bootstrap";
 import Header from "../Header/Header";
 import {withRouter} from "react-router";
 let formData = require('../../constants/constants');
@@ -12,6 +12,7 @@ class FormsContainer extends Component {
         super(props);
 
         this.formData = {};
+        this.state = {validated: false}
 
         this.handleClose = this.handleClose.bind(this);
         this.handleShow = this.handleShow.bind(this);
@@ -78,9 +79,20 @@ class FormsContainer extends Component {
     };
 
     submitForm() {
-        this.saveJson();
-        this.props.history.push('/submit/' + encodeURIComponent(this.props.formName))
     }
+
+    handleSubmit(event) {
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            this.props.history.push('/submit/' + encodeURIComponent(this.props.formName))
+        }
+        this.saveJson();
+        this.setState({ validated: true });
+    }
+
 
     changeValue(value, index) {
         let formStateData = this.state.formData;
@@ -103,12 +115,20 @@ class FormsContainer extends Component {
             <div className={'app-container'}>
                 <Header formName={this.props.formName} handleShow={this.handleShow}/>
                 <div className={'forms-container'}>
-                    {this.state.formData.map((form, index) => <FormTextArea key={index} index={index} formTitle={form.title} formValue={form.value} placeholder={form.title} numOfRows={form.numOfRows} changeValue={(value, index) => this.changeValue(value, index)}/> )}
+                    <Form
+                        noValidate
+                        validated={this.state.validated}
+                        onSubmit={e => this.handleSubmit(e)}
+                    >
+                        {this.state.formData.map((form, index) => <FormTextArea key={index} index={index} formTitle={form.title} formValue={form.value} placeholder={form.title} numOfRows={form.numOfRows} changeValue={(value, index) => this.changeValue(value, index)}/> )}
+
+
                     <ButtonToolbar>
                         <Button onClick={this.saveJson.bind(this)} variant="primary">Save</Button>
                         <Button variant="secondary" onClick={this.handleShow} >Go Back</Button>
-                        <Button onClick={this.submitForm.bind(this)} variant="outline-danger">Save and Submit</Button>
+                        <Button type={"submit"} variant="outline-danger">Save and Submit</Button>
                     </ButtonToolbar>
+                    </Form>
                 </div>
 
                 <Modal show={this.state.show} onHide={() => this.setState({ show: false })}>

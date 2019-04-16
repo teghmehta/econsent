@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../Forms/Forms.css';
-import {ButtonToolbar, Button, Container, Row, Col, Image} from "react-bootstrap";
+import {Row, Col, Image} from "react-bootstrap";
 
 class ImageHeader extends Component {
 

@@ -83,8 +83,9 @@ class FormsContainer extends Component {
     }
 
     changeValue(value, index) {
-        this.state.formData[index].value = value;
-        console.log(this.state.formData);
+        let formStateData = this.state.formData;
+        formStateData[index].value = value;
+        this.setState({formData: formStateData});
     }
 
     handleClose(saveFlag) {

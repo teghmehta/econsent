@@ -44,10 +44,8 @@ class StartupForm extends Component {
             }
             try {
                 encodeURIComponent(name);
-                console.log(name, encodeURIComponent(name))
             } catch (e) {
                 return false
-                console.log(name, encodeURIComponent(name))
             }
         }
         return false

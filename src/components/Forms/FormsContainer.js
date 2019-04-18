@@ -78,9 +78,6 @@ class FormsContainer extends Component {
         )
     };
 
-    submitForm() {
-    }
-
     handleSubmit(event) {
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
@@ -93,6 +90,20 @@ class FormsContainer extends Component {
         this.setState({ validated: true });
     }
 
+    isFileEmpty() {
+        let flag = false;
+        this.state.formData.forEach(function (form, i) {
+            if (form.value === "") {
+                console.log(form);
+                flag = true
+            } else {
+                flag = false
+            }
+        }.bind(this));
+
+        if (flag) localStorage.removeItem(this.props.formName);
+    }
+
 
     changeValue(value, index) {
         let formStateData = this.state.formData;
@@ -103,6 +114,7 @@ class FormsContainer extends Component {
     handleClose(saveFlag) {
         this.setState({ show: false });
         if (saveFlag) this.saveJson();
+        else this.isFileEmpty()
         this.props.history.push('/')
     }
 

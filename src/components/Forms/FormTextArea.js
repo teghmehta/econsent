@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Form from "react-bootstrap/Form";
-import {Col, Row} from "react-bootstrap";
 import ReactQuill, {ComponentProps as Editor} from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 
@@ -59,12 +58,11 @@ class FormTextArea extends Component {
         //     );
         // }
         return (
-            <div className="editorContainer">
+            <div className={"editorContainer"}>
                 <Form.Label>
                     {this.props.formTitle}
                 </Form.Label>
                 <ReactQuill
-                    theme={this.state.theme}
                     onChange={this.handleChange}
                     value={this.state.formValue}
                     modules={FormTextArea.modules}

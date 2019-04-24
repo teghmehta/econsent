@@ -50,8 +50,8 @@ body {
 }
 
 .editorContainer .ql-editor {
-    min-height: 18em;
     font-size: 1.2em;
+    background: #fefefe;
 }
 
 .themeSwitcher {

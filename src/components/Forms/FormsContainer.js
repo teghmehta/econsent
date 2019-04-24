@@ -12,7 +12,7 @@ class FormsContainer extends Component {
         super(props);
 
         this.formData = {};
-        this.state = {validated: false}
+        this.state = {validated: false};
 
         this.handleClose = this.handleClose.bind(this);
         this.handleShow = this.handleShow.bind(this);
@@ -92,7 +92,7 @@ class FormsContainer extends Component {
 
     isFileEmpty() {
         let flag = false;
-        this.state.formData.forEach(function (form, i) {
+        this.state.formData.forEach(function (form) {
             if (form.value === "") {
                 console.log(form);
                 flag = true
@@ -114,7 +114,7 @@ class FormsContainer extends Component {
     handleClose(saveFlag) {
         this.setState({ show: false });
         if (saveFlag) this.saveJson();
-        else this.isFileEmpty()
+        else this.isFileEmpty();
         this.props.history.push('/')
     }
 

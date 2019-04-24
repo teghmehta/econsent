@@ -12,7 +12,7 @@
     background-color: white;
     margin: auto;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    padding: 20px 40px 50px 40px;
+    padding: 50px 40px 50px 40px;
     position: relative;
     overflow: hidden;
     transition: margin-left .5s;
@@ -50,27 +50,53 @@
 
 .singleline-heading {
     flex: 1;
-    font-weight: 600;
+    font-weight: bolder;
     padding-right: 20px;
+    margin-bottom: 8px;
 }
 
 .singleline-text {
     flex: 3;
+    margin-bottom: 8px;
 
 }
 
 .multiline-container {
     /*display: flex;*/
-    white-space: pre-line;
+    white-space: pre-wrap;
 }
 
 .multiline-heading {
-    font-weight: 600;
+    font-weight: bolder;
+    margin-bottom: 8px;
 }
 
 .multiline-text {
+    margin-bottom: 8px;
 }
 
 p {
+    margin-bottom: 0;
     text-align: left;
+}
+
+.consent-back-button {
+    float: left;
+}
+
+@media print
+{
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+}
+
+@page
+{
+    size: auto;   /* auto is the initial value */
+
+    /* this affects the margin in the printer settings */
+    padding-top: 10px;
+    margin: 20mm 2mm 17mm 2mm;
 }

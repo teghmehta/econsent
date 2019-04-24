@@ -20,3 +20,41 @@
     display: flex;
     align-items: center;
 }
+
+body {
+    font-family: sans-serif;
+}
+
+.editorContainer {
+    margin: 1rem 4rem;
+}
+
+.editorContainer .ql-container {
+    border-bottom-left-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+    background: #fcfcfc;
+}
+
+/* Snow Theme */
+.editorContainer .ql-snow.ql-toolbar {
+    display: block;
+    background: #eaecec;
+    border-top-left-radius: 0.5em;
+    border-top-right-radius: 0.5em;
+}
+
+/* Bubble Theme */
+.editorContainer .ql-bubble .ql-editor {
+    border: 1px solid #ccc;
+    border-radius: 0.5em;
+}
+
+.editorContainer .ql-editor {
+    min-height: 18em;
+    font-size: 1.2em;
+}
+
+.themeSwitcher {
+    margin-top: 0.5em;
+    font-size: small;
+}

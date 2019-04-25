@@ -132,7 +132,7 @@ class FormsContainer extends Component {
                         validated={this.state.validated}
                         onSubmit={e => this.handleSubmit(e)}
                     >
-                        {this.state.formData.map((form, index) => <FormTextArea key={index} index={index} formTitle={form.title} formValue={form.value} placeholder={form.title} numOfRows={form.numOfRows} changeValue={(value, index) => this.changeValue(value, index)}/> )}
+                        {this.state.formData.map((form, index) => <FormTextArea paragraphOrder={form.paragraphOrder} fillInTheBlankField={form.fillInTheBlankField} key={index} index={index} formTitle={form.title} formValue={form.value} placeholder={form.title} numOfRows={form.numOfRows} changeValue={(value, index) => this.changeValue(value, index)}/> )}
 
 
                     <ButtonToolbar>

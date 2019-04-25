@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Form from "react-bootstrap/Form";
-import ReactQuill, {ComponentProps as Editor} from "react-quill";
+import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 
 
@@ -27,7 +27,44 @@ class FormTextArea extends Component {
             
         }
     }
+
+    getFillInTheBlank() {
+
+    }
+
     render() {
+        let title=
+            <Form.Label>
+                {this.props.formTitle}
+            </Form.Label>
+
+        let quillForm =
+            <ReactQuill
+                onChange={this.handleChange}
+                value={this.state.formValue}
+                modules={FormTextArea.modules}
+                formats={FormTextArea.formats}
+                bounds={'.editorContainer'}
+                placeholder={this.props.placeholder}
+            />;
+
+        let oldFITB = "";
+        let FITB = [];
+        try {
+            oldFITB = this.props.fillInTheBlankField.split("%fill");
+            for (let i = 0; i < oldFITB.length; i ++) {
+                FITB.push((oldFITB[i]))
+                if (i < oldFITB.length -1) {
+                    FITB.push((<Form.Control className={'fitb-form'} required type="textarea" placeholder={"3"}/>))
+                    console.log(i)
+                }
+            }
+
+            console.log(FITB)
+        } catch (e) {
+
+        }
+        let fillInTheBlankField = <div className={"fill-in-the-blank-field"}>{FITB}</div>;
         // if (this.props.numOfRows <= 1) {
         //     return (
         //             <Form.Group as={Row} controlId="">
@@ -57,21 +94,41 @@ class FormTextArea extends Component {
         //             </Form.Group>
         //     );
         // }
-        return (
-            <div className={"editorContainer"}>
-                <Form.Label>
-                    {this.props.formTitle}
-                </Form.Label>
-                <ReactQuill
-                    onChange={this.handleChange}
-                    value={this.state.formValue}
-                    modules={FormTextArea.modules}
-                    formats={FormTextArea.formats}
-                    bounds={'.editorContainer'}
-                    placeholder={this.props.placeholder}
-                />
-            </div>
+
+        if (this.props.fillInTheBlankField) {
+            if (this.props.paragraphOrder === 'fill') {
+                //This checks the order. Does static field come first or the form. This basically changes based on which paragraph needs to stay the same
+                return (
+                    <div className={"editorContainer"}>
+                        {title}
+                        {fillInTheBlankField}
+                        {quillForm}
+                    </div>
+                )
+            } else if (this.props.paragraphOrder === 'value'){
+                return (
+                    <div className={"editorContainer"}>
+                        {title}
+                        {quillForm}
+                        {fillInTheBlankField}
+                    </div>
+                )
+            } else {
+                return (
+                    <div className={"editorContainer"}>
+                        {title}
+                        {fillInTheBlankField}
+                    </div>
+                )
+            }
+        } else {
+            return (
+                <div className={"editorContainer"}>
+                    {title}
+                    {quillForm}
+                </div>
             )
+        }
     }
 }
 
@@ -79,10 +136,10 @@ FormTextArea.modules = {
     toolbar: [
         [{ 'header': '1'}, {'header': '2'}],
         [{size: []}],
-        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+        ['bold', 'italic', 'underline', 'strike',],
         [{'list': 'ordered'}, {'list': 'bullet'},
             {'indent': '-1'}, {'indent': '+1'}],
-        ['clean']
+        ['clean'],
     ],
     clipboard: {
         // toggle to add extra line breaks when pasting HTML:

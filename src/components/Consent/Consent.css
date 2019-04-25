@@ -84,6 +84,7 @@ p {
     float: left;
 }
 
+
 @media print
 {
     .no-print, .no-print *

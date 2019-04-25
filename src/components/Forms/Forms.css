@@ -58,3 +58,22 @@ body {
     margin-top: 0.5em;
     font-size: small;
 }
+
+.fill-in-the-blank-field {
+    display: inline-block;
+}
+
+.fitb-form {
+    width: 45px !important;
+    display: inline-block !important;
+    margin-left: 10px !important;
+}
+
+.fill-in-the-blank-field p {
+    display: inline-block;
+    margin-bottom: 0;
+}
+
+.quill {
+    margin-top: 10px;
+}

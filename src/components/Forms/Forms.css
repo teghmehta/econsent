@@ -26,7 +26,7 @@ body {
 }
 
 .editorContainer {
-    margin: 1rem 4rem;
+    margin: 3rem 4rem;
 }
 
 .editorContainer .ql-container {
@@ -49,6 +49,10 @@ body {
     border-radius: 0.5em;
 }
 
+.ql-formats {
+    float: right;
+}
+
 .editorContainer .ql-editor {
     font-size: 1.2em;
     background: #fefefe;
@@ -65,8 +69,10 @@ body {
 
 .fitb-form {
     width: 45px !important;
+    text-align: center !important;
+    padding: 4px !important;
     display: inline-block !important;
-    margin-left: 10px !important;
+    margin: auto 4px !important;
 }
 
 .fill-in-the-blank-field p {

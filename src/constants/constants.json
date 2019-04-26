@@ -62,9 +62,7 @@
   {
     "title": "WHAT ARE THE RESPONSIBILITIES OF STUDY PARTICIPANTS?",
     "numOfRows": 4,
-    "value": "",
-    "fillInTheBlankField": "If you decide to participate in this study, you will be asked to participate for a total of %fill months. At any time during the study, you can contact the study coordinator to ask questions or review the study protocol. You are free to withdraw from the study at anytime.",
-    "paragraphOrder": "fill"
+    "value": ""
   },
 
   {
@@ -121,3 +119,4 @@
     "value": ""
   }
 ]
+

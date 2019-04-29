@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import FormTextArea from "./FormTextArea";
 import './Forms.css';
-import {ButtonToolbar, Button, Modal, Form} from "react-bootstrap";
+import {ButtonToolbar, Button, Modal, Form, Tooltip, OverlayTrigger, Overlay} from "react-bootstrap";
 import Header from "../Header/Header";
 import {withRouter} from "react-router";
 let formData = require('../../constants/constants');
@@ -12,8 +12,8 @@ class FormsContainer extends Component {
         super(props);
 
         this.formData = {};
-        this.state = {validated: false};
-
+        this.state = {blankValidated: true};
+        this.attachRef = target => this.setState({ target });
         this.handleClose = this.handleClose.bind(this);
         this.handleShow = this.handleShow.bind(this);
 
@@ -79,15 +79,14 @@ class FormsContainer extends Component {
     };
 
     handleSubmit(event) {
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
+        // console.log("Blank Validated", this.state.isValidated);
+        if (this.state.isValidated === false) {
             event.preventDefault();
             event.stopPropagation();
         } else {
             this.props.history.push('/submit/' + encodeURIComponent(this.props.formName))
         }
         this.saveJson();
-        this.setState({ validated: true });
     }
 
     isFileEmpty() {
@@ -105,7 +104,12 @@ class FormsContainer extends Component {
     }
 
 
-    changeValue(value, index) {
+    changeValue(value, index, isValidated) {
+        console.log("FormCon", isValidated)
+        if (isValidated !== undefined) {
+            this.setState({isValidated: isValidated});
+            // console.log("changeVal isValidated ", isValidated)
+        }
         let formStateData = this.state.formData;
         formStateData[index].value = value;
         this.setState({formData: formStateData});
@@ -128,17 +132,23 @@ class FormsContainer extends Component {
                 <Header formName={this.props.formName} handleShow={this.handleShow}/>
                 <div className={'forms-container'}>
                     <Form
-                        noValidate
-                        validated={this.state.validated}
                         onSubmit={e => this.handleSubmit(e)}
                     >
-                        {this.state.formData.map((form, index) => <FormTextArea key={index} index={index} formTitle={form.title} formValue={form.value} placeholder={form.title} numOfRows={form.numOfRows} changeValue={(value, index) => this.changeValue(value, index)}/> )}
+                        {this.state.formData.map((form, index) => <FormTextArea key={index} isFillInTheBlank={form.isFillInTheBlank} index={index} formTitle={form.title} formValue={form.value} placeholder={form.title} numOfRows={form.numOfRows} changeValue={(value, index, isValidated) => this.changeValue(value, index, isValidated)}/> )}
 
 
                     <ButtonToolbar>
                         <Button onClick={this.saveJson.bind(this)} variant="primary">Save</Button>
                         <Button variant="secondary" onClick={this.handleShow} >Go Back</Button>
-                        <Button type={"submit"} variant="outline-danger">Save and Submit</Button>
+                        <Button ref={this.attachRef} type={"submit"} variant="outline-danger">Save and Submit</Button>
+
+                        {/*<Overlay target={this.state.target} show={this.state.blankValidated.toString()} placement="right">*/}
+                            {/*{props => (*/}
+                                {/*<Tooltip id="overlay-example" {...props}>*/}
+                                    {/*My Tooltip*/}
+                                {/*</Tooltip>*/}
+                            {/*)}*/}
+                        {/*</Overlay>*/}
                     </ButtonToolbar>
                     </Form>
                 </div>

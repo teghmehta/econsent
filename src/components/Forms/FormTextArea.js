@@ -9,7 +9,7 @@ class FormTextArea extends Component {
         super(props);
         this.state = {
             formValue: '',
-            validated: false,
+            isValidated: undefined,
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -17,18 +17,40 @@ class FormTextArea extends Component {
 
     componentDidMount() {
         this.setState({formValue: this.props.formValue });
+        if (this.props.isFillInTheBlank) {
+            this.setState({isValidated: false})
+        } else {
+            this.setState({isValidated: undefined})
+        }
     }
 
     handleChange(text) {
         this.setState({formValue: text});
-        try {
-            this.props.changeValue(text, this.props.index);
-        } catch (e) {
-            
+        console.log(text.replace(/\s/g, '').indexOf("<strong>X</strong>") && this.state.isValidated )
+
+        if (text.replace(/\s/g, '').indexOf("<strong>X</strong>") === -1 && this.state.isValidated !== undefined) { //If the fill in the blank doesn't exist
+            this.setState({isValidated: true});
+
+            try {
+                this.props.changeValue(text, this.props.index, true);
+                console.log("handleChange -- isValidated:", true, "   FILLINTHEBLANK:" , this.props.isFillInTheBlank)
+            } catch (e) {
+
+            }
+        } else {
+            this.setState({isValidated: false});
+
+            try {
+                this.props.changeValue(text, this.props.index, this.state.isValidated);
+                console.log("handleChange -- isValidated:", this.state.isValidated, "   FILLINTHEBLANK:" , this.props.isFillInTheBlank)
+            } catch (e) {
+
+            }
         }
     }
 
     render() {
+        //
         // if (this.props.numOfRows <= 1) {
         //     return (
         //             <Form.Group as={Row} controlId="">
@@ -68,7 +90,7 @@ class FormTextArea extends Component {
                     onChange={this.handleChange}
                     value={this.state.formValue}
                     modules={FormTextArea.modules}
-                    formats={FormTextArea.formats}
+                    formats={FormTextArea.formats}z
                     bounds={'.editorContainer'}
                     placeholder={this.props.placeholder}
                 />

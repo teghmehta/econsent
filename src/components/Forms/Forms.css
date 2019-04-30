@@ -53,8 +53,8 @@ body {
     float: right;
 }
 
-.span {
-    color: red;
+strong span{
+    color: red !important;
     font-weight: bolder;
 }
 
@@ -75,3 +75,14 @@ body {
 .quill {
     margin-top: 10px;
 }
+
+table {
+    width: 90%;
+    margin: 0rem 4rem 3rem 4rem;
+}
+td {
+    width: 30%;
+    padding: 10px;
+    text-align: center;
+}
+

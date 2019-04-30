@@ -12,10 +12,15 @@ class FormsContainer extends Component {
         super(props);
 
         this.formData = {};
-        this.state = {blankValidated: true};
+        this.state = {savingText: ""};
         this.handleClose = this.handleClose.bind(this);
         this.handleShow = this.handleShow.bind(this);
-
+        document.addEventListener("keydown", function(e) {
+            if (e.keyCode === 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
+                e.preventDefault();
+                this.saveJson()
+            }
+        }.bind(this), false);
     }
 
     componentWillUnmount() {
@@ -46,7 +51,6 @@ class FormsContainer extends Component {
         const json = window.localStorage.getItem(this.props.formName) || JSON.stringify(formData, null, 2);
         if (JSON.parse(window.localStorage.getItem(this.props.formName)) === null) {
             this.setState({isFormNew: true});
-            console.log("true - isFormNew");
             let validJson = this.validateJson(JSON.stringify(formData, null, 2));
             if (!validJson) {
                 return;
@@ -57,22 +61,23 @@ class FormsContainer extends Component {
                 validJson
             )
         } else {
-            console.log("False - isFormNew");
             this.setState({isFormNew: false});
         }
         this.setState({formData: JSON.parse(json) })
     };
 
     saveJson = () => {
+        this.setState({savingText:"Saved."});
+        setTimeout(function() {
+            this.setState({savingText:""});
+        }.bind(this), 1500);
         let  validJson;
         try {
             validJson = this.validateJson(JSON.stringify(this.state.formData, null, 2));
             this.setState({isFormNew: false});
-            console.log("False - isFormNew");
         } catch(e) {
             validJson = this.validateJson(JSON.stringify(formData, null, 2));
             this.setState({isFormNew: true});
-            console.log("true - isFormNew");
         }
 
         if (!validJson) {
@@ -125,14 +130,39 @@ class FormsContainer extends Component {
     render() {
         return (
             <div className={'app-container'}>
-                <Header formName={this.props.formName} handleShow={this.handleShow}/>
+                <Header formName={this.props.formName} handleShow={this.handleShow} savingText={this.state.savingText}/>
                 <div className={'forms-container'}>
-                    <Form
-                        onSubmit={e => this.handleSubmit(e)}
-                    >
-                        {this.state.formData.map((form, index) => <FormTextArea key={index} isFillInTheBlank={form.isFillInTheBlank} index={index} formTitle={form.title} formValue={form.value} placeholder={form.title} numOfRows={form.numOfRows} changeValue={(value, index, isValidated) => this.changeValue(value, index, isValidated)}/> )}
-
-
+                    <Form onSubmit={e => this.handleSubmit(e)}>
+                        {this.state.formData.map((form, index) =>
+                            <FormTextArea key={index} isFillInTheBlank={form.isFillInTheBlank}
+                                          index={index} formTitle={form.title}
+                                          formValue={form.value} placeholder={form.title}
+                                          numOfRows={form.numOfRows}
+                                          changeValue={(value, index, isValidated) => this.changeValue(value, index, isValidated)}/> )}
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>___________________________________________________</td>
+                                    <td>___________________________________________________</td>
+                                    <td>___________________________________________________</td>
+                                </tr>
+                                <tr>
+                                    <td>Name of Participant</td>
+                                    <td>Signature</td>
+                                    <td>Date</td>
+                                </tr>
+                                <tr>
+                                    <td>___________________________________________________</td>
+                                    <td>___________________________________________________</td>
+                                    <td>___________________________________________________</td>
+                                </tr>
+                                <tr>
+                                    <td>Name of Person obtaining consent (print)</td>
+                                    <td>Signature</td>
+                                    <td>Date</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     <ButtonToolbar>
                         <Button onClick={this.saveJson.bind(this)} variant="primary">Save</Button>
                         <Button variant="secondary" onClick={this.handleShow} >Go Back</Button>

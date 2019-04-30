@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import FormTextArea from "./FormTextArea";
 import './Forms.css';
-import {ButtonToolbar, Button, Modal, Form, Tooltip, OverlayTrigger, Overlay} from "react-bootstrap";
+import {ButtonToolbar, Button, Modal, Form} from "react-bootstrap";
 import Header from "../Header/Header";
 import {withRouter} from "react-router";
 let formData = require('../../constants/constants');
@@ -13,7 +13,6 @@ class FormsContainer extends Component {
 
         this.formData = {};
         this.state = {blankValidated: true};
-        this.attachRef = target => this.setState({ target });
         this.handleClose = this.handleClose.bind(this);
         this.handleShow = this.handleShow.bind(this);
 
@@ -25,7 +24,7 @@ class FormsContainer extends Component {
 
 
     componentWillMount () {
-        this.unlisten = this.props.history.listen((location, action) => {
+        this.unlisten = this.props.history.listen(() => {
             window.scrollTo(0, 0)
         });
         this.loadJson();
@@ -46,6 +45,8 @@ class FormsContainer extends Component {
     loadJson = () => {
         const json = window.localStorage.getItem(this.props.formName) || JSON.stringify(formData, null, 2);
         if (JSON.parse(window.localStorage.getItem(this.props.formName)) === null) {
+            this.setState({isFormNew: true});
+            console.log("true - isFormNew");
             let validJson = this.validateJson(JSON.stringify(formData, null, 2));
             if (!validJson) {
                 return;
@@ -55,6 +56,9 @@ class FormsContainer extends Component {
                 this.props.formName,
                 validJson
             )
+        } else {
+            console.log("False - isFormNew");
+            this.setState({isFormNew: false});
         }
         this.setState({formData: JSON.parse(json) })
     };
@@ -62,10 +66,13 @@ class FormsContainer extends Component {
     saveJson = () => {
         let  validJson;
         try {
-            console.log("Save JSON", this.state.formData);
             validJson = this.validateJson(JSON.stringify(this.state.formData, null, 2));
+            this.setState({isFormNew: false});
+            console.log("False - isFormNew");
         } catch(e) {
             validJson = this.validateJson(JSON.stringify(formData, null, 2));
+            this.setState({isFormNew: true});
+            console.log("true - isFormNew");
         }
 
         if (!validJson) {
@@ -79,36 +86,25 @@ class FormsContainer extends Component {
     };
 
     handleSubmit(event) {
-        // console.log("Blank Validated", this.state.isValidated);
         if (this.state.isValidated === false) {
             event.preventDefault();
             event.stopPropagation();
+            alert("Please fill in all fields.")
         } else {
             this.props.history.push('/submit/' + encodeURIComponent(this.props.formName))
         }
         this.saveJson();
     }
 
-    isFileEmpty() {
-        let flag = false;
-        this.state.formData.forEach(function (form) {
-            if (form.value === "") {
-                console.log(form);
-                flag = true
-            } else {
-                flag = false
-            }
-        }.bind(this));
-
-        if (flag) localStorage.removeItem(this.props.formName);
+    isFormNew() {
+        console.log("isFormNew()", this.state.isFormNew);
+        if (this.state.isFormNew) localStorage.removeItem(this.props.formName);
     }
 
 
     changeValue(value, index, isValidated) {
-        console.log("FormCon", isValidated)
         if (isValidated !== undefined) {
             this.setState({isValidated: isValidated});
-            // console.log("changeVal isValidated ", isValidated)
         }
         let formStateData = this.state.formData;
         formStateData[index].value = value;
@@ -118,7 +114,7 @@ class FormsContainer extends Component {
     handleClose(saveFlag) {
         this.setState({ show: false });
         if (saveFlag) this.saveJson();
-        else this.isFileEmpty();
+        else this.isFormNew();
         this.props.history.push('/')
     }
 
@@ -140,15 +136,7 @@ class FormsContainer extends Component {
                     <ButtonToolbar>
                         <Button onClick={this.saveJson.bind(this)} variant="primary">Save</Button>
                         <Button variant="secondary" onClick={this.handleShow} >Go Back</Button>
-                        <Button ref={this.attachRef} type={"submit"} variant="outline-danger">Save and Submit</Button>
-
-                        {/*<Overlay target={this.state.target} show={this.state.blankValidated.toString()} placement="right">*/}
-                            {/*{props => (*/}
-                                {/*<Tooltip id="overlay-example" {...props}>*/}
-                                    {/*My Tooltip*/}
-                                {/*</Tooltip>*/}
-                            {/*)}*/}
-                        {/*</Overlay>*/}
+                        <Button type={"submit"} variant="outline-danger">Save and Submit</Button>
                     </ButtonToolbar>
                     </Form>
                 </div>

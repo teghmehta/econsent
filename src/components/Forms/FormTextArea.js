@@ -26,14 +26,12 @@ class FormTextArea extends Component {
 
     handleChange(text) {
         this.setState({formValue: text});
-        console.log(text.replace(/\s/g, '').indexOf("<strong>X</strong>") && this.state.isValidated )
 
         if (text.replace(/\s/g, '').indexOf("<strong>X</strong>") === -1 && this.state.isValidated !== undefined) { //If the fill in the blank doesn't exist
             this.setState({isValidated: true});
 
             try {
                 this.props.changeValue(text, this.props.index, true);
-                console.log("handleChange -- isValidated:", true, "   FILLINTHEBLANK:" , this.props.isFillInTheBlank)
             } catch (e) {
 
             }
@@ -42,7 +40,6 @@ class FormTextArea extends Component {
 
             try {
                 this.props.changeValue(text, this.props.index, this.state.isValidated);
-                console.log("handleChange -- isValidated:", this.state.isValidated, "   FILLINTHEBLANK:" , this.props.isFillInTheBlank)
             } catch (e) {
 
             }

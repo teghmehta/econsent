@@ -53,6 +53,11 @@ body {
     float: right;
 }
 
+.span {
+    color: red;
+    font-weight: bolder;
+}
+
 .editorContainer .ql-editor {
     font-size: 1.2em;
     background: #fefefe;
@@ -63,21 +68,8 @@ body {
     font-size: small;
 }
 
-.fill-in-the-blank-field {
-    display: inline-block;
-}
+.fill-in-the-blank {
 
-.fitb-form {
-    width: 45px !important;
-    text-align: center !important;
-    padding: 4px !important;
-    display: inline-block !important;
-    margin: auto 4px !important;
-}
-
-.fill-in-the-blank-field p {
-    display: inline-block;
-    margin-bottom: 0;
 }
 
 .quill {

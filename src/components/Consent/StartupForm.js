@@ -37,7 +37,6 @@ class StartupForm extends Component {
     }
 
     isNameInvalid(name) {
-        console.log(localStorage.getItem(name));
         if (localStorage.getItem(name) !== null || name.length === 250 || !name.replace(/\s/g, '').length) {
             if (!name.replace(/\s/g, '').length) {
                 return true;

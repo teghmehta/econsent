@@ -25,7 +25,7 @@
   {
     "title": "INFORMED CONSENT",
     "numOfRows": 9,
-    "value": "You are being asked to consider participating in a research study. A research study is a way of gathering information on a treatment, procedure or medical device or to answer a question about something that is not well understood.\n\nThis form explains the purpose of this research study, provides information about the Medly application, the procedures involved, possible risks and benefits, and the rights of participants.\n\nPlease read this form carefully and ask any questions you may have. You may have this form and all information concerning the study explained to you. The study staff will tell you if there are any study timelines for making your decision. Please ask the study staff or one of the investigator(s) to clarify anything you do not understand or would like to know more about. Make sure all your questions are answered to your satisfaction before deciding whether to participate in this research study.\n\nParticipating in this study is your choice (voluntary). You have the right to choose not to participate, or to stop participating in this study at any time."
+    "value": "<p>You are being asked to consider participating in a research study. A research study is a way of gathering information on a treatment, procedure or medical device or to answer a question about something that is not well understood.\n\nThis form explains the purpose of this research study, provides information about the Medly application, the procedures involved, possible risks and benefits, and the rights of participants.\n\nPlease read this form carefully and ask any questions you may have. You may have this form and all information concerning the study explained to you. The study staff will tell you if there are any study timelines for making your decision. Please ask the study staff or one of the investigator(s) to clarify anything you do not understand or would like to know more about. Make sure all your questions are answered to your satisfaction before deciding whether to participate in this research study.\n\nParticipating in this study is your choice (voluntary). You have the right to choose not to participate, or to stop participating in this study at any time.</p>"
   },
 
   {
@@ -70,7 +70,7 @@
   {
     "title": "WHAT ARE THE RISKS OR HARMS OF PARTICIPATING IN THIS STUDY?",
     "numOfRows": 4,
-    "value": "\n\nYou will be told about any new information that might reasonably affect your willingness to continue to participate in this study as soon as the information becomes available to the study staff. This may include new information about the risks and benefits of being a participant in this study."
+    "value": "<p>\n\nYou will be told about any new information that might reasonably affect your willingness to continue to participate in this study as soon as the information becomes available to the study staff. This may include new information about the risks and benefits of being a participant in this study.</p>"
   },
 
   {
@@ -82,13 +82,13 @@
   {
     "title": "CAN PARTICIPATION IN THIS STUDY END EARLY?",
     "numOfRows": 4,
-    "value": "You can also choose to end your participation at any time without having to provide a reason. If you choose to withdraw, your choice will not have any effect on your current or future medical treatment or health care. By signing this form you do not give up any of your legal rights against the investigators, sponsor or involved institutions for compensation, nor does this form relieve the investigators, sponsor or involved institutions of their legal and professional responsibilities."
+    "value": "<p>You can also choose to end your participation at any time without having to provide a reason. If you choose to withdraw, your choice will not have any effect on your current or future medical treatment or health care. By signing this form you do not give up any of your legal rights against the investigators, sponsor or involved institutions for compensation, nor does this form relieve the investigators, sponsor or involved institutions of their legal and professional responsibilities.</p>"
   },
 
   {
     "title": "WHAT HAPPENS IF I HAVE A RESEARCH RELATED INJURY?",
     "numOfRows": 4,
-    "value": "If you become sick or injured as a direct result of your participation in this study, your medical care will be provided."
+    "value": "<p>If you become sick or injured as a direct result of your participation in this study, your medical care will be provided.</p>"
   },
 
   {
@@ -112,7 +112,7 @@
   {
     "title": "WHAT ARE THE RIGHTS OF PARTICIPANTS IN A RESEARCH STUDY?",
     "numOfRows": 4,
-    "value": "You have the right to receive all information that could help you make a decision about participating in this study. You also have the right to ask questions about this study and your rights as a research participant, and to have them answered to your satisfaction, before you make any decision. You also have the right to ask questions and to receive answers throughout this study."
+    "value": "<p>You have the right to receive all information that could help you make a decision about participating in this study. You also have the right to ask questions about this study and your rights as a research participant, and to have them answered to your satisfaction, before you make any decision. You also have the right to ask questions and to receive answers throughout this study.</p>"
   },
 
   {

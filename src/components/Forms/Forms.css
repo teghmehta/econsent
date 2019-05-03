@@ -61,6 +61,7 @@ strong span{
 .editorContainer .ql-editor {
     font-size: 1.2em;
     background: #fefefe;
+    line-height: 1.6em !important;
 }
 
 .themeSwitcher {
@@ -76,13 +77,73 @@ strong span{
     margin-top: 10px;
 }
 
-table {
-    width: 90%;
+.doc-border-top {
+    width: 100%;
+    border-top: 1px solid black;
+    height: 30px;
+    padding: 30px;
+    margin-top: 5px;
+}
+
+.table-div {
     margin: 0rem 4rem 3rem 4rem;
 }
+
+.name-td {width: 45%}
+
+.signature-td {width: 35%}
+
+.date-td {width: 20%}
+
+table {
+    width: 100%;
+}
 td {
-    width: 30%;
     padding: 10px;
     text-align: center;
 }
 
+@media only screen and (min-width: 1500px) {
+    form table {
+        width: 80%;
+    }
+}
+
+
+@media only screen and (min-width: 1700px) {
+    form table {
+        width: 60%;
+    }
+}
+
+
+@media only screen and (min-width: 1900px) {
+    form table {
+        width: 40%;
+    }
+}
+
+@media only screen and (min-width: 2100px) {
+    form table {
+        width: 30%;
+    }
+}
+
+@media only screen and (max-width: 1030px) {
+    form table {
+        width: 90%;
+    }
+
+    td {
+        font-size: 0.85em;
+    }
+}
+
+@media only screen and (max-width: 730px) {
+   .editorContainer, .table-div {
+       margin: 1rem;
+   }
+    .btn-toolbar {
+        padding-top: 50px;
+    }
+}

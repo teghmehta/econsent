@@ -72,16 +72,25 @@
 }
 
 .multiline-text {
-    margin-bottom: 8px;
+    margin-bottom: 3px;
 }
 
 p {
-    margin-bottom: 0;
     text-align: left;
+    margin-bottom: 0.3rem !important;
 }
+
+li {
+    margin-bottom: 0.3rem !important;
+}
+
 
 .consent-back-button {
     float: left;
+}
+
+.tablePadding {
+    padding-top: 0;
 }
 
 

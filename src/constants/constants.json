@@ -118,7 +118,20 @@
   {
     "title": "DOCUMENTATION OF INFORMED CONSENT",
     "numOfRows": 4,
-    "value": ""
+    "value": "<p>You will be given a copy of this informed consent form after it has been signed and dated by you and the study staff.</p><p><br></p><p>Full Study Title: <strong>X</strong></p><p><br></p><p>Name of Participant: _________________________________________________________</p><p><br></p><p><u>Participant</u></p><p>By signing this form, I confirm that:</p><ul><li>This research study has been fully explained to me and all of my questions answered to my satisfaction</li><li>I understand the requirements of participating in this research study</li><li>I have been informed of the risks and benefits, if any, of participating in this research study</li><li>I have been informed of any alternatives to participating in this research study</li><li>I have been informed of the rights of research participants</li><li>I have read each page of this form</li><li>I authorize access to my personal health information, medical record and research study data as explained in this form</li><li>I have agreed to participate in this research study</li></ul></div>"
+  },
+  {
+    "table": "participant",
+    "value": "<table> <tbody> <tr> <td <div class=\"name-td\"> <div class=\"doc-border-top\"> Name of Participant </div> </td> <td <div class=\"signature-td\"> <div class=\"doc-border-top\"> Signature </div> </td> <td <div class=\"date-td\"> <div class=\"doc-border-top\"> Date </div> </td> </tr> </tbody> </table>"
+  },
+  {
+    "title": "",
+    "numOfRows": 4,
+    "value": "<p><u>Person obtaining consent</u></p><p>By signing this form, I confirm that:</p><ul><li>This study and its purpose has been explained to the participant named above</li><li>All questions asked by the participant have been answered</li><li>I will give a copy of this signed and dated document to the participant</li></ul>"
+  },
+  {
+    "table": "person-obtaining",
+    "value": "<table> <tbody> <tr> <td <div class=\"name-td\"> <div class=\"doc-border-top\"> Name of Person obtaining consent (print) </div> </td> <td <div class=\"signature-td\"> <div class=\"doc-border-top\"> Signature </div> </td> <td <div class=\"date-td\"> <div class=\"doc-border-top\"> Date </div> </td> </tr> </tbody> </table>"
   }
 ]
 

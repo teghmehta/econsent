@@ -15,10 +15,11 @@ class FormTextArea extends Component {
     }
 
     componentDidMount() {
-        this.setState({formValue: this.props.formValue });
+        this.setState({formValue: this.props.formValue })
     }
 
     handleChange(text) {
+        this.setState({formValue: text});
         try {
             this.props.changeValue(text, this.props.index);
         } catch (e) {

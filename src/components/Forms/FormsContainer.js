@@ -91,7 +91,23 @@ class FormsContainer extends Component {
     };
 
     areFormsValidated() {
-        return this.state.formData.some(item => item.value.replace(/\s/g, '').indexOf("<strong>X</strong>") > -1)
+        let isBlanksUnfilled = this.state.formData.some(item => item.value.replace(/\s/g, '').indexOf("<strong>X</strong>") > -1)
+        let isFormBlank = false;
+            this.state.formData.some((item) => {
+                if (item.title !== "Funder:" && item.title !== "Co-Investigators:") {
+                    console.log(item.title, item.title !== "Funder:")
+                    let replacedItem = item.value.replace(/\s/g, '').replace('<br>', '');
+                    if (replacedItem === '<p></p>' || replacedItem === '') { //if it is empty
+                        isFormBlank = true;
+                        return;
+                    }
+                }
+            }
+        );
+
+        console.log("isFormBlank: ", isFormBlank);
+
+        return isBlanksUnfilled || isFormBlank
     }
 
     handleSubmit(event) {

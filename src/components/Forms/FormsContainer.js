@@ -90,8 +90,12 @@ class FormsContainer extends Component {
         )
     };
 
+    areFormsValidated() {
+        return this.state.formData.some(item => item.value.replace(/\s/g, '').indexOf("<strong>X</strong>") > -1)
+    }
+
     handleSubmit(event) {
-        if (this.state.isValidated === false) {
+        if (this.areFormsValidated()) {
             event.preventDefault();
             event.stopPropagation();
             alert("Please fill in all fields.")
@@ -107,10 +111,7 @@ class FormsContainer extends Component {
     }
 
 
-    changeValue(value, index, isValidated) {
-        if (isValidated !== undefined) {
-            this.setState({isValidated: isValidated});
-        }
+    changeValue(value, index) {
         let formStateData = this.state.formData;
         formStateData[index].value = value;
         this.setState({formData: formStateData});
@@ -138,11 +139,11 @@ class FormsContainer extends Component {
                                 return <div key={index} className={'table-div'} dangerouslySetInnerHTML={{__html:form.value}}/>
                             } else {
                                 return (
-                                    <FormTextArea key={index} isFillInTheBlank={form.isFillInTheBlank}
+                                    <FormTextArea key={index}
                                                   index={index} formTitle={form.title}
                                                   formValue={form.value} placeholder={form.title}
                                                   numOfRows={form.numOfRows}
-                                                  changeValue={(value, index, isValidated) => this.changeValue(value, index, isValidated)}/> )
+                                                  changeValue={(value, index) => this.changeValue(value, index)}/> )
                             }
                         }.bind(this) )}
 

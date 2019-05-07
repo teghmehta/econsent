@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c02733d7-d4a9-4ce8-a87a-d7686d50c11f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Forms/FormTextArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Forms/FormTextArea.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Forms/FormsContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Forms/FormsContainer.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -41,7 +40,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Header/Header.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="915">
+            <state relative-caret-position="567">
               <caret line="61" selection-start-line="61" selection-end-line="65" selection-end-column="1" />
             </state>
           </provider>
@@ -50,8 +49,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/constants/constants.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="32" />
+            <state relative-caret-position="45">
+              <caret line="3" column="17" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -59,20 +58,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Forms/Forms.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="804">
-              <caret line="146" column="19" selection-start-line="146" selection-start-column="19" selection-end-line="146" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Forms/FormTextArea.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="309">
-              <caret line="68" column="48" lean-forward="true" selection-start-line="68" selection-start-column="48" selection-end-line="68" selection-end-column="48" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="492">
+              <caret line="115" column="5" lean-forward="true" selection-start-line="115" selection-start-column="5" selection-end-line="115" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -80,10 +67,24 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/Forms/FormsContainer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="376">
-              <caret line="97" column="68" selection-start-line="97" selection-start-column="68" selection-end-line="97" selection-end-column="68" />
+            <state relative-caret-position="787">
+              <caret line="131" column="47" selection-start-line="131" selection-start-column="47" selection-end-line="131" selection-end-column="47" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
+                <element signature="e#4839#4991#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Forms/FormTextArea.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="16" column="25" lean-forward="true" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+                <element signature="e#673#675#0" />
               </folding>
             </state>
           </provider>
@@ -92,8 +93,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Consent/ConsentForm.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="447">
-              <caret line="43" column="92" selection-start-line="43" selection-start-column="92" selection-end-line="43" selection-end-column="92" />
+            <state relative-caret-position="495">
+              <caret line="33" column="16" lean-forward="true" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -146,10 +147,13 @@
       <find>form</find>
       <find>q</find>
       <find>q</find>
+      <find>, ,</find>
+      <find>false</find>
     </findStrings>
     <replaceStrings>
       <replace>title</replace>
       <replace>&quot;</replace>
+      <replace>true</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src</dir>
@@ -385,7 +389,7 @@
       <workItem from="1554752282344" duration="951000" />
       <workItem from="1554753434748" duration="8835000" />
       <workItem from="1555001382171" duration="77064000" />
-      <workItem from="1556735156094" duration="11580000" />
+      <workItem from="1556735156094" duration="21095000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1554742894433</created>
@@ -604,30 +608,44 @@
       <option name="project" value="LOCAL" />
       <updated>1557165891329</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Validates every Form except funder and co-investigators. If it is not empty it submits">
+      <created>1557168640899</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1557168640899</updated>
+    </task>
+    <task id="LOCAL-00033" summary="This is the potential working version of the validation of forms">
+      <created>1557251651577</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1557251651577</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="111902000" />
+    <option name="totallyTimeSpent" value="121417000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.122621566" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.06853092" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.20384048" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49964765" visible="true" weight="0.119164616" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49980307" weight="0.118906945" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5003524" side_tool="true" visible="true" weight="0.119164616" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3293944" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50019693" side_tool="true" weight="0.07163959" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.54299754" />
       <window_info anchor="bottom" id="TypeScript" order="11" weight="0.3293944" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.3293944" />
@@ -640,8 +658,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fixed css bug with the pre vs preline spacing of the lines in the form" />
-    <MESSAGE value="Added file saving and opening, not tested" />
     <MESSAGE value="Tried to add new features like Deleting but not working. Overall besides that it is a full working copy." />
     <MESSAGE value="changed '/new' to '/form'" />
     <MESSAGE value="Added deletion of localStorage items and fixed other bugs" />
@@ -665,7 +681,9 @@
     <MESSAGE value="Attempting to add a table for Documentation of Informed Consent" />
     <MESSAGE value="Added Table for Informed Consent but the Validation for the study title needs to be added" />
     <MESSAGE value="Fixed the fill in the blank: Removed all the code in FormTextArea and replaced it with a single function in FormContainer that loops through the array and checks if it contains the Bold X" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed the fill in the blank: Removed all the code in FormTextArea and replaced it with a single function in FormContainer that loops through the array and checks if it contains the Bold X" />
+    <MESSAGE value="Validates every Form except funder and co-investigators. If it is not empty it submits" />
+    <MESSAGE value="This is the potential working version of the validation of forms" />
+    <option name="LAST_COMMIT_MESSAGE" value="This is the potential working version of the validation of forms" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/public/favicon.ico" />
@@ -785,13 +803,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Header/Header.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="915">
-          <caret line="61" selection-start-line="61" selection-end-line="65" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Consent/Consent.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="504">
@@ -809,46 +820,55 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Header/Header.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="567">
+          <caret line="61" selection-start-line="61" selection-end-line="65" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Forms/Forms.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="492">
+          <caret line="115" column="5" lean-forward="true" selection-start-line="115" selection-start-column="5" selection-end-line="115" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Consent/ConsentForm.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="447">
-          <caret line="43" column="92" selection-start-line="43" selection-start-column="92" selection-end-line="43" selection-end-column="92" />
+        <state relative-caret-position="495">
+          <caret line="33" column="16" lean-forward="true" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Forms/Forms.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="804">
-          <caret line="146" column="19" selection-start-line="146" selection-start-column="19" selection-end-line="146" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Forms/FormTextArea.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="68" column="48" lean-forward="true" selection-start-line="68" selection-start-column="48" selection-end-line="68" selection-end-column="48" />
+        <state relative-caret-position="240">
+          <caret line="16" column="25" lean-forward="true" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#673#675#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/constants/constants.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="32" />
+        <state relative-caret-position="45">
+          <caret line="3" column="17" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Forms/FormsContainer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="97" column="68" selection-start-line="97" selection-start-column="68" selection-end-line="97" selection-end-column="68" />
+        <state relative-caret-position="787">
+          <caret line="131" column="47" selection-start-line="131" selection-start-column="47" selection-end-line="131" selection-end-column="47" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#4839#4991#0" />
           </folding>
         </state>
       </provider>

@@ -15,16 +15,22 @@ class FormsContainer extends Component {
         this.state = {savingText: ""};
         this.handleClose = this.handleClose.bind(this);
         this.handleShow = this.handleShow.bind(this);
-        document.addEventListener("keydown", function(e) {
-            if (e.keyCode === 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
-                e.preventDefault();
-                this.saveJson()
-            }
-        }.bind(this), false);
+        this.saveOnCtrlS = this.saveOnCtrlS.bind(this)
+        document.addEventListener("keydown", this.saveOnCtrlS, false);
     }
+
+    saveOnCtrlS(e) {
+        if (e.keyCode === 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
+            e.preventDefault();
+            console.log('t')
+            this.saveJson()
+        }
+    }
+
 
     componentWillUnmount() {
         this.unlisten();
+        document.removeEventListener('scroll', this.saveOnCtrlS, false);
     }
 
 
@@ -91,24 +97,28 @@ class FormsContainer extends Component {
     };
 
     areFormsValidated() {
-        let isBlanksUnfilled = this.state.formData.some(item => item.value.replace(/\s/g, '').indexOf("<strong>X</strong>") > -1)
         let isFormBlank = false;
             this.state.formData.some((item, index) => {
                 let replacedItem = item.value.replace(/\s/g, '').replace('<br>', '');
                 if ((replacedItem === '<p></p>' || replacedItem === '')&& (item.isValidated !== undefined)) { //if it is empty
-                    console.log("AHAHH", item.isValidated);
-                    let formStateData = this.state.formData;
-                    formStateData[index].isValidated = false;
-                    this.setState({formData: formStateData});
+                    this.replaceFormData(index, 'isValidated', false)
                     isFormBlank = true;
                     return;
                 } else if (item.isValidated !== undefined) {
-                    let formStateData = this.state.formData;
-                    formStateData[index].isValidated = true;
-                    this.setState({formData: formStateData});
+                    this.replaceFormData(index, 'isValidated', true)
                 }
             }
         );
+
+
+        let isBlanksUnfilled = false;
+        this.state.formData.some((item, index) => {
+            let flag = item.value.replace(/\s/g, '').indexOf("<strong>X</strong>") > -1;
+            if (flag) {
+                this.replaceFormData(index, 'isValidated', false);
+                isBlanksUnfilled = true
+            }
+        });
 
         console.log("isFormBlank: ", isFormBlank);
 
@@ -119,7 +129,7 @@ class FormsContainer extends Component {
         if (this.areFormsValidated()) {
             event.preventDefault();
             event.stopPropagation();
-            alert("Please fill in all fields.")
+            alert("Please fill in all required* fields.")
         } else {
             this.props.history.push('/submit/' + encodeURIComponent(this.props.formName))
         }
@@ -131,24 +141,26 @@ class FormsContainer extends Component {
         if (this.state.isFormNew) localStorage.removeItem(this.props.formName);
     }
 
-
+    replaceFormData(index, property, value) {
+        let formStateData = this.state.formData;
+        formStateData[index][property] = value;
+        if (index == 19 || index === 10) console.log(index, property, value)
+        this.setState({formData: formStateData});
+    }
 
     changeValue(value, index) {
         let formStateData = this.state.formData;
-        console.log(value)
-        formStateData[index].value = value;
+        this.replaceFormData(index, 'value', value);
+
         let replacedItem = value.replace(/\s/g, '').replace('<br>', '');
-        console.log(replacedItem)
         if ((replacedItem === '<p></p>' || replacedItem === '') && (formStateData[index].isValidated !== undefined)) { //if it is empty
-            let formStateData = this.state.formData;
+            /*let formStateData = this.state.formData;
             formStateData[index].isValidated = false;
-            this.setState({formData: formStateData});
+            this.setState({formData: formStateData});*/
+            this.replaceFormData(index, 'isValidated', false)
         } else if (formStateData[index].isValidated !== undefined){
-            let formStateData = this.state.formData;
-            formStateData[index].isValidated = true;
-            this.setState({formData: formStateData});
+            this.replaceFormData(index, 'isValidated', true)
         }
-        this.setState({formData: formStateData});
     }
 
     handleClose(saveFlag) {

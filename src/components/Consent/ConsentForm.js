@@ -41,7 +41,11 @@ class ConsentForm extends Component {
                     <ImageHeader/>
                     <h6 className={'consent-form-title'}>PATIENT INFORMED CONSENT TO PARTICIPATE IN A RESEARCH STUDY</h6>
 
-                    {this.state.formData.map((form, index) => <ConsentText table={form.table} key={index} numOfRows={form.numOfRows} heading={form.title} text={form.value}/>)}
+                    {this.state.formData.map((form, index) => {
+                        let replacedItem = form.value.replace(/\s/g, '').replace('<br>', '');
+                        if (form.isValidated === undefined && (replacedItem === '<p></p>' || replacedItem === '')) return '';
+                        else return <ConsentText table={form.table} key={index} numOfRows={form.numOfRows} heading={form.title} text={form.value}/>
+                    })}
 
                 </div>
             </div>

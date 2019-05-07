@@ -52,7 +52,8 @@ class StartupForm extends Component {
 
     openForms() {
         let rows = [];
-        Object.keys(localStorage).forEach(function(key, i){
+        let sorted = Object.keys(localStorage).sort();
+        sorted.forEach(function(key, i){
             rows.push(<div key={i} className={"dropdown-div"}><Dropdown.Item key={i} href={"/form/" + key}>{key.length > 20 ? key.substring(0, Math.min(key.length, 70)) + '...' : key}</Dropdown.Item>
                 <Button onClick={() => this.deleteForm(key)} variant="danger">Delete</Button></div>)
         }.bind(this));

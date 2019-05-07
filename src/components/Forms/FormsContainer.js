@@ -12,7 +12,7 @@ class FormsContainer extends Component {
         super(props);
 
         this.formData = {};
-        this.state = {savingText: ""};
+        this.state = {savingText: "", timeout: ''};
         this.handleClose = this.handleClose.bind(this);
         this.handleShow = this.handleShow.bind(this);
         this.saveOnCtrlS = this.saveOnCtrlS.bind(this)
@@ -31,6 +31,7 @@ class FormsContainer extends Component {
     componentWillUnmount() {
         this.unlisten();
         document.removeEventListener('scroll', this.saveOnCtrlS, false);
+        clearTimeout(this.state.timeout)
     }
 
 
@@ -74,9 +75,10 @@ class FormsContainer extends Component {
 
     saveJson = () => {
         this.setState({savingText:"Saved."});
-        setTimeout(function() {
+        let timeout = setTimeout(function() {
             this.setState({savingText:""});
         }.bind(this), 1500);
+        this.setState({timeout});
         let  validJson;
         try {
             validJson = this.validateJson(JSON.stringify(this.state.formData, null, 2));

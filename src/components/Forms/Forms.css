@@ -147,3 +147,11 @@ td {
         padding-top: 50px;
     }
 }
+
+.isValidated-false {
+    color: red;
+}
+
+.isValidated-true {
+    color: black;
+}

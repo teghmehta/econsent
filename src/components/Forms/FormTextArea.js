@@ -20,6 +20,7 @@ class FormTextArea extends Component {
 
     handleChange(text) {
         this.setState({formValue: text});
+        this.props.changeValue(text, this.props.index);
         try {
             this.props.changeValue(text, this.props.index);
         } catch (e) {
@@ -58,11 +59,12 @@ class FormTextArea extends Component {
         //             </Form.Group>
         //     );
         // }
+
         return (
 
             <div className={"editorContainer"}>
-                <Form.Label>
-                    {this.props.formTitle}
+                <Form.Label className={'isValidated-' + this.props.isValidated}>
+                    {this.props.formTitle} {this.props.isValidated !== undefined ? this.props.isValidated === true ? "" : "*" : ""}
                 </Form.Label>
                 <ReactQuill
                     onChange={this.handleChange}

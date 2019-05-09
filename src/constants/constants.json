@@ -151,6 +151,10 @@
   {
     "table": "person-obtaining",
     "value": "<table> <tbody> <tr> <td <div class=\"name-td\"> <div class=\"doc-border-top\"> Name of Person obtaining consent (print) </div> </td> <td <div class=\"signature-td\"> <div class=\"doc-border-top\"> Signature </div> </td> <td <div class=\"date-td\"> <div class=\"doc-border-top\"> Date </div> </td> </tr> </tbody> </table>"
+  },
+  {
+    "date": "",
+    "value": ""
   }
 ]
 

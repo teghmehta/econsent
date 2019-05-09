@@ -12,16 +12,37 @@
     background-color: white;
     margin: auto;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    padding: 50px 40px 50px 40px;
+    padding: 0px 40px 0px 40px;
     position: relative;
     overflow: hidden;
     transition: margin-left .5s;
     width: 11.5in;
-    /*height: 11in;*/
     clear: both;
     page-break-after: always;
 }
 
+.print-header {
+    font-size: 0.8em;
+    text-align: center;
+    margin-bottom: 5px;
+    position: fixed;
+    bottom: 0;
+}
+
+.footer-td {
+    padding-top: 40px;
+}
+
+.footer {
+
+    position: fixed;
+    bottom: 0;
+}
+
+.header, .header-space,
+.footer, .footer-space {
+    height: 100px;
+}
 
 .uhn-consent-logo {
     width: 240px
@@ -108,5 +129,5 @@ li {
 
     /* this affects the margin in the printer settings */
     padding-top: 10px;
-    margin: 20mm 2mm 17mm 2mm;
+    margin: 10mm 2mm 10mm 2mm;
 }

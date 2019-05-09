@@ -4,6 +4,8 @@ import './Forms.css';
 import {ButtonToolbar, Button, Modal, Form} from "react-bootstrap";
 import Header from "../Header/Header";
 import {withRouter} from "react-router";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 let formData = require('../../constants/constants');
 
 class FormsContainer extends Component {
@@ -12,7 +14,7 @@ class FormsContainer extends Component {
         super(props);
 
         this.formData = {};
-        this.state = {savingText: "", timeout: ''};
+        this.state = {savingText: "", timeout: '', startDate: new Date()};
         this.handleClose = this.handleClose.bind(this);
         this.handleShow = this.handleShow.bind(this);
         this.saveOnCtrlS = this.saveOnCtrlS.bind(this)
@@ -22,7 +24,6 @@ class FormsContainer extends Component {
     saveOnCtrlS(e) {
         if (e.keyCode === 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
             e.preventDefault();
-            console.log('t')
             this.saveJson()
         }
     }
@@ -74,6 +75,7 @@ class FormsContainer extends Component {
     };
 
     saveJson = () => {
+        this.replaceFormData(this.state.formData.length -1 , 'date', this.state.startDate);
         this.setState({savingText:"Saved."});
         let timeout = setTimeout(function() {
             this.setState({savingText:""});
@@ -139,14 +141,12 @@ class FormsContainer extends Component {
     }
 
     isFormNew() {
-        console.log("isFormNew()", this.state.isFormNew);
         if (this.state.isFormNew) localStorage.removeItem(this.props.formName);
     }
 
     replaceFormData(index, property, value) {
         let formStateData = this.state.formData;
         formStateData[index][property] = value;
-        if (index == 19 || index === 10) console.log(index, property, value)
         this.setState({formData: formStateData});
     }
 
@@ -156,9 +156,6 @@ class FormsContainer extends Component {
 
         let replacedItem = value.replace(/\s/g, '').replace('<br>', '');
         if ((replacedItem === '<p></p>' || replacedItem === '') && (formStateData[index].isValidated !== undefined)) { //if it is empty
-            /*let formStateData = this.state.formData;
-            formStateData[index].isValidated = false;
-            this.setState({formData: formStateData});*/
             this.replaceFormData(index, 'isValidated', false)
         } else if (formStateData[index].isValidated !== undefined){
             this.replaceFormData(index, 'isValidated', true)
@@ -183,6 +180,7 @@ class FormsContainer extends Component {
                 <div className={'forms-container'}>
                     <Form onSubmit={e => this.handleSubmit(e)}>
                         {this.state.formData.map(function(form, index) {
+                            if (form.date !== undefined) return ''; //Do not display the date JSON
                             if (form.table) {
                                 return <div key={index} className={'table-div'} dangerouslySetInnerHTML={{__html:form.value}}/>
                             } else {
@@ -200,6 +198,12 @@ class FormsContainer extends Component {
                         <Button onClick={this.saveJson.bind(this)} variant="primary">Save</Button>
                         <Button variant="secondary" onClick={this.handleShow} >Go Back</Button>
                         <Button type={"submit"} variant="outline-danger">Save and Submit</Button>
+                        <h6 className={'date-picker-header'}>Informed Consent Form Version Date:</h6>
+                        <DatePicker
+                            selected={this.state.startDate}
+                            onChange={(date) => this.setState({startDate: date})}
+                            onSelect={() => this.replaceFormData(this.state.formData.length -1 , 'date', this.state.startDate)}
+                        />
                     </ButtonToolbar>
                     </Form>
                 </div>

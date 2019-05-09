@@ -16,6 +16,7 @@ class ConsentForm extends Component {
         this.loadJson()
     }
 
+
     loadJson = () => {
         const json = window.localStorage.getItem(this.props.formName);
 
@@ -31,6 +32,7 @@ class ConsentForm extends Component {
     }
 
     render() {
+        console.log('Informed Consent Form Version Date: '+ new Date(Date.parse(this.state.formData[this.state.formData.length-1].date)).toDateString().split(' ').slice(1).join(' '));
         return (
             <div>
                 <ButtonToolbar/>
@@ -38,15 +40,38 @@ class ConsentForm extends Component {
                     <Button media="print" className={'no-print'} variant="secondary" onClick={this.push.bind(this)} >Go Back</Button>
                  <ButtonToolbar/>
                 <div id='consent-form-container' className={'consent-form-container'}>
-                    <ImageHeader/>
-                    <h6 className={'consent-form-title'}>PATIENT INFORMED CONSENT TO PARTICIPATE IN A RESEARCH STUDY</h6>
+                    <table>
+                        <thead>
+                        <tr>
+                            <td>&nbsp;
+                            </td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div className="content">
+                                    <ImageHeader/>
+                                    <h6 className={'consent-form-title'}>PATIENT INFORMED CONSENT TO PARTICIPATE IN A RESEARCH STUDY</h6>
 
-                    {this.state.formData.map((form, index) => {
-                        let replacedItem = form.value.replace(/\s/g, '').replace('<br>', '');
-                        if (form.isValidated === undefined && (replacedItem === '<p></p>' || replacedItem === '')) return '';
-                        else return <ConsentText table={form.table} key={index} numOfRows={form.numOfRows} heading={form.title} text={form.value}/>
-                    })}
-
+                                    {this.state.formData.map((form, index) => {
+                                        let replacedItem = form.value.replace(/\s/g, '').replace('<br>', '');
+                                        if (form.isValidated === undefined && (replacedItem === '<p></p>' || replacedItem === '')) return '';
+                                        else return <ConsentText table={form.table} key={index} numOfRows={form.numOfRows} heading={form.title} text={form.value}/>
+                                    })}
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td className={'footer-td'}>
+                                <div className="footer-space">&nbsp;</div>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                    <div className="footer"><p className={'print-header'}>Version Date:  {new Date(Date.parse(this.state.formData[this.state.formData.length-1].date)).toDateString().split(' ').slice(1).join(' ')}</p></div>
                 </div>
             </div>
         );

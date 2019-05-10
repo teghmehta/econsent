@@ -66,7 +66,9 @@ class ConsentForm extends Component {
                         <tfoot>
                         <tr>
                             <td className={'footer-td'}>
-                                <div className="footer-space">&nbsp;</div>
+                                <div className="footer-space">&nbsp;
+                                    <p className={'page-num'}></p>
+                                </div>
                             </td>
                         </tr>
                         </tfoot>

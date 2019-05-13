@@ -160,3 +160,23 @@ td {
 .isValidated-true {
     color: black;
 }
+
+
+.image-uploader-header {
+
+}
+
+.image-uploader-container {
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.image-uploader {
+    display: flex;
+}
+
+.fileContainer {
+    padding: 0!important;
+    margin: 10px 0 0 70px  !important;
+}

@@ -5,6 +5,7 @@ import {ButtonToolbar, Button, Modal, Form} from "react-bootstrap";
 import Header from "../Header/Header";
 import {withRouter} from "react-router";
 import DatePicker from "react-datepicker";
+import ImageUploader from 'react-images-upload';
 import "react-datepicker/dist/react-datepicker.css";
 let formData = require('../../constants/constants');
 
@@ -14,11 +15,54 @@ class FormsContainer extends Component {
         super(props);
 
         this.formData = {};
-        this.state = {savingText: "", timeout: '', startDate: new Date()};
+        this.state = {savingText: "", timeout: '', startDate: new Date(), pictures: [], lastPicturesLength: 0 };
+        this.onDrop = this.onDrop.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleShow = this.handleShow.bind(this);
         this.saveOnCtrlS = this.saveOnCtrlS.bind(this)
         document.addEventListener("keydown", this.saveOnCtrlS, false);
+    }
+    onDrop(pictures,pictureDataURLs) {
+        this.setState({lastPicturesLength: pictures.length})
+        console.log(this.state.pictures.length, pictures, pictureDataURLs);
+        if ((this.state.pictures.length) < 2 && !(this.state.lastPicturesLength === 0 && pictures.length > 2)) {
+            if (this.state.pictures.length === 1) {
+                if (this.state.pictures[0].name === pictures[pictures.length-1].name) {
+                    alert('There is already an Image with the same name!');
+                } else {
+                    this.setPicturesArray(pictures)
+                }
+            } else {
+                this.setPicturesArray(pictures)
+            }
+        } else {
+            alert("You have already reached the image limit.")
+        }
+    }
+
+    setPicturesArray(picturesArray) {
+        let slicedArray = picturesArray[picturesArray.length-1];
+        if (Math.abs(picturesArray.length - this.state.lastPicturesLength) === 2) {
+            slicedArray = picturesArray.slice(Math.max(picturesArray.length - 2, 0))
+            console.log(slicedArray)
+        }
+
+        if (picturesArray.length - this.state.lastPicturesLength > 2) {
+            alert('You have already reached the image limit.');
+            return;
+        }
+        this.setState({
+            pictures: this.state.pictures.concat(slicedArray),
+        });
+    }
+
+
+    deletePhoto(key) {
+        this.setState({pictures: this.state.pictures.filter(function( obj ) {
+            return obj.name !== key;
+        })});
+
+        console.log("delete:", this.state.pictures)
     }
 
     saveOnCtrlS(e) {
@@ -193,7 +237,20 @@ class FormsContainer extends Component {
                                                   changeValue={(value, index) => this.changeValue(value, index)}/> )
                             }
                         }.bind(this) )}
-
+                        <div className={'image-uploader-container'}>
+                            <h6 className={'image-uploader-header'}>Upload Image used for Consent Form Header</h6>
+                            <ImageUploader
+                                className={'image-uploader'}
+                                buttonText='Choose images'
+                                onChange={(e) => this.onDrop(e)}
+                                withPreview={false}
+                                withIcon={false}
+                                label={'Max File Size: 5MB'}
+                                imgExtension={['.jpg', '.png']}
+                                maxFileSize={5242880}
+                            />
+                            {this.state.pictures.map((picture, index) => <p key={index}> {picture.name}<Button onClick={() =>this.deletePhoto(picture.name)} variant="danger">Delete</Button></p>)}
+                        </div>
                     <ButtonToolbar>
                         <Button onClick={this.saveJson.bind(this)} variant="primary">Save</Button>
                         <Button variant="secondary" onClick={this.handleShow} >Go Back</Button>
@@ -205,6 +262,7 @@ class FormsContainer extends Component {
                             onSelect={() => this.replaceFormData(this.state.formData.length -1 , 'date', this.state.startDate)}
                         />
                     </ButtonToolbar>
+
                     </Form>
                 </div>
 

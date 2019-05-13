@@ -43,7 +43,7 @@ class ConsentForm extends Component {
                     <table>
                         <thead>
                         <tr>
-                            <td>&nbsp;
+                            <td>
                             </td>
                         </tr>
                         </thead>
@@ -66,14 +66,15 @@ class ConsentForm extends Component {
                         <tfoot>
                         <tr>
                             <td className={'footer-td'}>
-                                <div className="footer-space">&nbsp;
+                                <div className="footer">
+                                    <p className={'print-header'}>Version Date:  {new Date(Date.parse(this.state.formData[this.state.formData.length-1].date)).toDateString().split(' ').slice(1).join(' ')}</p>
                                     <p className={'page-num'}></p>
                                 </div>
                             </td>
                         </tr>
                         </tfoot>
                     </table>
-                    <div className="footer"><p className={'print-header'}>Version Date:  {new Date(Date.parse(this.state.formData[this.state.formData.length-1].date)).toDateString().split(' ').slice(1).join(' ')}</p></div>
+
                 </div>
             </div>
         );

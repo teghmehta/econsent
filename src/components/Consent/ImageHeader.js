@@ -5,6 +5,7 @@ import {Row, Col, Image} from "react-bootstrap";
 class ImageHeader extends Component {
 
     render() {
+        console.log(this.props.pictures);
         return (
             <div className={'image-header-container'}>
                 <Row>

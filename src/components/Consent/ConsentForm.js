@@ -51,7 +51,7 @@ class ConsentForm extends Component {
                         <tr>
                             <td>
                                 <div className="content">
-                                    <ImageHeader/>
+                                    <ImageHeader pictures={this.state.formData.find(x => x.pictures).pictures}/>
                                     <h6 className={'consent-form-title'}>PATIENT INFORMED CONSENT TO PARTICIPATE IN A RESEARCH STUDY</h6>
 
                                     {this.state.formData.map((form, index) => {

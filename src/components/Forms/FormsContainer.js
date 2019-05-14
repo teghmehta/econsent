@@ -15,7 +15,7 @@ class FormsContainer extends Component {
         super(props);
 
         this.formData = {};
-        this.state = {savingText: "", timeout: '', startDate: new Date(), pictures: [], lastPicturesLength: 0 };
+        this.state = {savingText: "", timeout: '', startDate: new Date(), pictures: [], lastPicturesLength: 0, base64Images: [] };
         this.onDrop = this.onDrop.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleShow = this.handleShow.bind(this);
@@ -43,15 +43,49 @@ class FormsContainer extends Component {
             if (Math.abs(pictures.length - this.state.lastPicturesLength) === 2) {
                 slicedArray = pictures.slice(Math.max(pictures.length - 2, 0))
             }
+
+            let newPictures = this.state.pictures.concat(slicedArray)
             this.setState({
-                pictures: this.state.pictures.concat(slicedArray),
+                pictures: newPictures,
             });
+
+            this.setBase64Images(newPictures);
         }
     }
 
+    setBase64Images(pictures) {
+        pictures.map((picture) => {
+            let reader = new FileReader();
+            reader.readAsDataURL(picture);
+            reader.onload = function () {
+                this.setState({base64Images: this.state.base64Images.concat(reader.result)})
+            }.bind(this);
+            reader.onerror = function (error) {
+                console.log('Error: ', error);
+            };
+        });
+    }
 
-    deletePhoto(key) {
-        this.setState({pictures: this.state.pictures.filter(function( obj ) {
+    loadBase64Images(json) {
+        var image = new Image();
+        image.src = 'data:image/png;base64,iVBORw0K...';
+        let pictures = [];
+        try {
+            pictures.concat(JSON.parse(json).find(x => x.base64Images).base64Images.map((base64Picture) => {
+                //return the file from the base64Image
+                return;
+            }))
+        } catch (e) {
+
+        }
+        console.log(pictures);
+        // this.setState({pictures: pictures})
+    }
+
+
+
+    deletePhoto(key, index) {
+        this.setState({base64Images: this.state.base64Images.splice(index, 1), pictures: this.state.pictures.filter(function( obj ) {
             return obj.name !== key;
         })});
 
@@ -108,13 +142,17 @@ class FormsContainer extends Component {
         } else {
             this.setState({isFormNew: false});
         }
-        this.setState({formData: JSON.parse(json) })
+
+        this.setState({formData: JSON.parse(json)})
+
+        this.loadBase64Images(json)
     };
 
     saveJson = () => {
-
+        console.log(this.state.base64Images)
         this.replaceFormData(this.state.formData.findIndex(form => form.date !== undefined), 'date', this.state.startDate);
         this.replaceFormData(this.state.formData.findIndex(form => form.pictures !== undefined), 'pictures', this.state.pictures);
+        this.replaceFormData(this.state.formData.findIndex(form => form.base64Images !== undefined), 'base64Images', this.state.base64Images);
 
         this.setState({savingText:"Saved."});
         let timeout = setTimeout(function() {
@@ -185,7 +223,6 @@ class FormsContainer extends Component {
     }
 
     replaceFormData(index, property, value) {
-        console.log(index, property, value)
         let formStateData = this.state.formData;
         formStateData[index][property] = value;
         this.setState({formData: formStateData});
@@ -246,7 +283,7 @@ class FormsContainer extends Component {
                                 imgExtension={['.jpg', '.png']}
                                 maxFileSize={5242880}
                             />
-                            {this.state.pictures.map((picture, index) => <p key={index}> {picture.name}<Button onClick={() =>this.deletePhoto(picture.name)} variant="danger">Delete</Button></p>)}
+                            {this.state.pictures.map((picture, index) => <p key={index}> {picture.name}<Button onClick={() =>this.deletePhoto(picture.name, index)} variant="danger">Delete</Button></p>)}
                         </div>
                     <ButtonToolbar>
                         <Button onClick={this.saveJson.bind(this)} variant="primary">Save</Button>

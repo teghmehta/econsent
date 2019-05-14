@@ -32,7 +32,7 @@ class ConsentForm extends Component {
     }
 
     render() {
-        console.log('Informed Consent Form Version Date: '+ new Date(Date.parse(this.state.formData[this.state.formData.length-1].date)).toDateString().split(' ').slice(1).join(' '));
+        console.log('Informed Consent Form Version Date: '+ new Date(Date.parse(this.state.formData.find(x => x.date).date)).toDateString().split(' ').slice(1).join(' '));
         return (
             <div>
                 <ButtonToolbar/>
@@ -67,7 +67,7 @@ class ConsentForm extends Component {
                         <tr>
                             <td className={'footer-td'}>
                                 <div className="footer">
-                                    <p className={'print-header'}>Version Date:  {new Date(Date.parse(this.state.formData[this.state.formData.length-1].date)).toDateString().split(' ').slice(1).join(' ')}</p>
+                                    <p className={'print-header'}>Version Date:  {new Date(Date.parse(this.state.formData.find(x => x.date).date)).toDateString().split(' ').slice(1).join(' ')}</p>
                                     <p className={'page-num'}></p>
                                 </div>
                             </td>

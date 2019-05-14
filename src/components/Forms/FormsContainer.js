@@ -22,38 +22,31 @@ class FormsContainer extends Component {
         this.saveOnCtrlS = this.saveOnCtrlS.bind(this)
         document.addEventListener("keydown", this.saveOnCtrlS, false);
     }
-    onDrop(pictures,pictureDataURLs) {
+
+    //This function makes sure that a maximum of two new images can be added
+    onDrop(pictures) {
         this.setState({lastPicturesLength: pictures.length})
-        console.log(this.state.pictures.length, pictures, pictureDataURLs);
-        if ((this.state.pictures.length) < 2 && !(this.state.lastPicturesLength === 0 && pictures.length > 2)) {
-            if (this.state.pictures.length === 1) {
-                if (this.state.pictures[0].name === pictures[pictures.length-1].name) {
-                    alert('There is already an Image with the same name!');
-                } else {
-                    this.setPicturesArray(pictures)
-                }
-            } else {
-                this.setPicturesArray(pictures)
-            }
-        } else {
+
+        if (this.state.pictures.length >= 2
+            || (this.state.lastPicturesLength === 0 && pictures.length > 2)
+            || (Math.abs(pictures.length - this.state.lastPicturesLength) > 2)
+            || (Math.abs(pictures.length - this.state.lastPicturesLength) > 1 && this.state.pictures.length === 1)) {
             alert("You have already reached the image limit.")
-        }
-    }
+        } else {
 
-    setPicturesArray(picturesArray) {
-        let slicedArray = picturesArray[picturesArray.length-1];
-        if (Math.abs(picturesArray.length - this.state.lastPicturesLength) === 2) {
-            slicedArray = picturesArray.slice(Math.max(picturesArray.length - 2, 0))
-            console.log(slicedArray)
-        }
+            if (this.state.pictures.length === 1 && this.state.pictures[0].name === pictures[pictures.length-1].name) {
+                alert('There is already an Image with the same name!');
+                return;
+            }
 
-        if (picturesArray.length - this.state.lastPicturesLength > 2) {
-            alert('You have already reached the image limit.');
-            return;
+            let slicedArray = pictures[pictures.length-1];
+            if (Math.abs(pictures.length - this.state.lastPicturesLength) === 2) {
+                slicedArray = pictures.slice(Math.max(pictures.length - 2, 0))
+            }
+            this.setState({
+                pictures: this.state.pictures.concat(slicedArray),
+            });
         }
-        this.setState({
-            pictures: this.state.pictures.concat(slicedArray),
-        });
     }
 
 
@@ -119,7 +112,10 @@ class FormsContainer extends Component {
     };
 
     saveJson = () => {
-        this.replaceFormData(this.state.formData.length -1 , 'date', this.state.startDate);
+
+        this.replaceFormData(this.state.formData.findIndex(form => form.date !== undefined), 'date', this.state.startDate);
+        this.replaceFormData(this.state.formData.findIndex(form => form.pictures !== undefined), 'pictures', this.state.pictures);
+
         this.setState({savingText:"Saved."});
         let timeout = setTimeout(function() {
             this.setState({savingText:""});
@@ -189,6 +185,7 @@ class FormsContainer extends Component {
     }
 
     replaceFormData(index, property, value) {
+        console.log(index, property, value)
         let formStateData = this.state.formData;
         formStateData[index][property] = value;
         this.setState({formData: formStateData});
@@ -224,7 +221,7 @@ class FormsContainer extends Component {
                 <div className={'forms-container'}>
                     <Form onSubmit={e => this.handleSubmit(e)}>
                         {this.state.formData.map(function(form, index) {
-                            if (form.date !== undefined) return ''; //Do not display the date JSON
+                            if (form.date !== undefined || form.pictures !== undefined) return ''; //Do not display the date JSON
                             if (form.table) {
                                 return <div key={index} className={'table-div'} dangerouslySetInnerHTML={{__html:form.value}}/>
                             } else {

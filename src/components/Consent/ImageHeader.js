@@ -5,18 +5,20 @@ import {Row, Col, Image} from "react-bootstrap";
 class ImageHeader extends Component {
 
     render() {
-        console.log(this.props.pictures);
+        console.log(this.props.base64Images, this.props.base64FileNames);
+
         return (
             <div className={'image-header-container'}>
                 <Row>
                     <Col/>
-                    <Col>
-                        <Image className={'uhn-consent-logo'} src={require('../../res/UHN.png')}/>
-                    </Col>
+                    {this.props.base64Images.map((img, i ) => {
+                        return (
+                            <Col>
+                                <Image className={'uhn-consent-logo'} src={img}/>
+                            </Col>
+                        )
 
-                    <Col>
-                        <Image className={'ehi-consent-logo'} src={require('../../res/ehealth-logo.png')}/>
-                    </Col>
+                    })}
                     <Col/>
                 </Row>
             </div>

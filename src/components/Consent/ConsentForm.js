@@ -78,7 +78,7 @@ class ConsentForm extends Component {
                         <tr>
                             <td>
                                 <div className="content">
-                                    <ImageHeader pictures={this.getFileArrFromBase64Images(this.state.formData.find(x => x.base64Images).base64Images, this.state.formData.find(x => x.base64FileNames).base64FileNames)}/>
+                                    <ImageHeader  base64Images={this.state.formData.find(x => x.base64Images).base64Images} pictures={this.getFileArrFromBase64Images(this.state.formData.find(x => x.base64Images).base64Images, this.state.formData.find(x => x.base64FileNames).base64FileNames)} base64FileNames={this.state.formData.find(x => x.base64FileNames).base64FileNames}/>
                                     <h6 className={'consent-form-title'}>PATIENT INFORMED CONSENT TO PARTICIPATE IN A RESEARCH STUDY</h6>
 
                                     {this.state.formData.map((form, index) => {

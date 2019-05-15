@@ -157,8 +157,9 @@
     "value": ""
   },
   {
-    "pictures": "",
-    "base64Images": "",
+    "pictures": [],
+    "base64Images": [],
+    "base64FileNames": [],
     "value": ""
   }
 ]

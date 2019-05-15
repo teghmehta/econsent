@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c02733d7-d4a9-4ce8-a87a-d7686d50c11f" name="Default Changelist" comment="Added Image uploading functionality. My code works but it needs to be cleaned up.&#10;&#10;It checks if it has reached 2 files,">
+    <list default="true" id="c02733d7-d4a9-4ce8-a87a-d7686d50c11f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Consent/ConsentForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Consent/ConsentForm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Forms/FormsContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Forms/FormsContainer.js" afterDir="false" />
@@ -21,8 +21,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/constants/constants.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="725">
-              <caret line="152" column="15" selection-start-line="152" selection-start-column="15" selection-end-line="152" selection-end-column="15" />
+            <state relative-caret-position="169">
+              <caret line="97" column="4" lean-forward="true" selection-start-line="97" selection-start-column="4" selection-end-line="97" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -51,8 +51,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/Forms/FormsContainer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
-              <caret line="112" lean-forward="true" selection-start-line="112" selection-end-line="112" />
+            <state relative-caret-position="490">
+              <caret line="65" column="42" lean-forward="true" selection-start-line="65" selection-start-column="42" selection-end-line="65" selection-end-column="42" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -63,8 +63,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Consent/ConsentForm.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3">
-              <caret line="16" column="5" lean-forward="true" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+            <state relative-caret-position="470">
+              <caret line="81" column="135" selection-start-line="81" selection-start-column="135" selection-end-line="81" selection-end-column="135" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -75,8 +75,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Consent/ImageHeader.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
+            <state relative-caret-position="105">
+              <caret line="7" column="41" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -121,6 +124,7 @@
       <find>false</find>
       <find>images</find>
       <find>.pictures</find>
+      <find>pictures</find>
     </findStrings>
     <replaceStrings>
       <replace>title</replace>
@@ -148,7 +152,6 @@
         <option value="$PROJECT_DIR$/src/components/Consent/SingleLineText.js" />
         <option value="$PROJECT_DIR$/src/components/Consent/MultiLineText.js" />
         <option value="$PROJECT_DIR$/src/App.js" />
-        <option value="$PROJECT_DIR$/src/components/Consent/ImageHeader.js" />
         <option value="$PROJECT_DIR$/src/components/Modal.js" />
         <option value="$PROJECT_DIR$/src/components/Modal/BackModal.js" />
         <option value="$PROJECT_DIR$/src/components/Forms/FormTextArea.css" />
@@ -161,6 +164,7 @@
         <option value="$PROJECT_DIR$/public/index.html" />
         <option value="$PROJECT_DIR$/src/components/Consent/Consent.css" />
         <option value="$PROJECT_DIR$/src/components/Forms/Forms.css" />
+        <option value="$PROJECT_DIR$/src/components/Consent/ImageHeader.js" />
         <option value="$PROJECT_DIR$/src/components/Consent/ConsentForm.js" />
         <option value="$PROJECT_DIR$/src/constants/constants.json" />
         <option value="$PROJECT_DIR$/src/components/Forms/FormsContainer.js" />
@@ -361,7 +365,7 @@
       <workItem from="1554752282344" duration="951000" />
       <workItem from="1554753434748" duration="8835000" />
       <workItem from="1555001382171" duration="77064000" />
-      <workItem from="1556735156094" duration="49893000" />
+      <workItem from="1556735156094" duration="61946000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1554742894433</created>
@@ -636,11 +640,25 @@
       <option name="project" value="LOCAL" />
       <updated>1557777432775</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="I cleaned up the code, it works. On save I now save the images too which then the ConsentForm.js now can read in state. The next step is displaying the photos in the ConsentForm">
+      <created>1557858624971</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1557858624971</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Now I am converting the image to base64. This way the forms can read it as a file later. But i stillhaven't been able to convert it back from base64 to File">
+      <created>1557864034413</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1557864034413</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="150215000" />
+    <option name="totallyTimeSpent" value="162268000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="6" />
@@ -660,7 +678,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3293944" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50019693" side_tool="true" weight="0.07163959" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.22082718" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.22082718" />
       <window_info anchor="bottom" id="TypeScript" order="11" weight="0.3293944" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.3293944" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -672,8 +690,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fixed validation for spaces" />
-    <MESSAGE value="made header width 200% because when width is 700px it only goes halfway" />
     <MESSAGE value="Removed the 200% thing on both the form control and header" />
     <MESSAGE value="got rid of directly changing state instead of using setState in FormsContainer and other warnings" />
     <MESSAGE value="Added form requirements and validation for the FormsContainer" />
@@ -697,7 +713,9 @@
     <MESSAGE value="I got the Date to work even when scrolling but the page number doesn't show." />
     <MESSAGE value="The version number works but not the Page count" />
     <MESSAGE value="Added Image uploading functionality. My code works but it needs to be cleaned up.&#10;&#10;It checks if it has reached 2 files," />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Image uploading functionality. My code works but it needs to be cleaned up.&#10;&#10;It checks if it has reached 2 files," />
+    <MESSAGE value="I cleaned up the code, it works. On save I now save the images too which then the ConsentForm.js now can read in state. The next step is displaying the photos in the ConsentForm" />
+    <MESSAGE value="Now I am converting the image to base64. This way the forms can read it as a file later. But i stillhaven't been able to convert it back from base64 to File" />
+    <option name="LAST_COMMIT_MESSAGE" value="Now I am converting the image to base64. This way the forms can read it as a file later. But i stillhaven't been able to convert it back from base64 to File" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/public/favicon.ico" />
@@ -851,17 +869,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Consent/ImageHeader.js">
+    <entry file="file://$PROJECT_DIR$/src/components/Consent/ConsentForm.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
+        <state relative-caret-position="470">
+          <caret line="81" column="135" selection-start-line="81" selection-start-column="135" selection-end-line="81" selection-end-column="135" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Consent/ConsentForm.js">
+    <entry file="file://$PROJECT_DIR$/src/components/Consent/ImageHeader.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3">
-          <caret line="16" column="5" lean-forward="true" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+        <state relative-caret-position="105">
+          <caret line="7" column="41" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
@@ -870,15 +891,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/constants/constants.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="725">
-          <caret line="152" column="15" selection-start-line="152" selection-start-column="15" selection-end-line="152" selection-end-column="15" />
+        <state relative-caret-position="169">
+          <caret line="97" column="4" lean-forward="true" selection-start-line="97" selection-start-column="4" selection-end-line="97" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Forms/FormsContainer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="112" lean-forward="true" selection-start-line="112" selection-end-line="112" />
+        <state relative-caret-position="490">
+          <caret line="65" column="42" lean-forward="true" selection-start-line="65" selection-start-column="42" selection-end-line="65" selection-end-column="42" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>

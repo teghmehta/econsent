@@ -8,6 +8,7 @@ import DatePicker from "react-datepicker";
 import ImageUploader from 'react-images-upload';
 import "react-datepicker/dist/react-datepicker.css";
 let formData = require('../../constants/constants');
+const MAX_PICTURES = 2;
 
 class FormsContainer extends Component {
 
@@ -15,7 +16,7 @@ class FormsContainer extends Component {
         super(props);
 
         this.formData = {};
-        this.state = {savingText: "", timeout: '', startDate: new Date(), pictures: [], lastPicturesLength: 0, base64Images: [] };
+        this.state = {savingText: "", timeout: '', startDate: new Date(), pictures: new Array(MAX_PICTURES), lastPicturesLength: 0, base64Images: new Array(MAX_PICTURES), base64FileNames: new Array(MAX_PICTURES) };
         this.onDrop = this.onDrop.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleShow = this.handleShow.bind(this);
@@ -25,71 +26,98 @@ class FormsContainer extends Component {
 
     //This function makes sure that a maximum of two new images can be added
     onDrop(pictures) {
+        let blank = this.state.pictures;
         this.setState({lastPicturesLength: pictures.length})
 
-        if (this.state.pictures.length >= 2
-            || (this.state.lastPicturesLength === 0 && pictures.length > 2)
-            || (Math.abs(pictures.length - this.state.lastPicturesLength) > 2)
-            || (Math.abs(pictures.length - this.state.lastPicturesLength) > 1 && this.state.pictures.length === 1)) {
+        if (this.state.pictures.length >= MAX_PICTURES
+            || (this.state.lastPicturesLength === 0 && pictures.length > MAX_PICTURES)
+            || (Math.abs(pictures.length - this.state.lastPicturesLength) > MAX_PICTURES)
+            || (Math.abs(pictures.length - this.state.lastPicturesLength) > MAX_PICTURES-1 && this.state.pictures.length === MAX_PICTURES-1)) {
             alert("You have already reached the image limit.")
         } else {
 
-            if (this.state.pictures.length === 1 && this.state.pictures[0].name === pictures[pictures.length-1].name) {
+            if (this.state.pictures.length === MAX_PICTURES-1 && this.state.pictures[0].name === pictures[pictures.length-1].name) {
                 alert('There is already an Image with the same name!');
                 return;
             }
 
             let slicedArray = pictures[pictures.length-1];
-            if (Math.abs(pictures.length - this.state.lastPicturesLength) === 2) {
-                slicedArray = pictures.slice(Math.max(pictures.length - 2, 0))
+            if (Math.abs(pictures.length - this.state.lastPicturesLength) === MAX_PICTURES) {
+                slicedArray = pictures.slice(Math.max(pictures.length - MAX_PICTURES, 0))
             }
 
-            let newPictures = this.state.pictures.concat(slicedArray)
             this.setState({
-                pictures: newPictures,
-            });
+                pictures: this.state.pictures.concat(slicedArray),
+            }, () => this.setBase64Images(this.state.pictures));
 
-            this.setBase64Images(newPictures);
         }
     }
 
     setBase64Images(pictures) {
+        console.log(pictures);
+        let images = this.state.base64Images;
+        let filenames = this.state.base64FileNames;
         pictures.map((picture) => {
+            filenames = filenames.concat(picture.name)
             let reader = new FileReader();
             reader.readAsDataURL(picture);
             reader.onload = function () {
-                this.setState({base64Images: this.state.base64Images.concat(reader.result)})
+                images.push(reader.result)
+                console.log(reader.result)
             }.bind(this);
             reader.onerror = function (error) {
                 console.log('Error: ', error);
             };
         });
+
+        this.setState({base64FileNames: filenames, base64Images: images}, () => console.log(this.state.base64Images, images));
     }
 
     loadBase64Images(json) {
-        var image = new Image();
-        image.src = 'data:image/png;base64,iVBORw0K...';
         let pictures = [];
         try {
-            pictures.concat(JSON.parse(json).find(x => x.base64Images).base64Images.map((base64Picture) => {
-                //return the file from the base64Image
-                return;
-            }))
+            pictures = this.getFileArrFromBase64Images(JSON.parse(json).find(x => x.base64Images).base64Images, JSON.parse(json).find(x => x.base64FileNames).base64FileNames);
         } catch (e) {
-
+            console.log(e)
         }
-        console.log(pictures);
-        // this.setState({pictures: pictures})
+        this.setState({pictures: pictures})
     }
 
 
+    getFileArrFromBase64Images(base64Images, base64FileNames) {
+        let ImageArray = [];
+        ImageArray.concat(base64Images.map((base64Picture, index) => {
+            let name = base64FileNames[index];
+            const byteString = atob(base64Picture.split(',')[1]);
+            const ab = new ArrayBuffer(byteString.length);
+            const ia = new Uint8Array(ab);
+            for (let i = 0; i < byteString.length; i += 1) {
+                ia[i] = byteString.charCodeAt(i);
+            }
+            const newBlob = new Blob([ab], {
+                type: 'image/jpeg',
+            });
+            var file = new File([newBlob], name, {type: 'image/png', lastModified: Date.now()});
+            console.log(file);
+            return file;
+        }));
+        console.log("Img Array", ImageArray)
+        return ImageArray
+    }
+
 
     deletePhoto(key, index) {
-        this.setState({base64Images: this.state.base64Images.splice(index, 1), pictures: this.state.pictures.filter(function( obj ) {
+        let imagesRemoved = this.state.base64Images;
+        imagesRemoved.splice(index, 1);
+        let fileNamesRemoved = this.state.base64FileNames;
+        fileNamesRemoved.splice(index, 1);
+        console.log(index);
+        this.setState({
+            base64Images: imagesRemoved,
+            base64FileNames: fileNamesRemoved,
+            pictures: this.state.pictures.filter(function( obj ) {
             return obj.name !== key;
-        })});
-
-        console.log("delete:", this.state.pictures)
+        })}, () => this.saveJson());
     }
 
     saveOnCtrlS(e) {
@@ -143,7 +171,7 @@ class FormsContainer extends Component {
             this.setState({isFormNew: false});
         }
 
-        this.setState({formData: JSON.parse(json)})
+        this.setState({formData: JSON.parse(json), pictures: JSON.parse(json).find(x => x.pictures !== undefined).pictures, base64Images: JSON.parse(json).find(x => x.base64Images !== undefined).base64Images, base64FileNames: JSON.parse(json).find(x => x.base64FileNames !== undefined).base64FileNames})
 
         this.loadBase64Images(json)
     };
@@ -153,6 +181,7 @@ class FormsContainer extends Component {
         this.replaceFormData(this.state.formData.findIndex(form => form.date !== undefined), 'date', this.state.startDate);
         this.replaceFormData(this.state.formData.findIndex(form => form.pictures !== undefined), 'pictures', this.state.pictures);
         this.replaceFormData(this.state.formData.findIndex(form => form.base64Images !== undefined), 'base64Images', this.state.base64Images);
+        this.replaceFormData(this.state.formData.findIndex(form => form.base64FileNames !== undefined), 'base64FileNames', this.state.base64FileNames);
 
         this.setState({savingText:"Saved."});
         let timeout = setTimeout(function() {
@@ -283,7 +312,7 @@ class FormsContainer extends Component {
                                 imgExtension={['.jpg', '.png']}
                                 maxFileSize={5242880}
                             />
-                            {this.state.pictures.map((picture, index) => <p key={index}> {picture.name}<Button onClick={() =>this.deletePhoto(picture.name, index)} variant="danger">Delete</Button></p>)}
+                            {this.state.base64FileNames.map((name, index) => <p key={index}> {name}<Button onClick={() =>this.deletePhoto(name, index)} variant="danger">Delete</Button></p>)}
                         </div>
                     <ButtonToolbar>
                         <Button onClick={this.saveJson.bind(this)} variant="primary">Save</Button>

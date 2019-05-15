@@ -27,6 +27,33 @@ class ConsentForm extends Component {
         console.log('ConsentForm', this.state.formData);
     };
 
+    getFileArrFromBase64Images(base64Images, base64FileNames) {
+        let ImageArray = [];
+        ImageArray.push(base64Images.map((base64Picture, index) => {
+            // const i = base64Picture.indexOf('base64,');
+            // const buffer = Buffer.from(base64Picture.slice(i + 7), 'base64');
+            let name = base64FileNames[index];
+            // const file = new File({buffer: buffer, name, type: 'image/png'});
+            // new File
+            // console.log(file)
+
+            const byteString = atob(base64Picture.split(',')[1]);
+            const ab = new ArrayBuffer(byteString.length);
+            const ia = new Uint8Array(ab);
+            for (let i = 0; i < byteString.length; i += 1) {
+                ia[i] = byteString.charCodeAt(i);
+            }
+            const newBlob = new Blob([ab], {
+                type: 'image/jpeg',
+            });
+            var file = new File([newBlob], name, {type: 'image/png', lastModified: Date.now()});
+            console.log(file)
+            return file;
+        }));
+        console.log("Img Array", ImageArray)
+        return ImageArray
+    }
+
     push() {
         this.props.history.push('/form/' + this.props.formName)
     }
@@ -51,7 +78,7 @@ class ConsentForm extends Component {
                         <tr>
                             <td>
                                 <div className="content">
-                                    <ImageHeader pictures={this.state.formData.find(x => x.pictures).pictures}/>
+                                    <ImageHeader pictures={this.getFileArrFromBase64Images(this.state.formData.find(x => x.base64Images).base64Images, this.state.formData.find(x => x.base64FileNames).base64FileNames)}/>
                                     <h6 className={'consent-form-title'}>PATIENT INFORMED CONSENT TO PARTICIPATE IN A RESEARCH STUDY</h6>
 
                                     {this.state.formData.map((form, index) => {

@@ -35,7 +35,7 @@ class FormsContainer extends Component {
             alert("You have already reached the image limit.")
         } else {
 
-            if (this.state.base64Images.length === MAX_PICTURES-1 && this.state.base64FileNames[0].name === pictures[pictures.length-1].name) {
+            if (this.state.base64Images.length === MAX_PICTURES-1 && this.state.base64FileNames[0] === pictures[pictures.length-1].name) {
                 alert('There is already an Image with the same name!');
                 return;
             }
@@ -133,7 +133,13 @@ class FormsContainer extends Component {
             this.setState({isFormNew: false});
         }
 
-        this.setState({formData: JSON.parse(json), startDate: new Date(JSON.parse(json).find(x => x.date !== undefined).date), base64Images: JSON.parse(json).find(x => x.base64Images !== undefined).base64Images, base64FileNames: JSON.parse(json).find(x => x.base64FileNames !== undefined).base64FileNames})
+        let startDate;
+
+        if (JSON.parse(json).find(x => x.date !== undefined).date === "")  startDate = new Date();
+        else startDate = new Date(JSON.parse(json).find(x => x.date !== undefined).date)
+
+
+        this.setState({formData: JSON.parse(json), startDate: startDate, base64Images: JSON.parse(json).find(x => x.base64Images !== undefined).base64Images, base64FileNames: JSON.parse(json).find(x => x.base64FileNames !== undefined).base64FileNames})
     };
 
     saveJson = () => {
@@ -194,6 +200,7 @@ class FormsContainer extends Component {
     }
 
     handleSubmit(event) {
+        this.saveJson();
         if (this.areFormsValidated()) {
             event.preventDefault();
             event.stopPropagation();
@@ -201,7 +208,6 @@ class FormsContainer extends Component {
         } else {
             this.props.history.push('/submit/' + encodeURIComponent(this.props.formName))
         }
-        this.saveJson();
     }
 
     isFormNew() {

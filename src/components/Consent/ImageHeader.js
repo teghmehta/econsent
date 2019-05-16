@@ -13,7 +13,7 @@ class ImageHeader extends Component {
                     <Col/>
                     {this.props.base64Images.map((img, i ) => {
                         return (
-                            <Col>
+                            <Col key={i}>
                                 <Image className={'uhn-consent-logo'} src={img}/>
                             </Col>
                         )

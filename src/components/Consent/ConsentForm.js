@@ -50,7 +50,6 @@ class ConsentForm extends Component {
             console.log(file)
             return file;
         }));
-        console.log("Img Array", ImageArray)
         return ImageArray
     }
 

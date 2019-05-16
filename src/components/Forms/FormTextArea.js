@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Form from "react-bootstrap/Form";
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 
@@ -20,12 +19,15 @@ class FormTextArea extends Component {
 
     handleChange(text) {
         this.setState({formValue: text});
-        this.props.changeValue(text, this.props.index);
         try {
             this.props.changeValue(text, this.props.index);
         } catch (e) {
 
         }
+    }
+
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        return this.state.formValue !== nextState.formValue;
     }
 
     render() {
@@ -62,19 +64,14 @@ class FormTextArea extends Component {
 
         return (
 
-            <div className={"editorContainer"}>
-                <Form.Label className={'isValidated-' + this.props.isValidated}>
-                    {this.props.formTitle} {this.props.isValidated !== undefined ? this.props.isValidated === true ? "" : "*" : ""}
-                </Form.Label>
-                <ReactQuill
-                    onChange={this.handleChange}
-                    value={this.state.formValue}
-                    modules={FormTextArea.modules}
-                    formats={FormTextArea.formats}
-                    bounds={'.editorContainer'}
-                    placeholder={this.props.placeholder}
-                />
-            </div>
+            <ReactQuill
+                onChange={this.handleChange}
+                value={this.state.formValue}
+                modules={FormTextArea.modules}
+                formats={FormTextArea.formats}
+                bounds={'.editorContainer'}
+                placeholder={this.props.placeholder}
+            />
         )
 
     }

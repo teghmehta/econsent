@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import FormTextArea from "./FormTextArea";
 import './Forms.css';
 import {ButtonToolbar, Button, Modal, Form} from "react-bootstrap";
 import Header from "../Header/Header";
@@ -7,6 +6,7 @@ import {withRouter} from "react-router";
 import DatePicker from "react-datepicker";
 import ImageUploader from 'react-images-upload';
 import "react-datepicker/dist/react-datepicker.css";
+import FormTextArea from "./FormTextArea";
 let formData = require('../../constants/constants');
 const MAX_PICTURES = 2;
 
@@ -16,7 +16,7 @@ class FormsContainer extends Component {
         super(props);
 
         this.formData = {};
-        this.state = {savingText: "", timeout: '', startDate: new Date(), pictures: new Array(MAX_PICTURES), lastPicturesLength: 0, base64Images: new Array(MAX_PICTURES), base64FileNames: new Array(MAX_PICTURES) };
+        this.state = {savingText: "", timeout: '', startDate: new Date(), lastPicturesLength: 0, base64Images: new Array(MAX_PICTURES), base64FileNames: new Array(MAX_PICTURES) };
         this.onDrop = this.onDrop.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleShow = this.handleShow.bind(this);
@@ -26,29 +26,26 @@ class FormsContainer extends Component {
 
     //This function makes sure that a maximum of two new images can be added
     onDrop(pictures) {
-        let blank = this.state.pictures;
         this.setState({lastPicturesLength: pictures.length})
 
-        if (this.state.pictures.length >= MAX_PICTURES
+        if (this.state.base64Images.length >= MAX_PICTURES
             || (this.state.lastPicturesLength === 0 && pictures.length > MAX_PICTURES)
             || (Math.abs(pictures.length - this.state.lastPicturesLength) > MAX_PICTURES)
-            || (Math.abs(pictures.length - this.state.lastPicturesLength) > MAX_PICTURES-1 && this.state.pictures.length === MAX_PICTURES-1)) {
+            || (Math.abs(pictures.length - this.state.lastPicturesLength) > MAX_PICTURES-1 && this.state.base64Images.length === MAX_PICTURES-1)) {
             alert("You have already reached the image limit.")
         } else {
 
-            if (this.state.pictures.length === MAX_PICTURES-1 && this.state.pictures[0].name === pictures[pictures.length-1].name) {
+            if (this.state.base64Images.length === MAX_PICTURES-1 && this.state.base64FileNames[0].name === pictures[pictures.length-1].name) {
                 alert('There is already an Image with the same name!');
                 return;
             }
 
-            let slicedArray = pictures[pictures.length-1];
+            let slicedArray = pictures.slice(Math.max(pictures.length - 1, 0));
             if (Math.abs(pictures.length - this.state.lastPicturesLength) === MAX_PICTURES) {
                 slicedArray = pictures.slice(Math.max(pictures.length - MAX_PICTURES, 0))
+                console.log('Sliced: ', slicedArray)
             }
-
-            this.setState({
-                pictures: this.state.pictures.concat(slicedArray),
-            }, () => this.setBase64Images(this.state.pictures));
+            this.setBase64Images(slicedArray);
 
         }
     }
@@ -73,38 +70,6 @@ class FormsContainer extends Component {
         this.setState({base64FileNames: filenames, base64Images: images}, () => console.log(this.state.base64Images, images));
     }
 
-    loadBase64Images(json) {
-        let pictures = [];
-        try {
-            pictures = this.getFileArrFromBase64Images(JSON.parse(json).find(x => x.base64Images).base64Images, JSON.parse(json).find(x => x.base64FileNames).base64FileNames);
-        } catch (e) {
-            console.log(e)
-        }
-        this.setState({pictures: pictures})
-    }
-
-
-    getFileArrFromBase64Images(base64Images, base64FileNames) {
-        let ImageArray = [];
-        ImageArray.concat(base64Images.map((base64Picture, index) => {
-            let name = base64FileNames[index];
-            const byteString = atob(base64Picture.split(',')[1]);
-            const ab = new ArrayBuffer(byteString.length);
-            const ia = new Uint8Array(ab);
-            for (let i = 0; i < byteString.length; i += 1) {
-                ia[i] = byteString.charCodeAt(i);
-            }
-            const newBlob = new Blob([ab], {
-                type: 'image/jpeg',
-            });
-            var file = new File([newBlob], name, {type: 'image/png', lastModified: Date.now()});
-            console.log(file);
-            return file;
-        }));
-        console.log("Img Array", ImageArray)
-        return ImageArray
-    }
-
 
     deletePhoto(key, index) {
         let imagesRemoved = this.state.base64Images;
@@ -114,10 +79,7 @@ class FormsContainer extends Component {
         console.log(index);
         this.setState({
             base64Images: imagesRemoved,
-            base64FileNames: fileNamesRemoved,
-            pictures: this.state.pictures.filter(function( obj ) {
-            return obj.name !== key;
-        })}, () => this.saveJson());
+            base64FileNames: fileNamesRemoved}, () => this.saveJson());
     }
 
     saveOnCtrlS(e) {
@@ -171,15 +133,12 @@ class FormsContainer extends Component {
             this.setState({isFormNew: false});
         }
 
-        this.setState({formData: JSON.parse(json), pictures: JSON.parse(json).find(x => x.pictures !== undefined).pictures, base64Images: JSON.parse(json).find(x => x.base64Images !== undefined).base64Images, base64FileNames: JSON.parse(json).find(x => x.base64FileNames !== undefined).base64FileNames})
-
-        this.loadBase64Images(json)
+        this.setState({formData: JSON.parse(json), base64Images: JSON.parse(json).find(x => x.base64Images !== undefined).base64Images, base64FileNames: JSON.parse(json).find(x => x.base64FileNames !== undefined).base64FileNames})
     };
 
     saveJson = () => {
         console.log(this.state.base64Images)
         this.replaceFormData(this.state.formData.findIndex(form => form.date !== undefined), 'date', this.state.startDate);
-        this.replaceFormData(this.state.formData.findIndex(form => form.pictures !== undefined), 'pictures', this.state.pictures);
         this.replaceFormData(this.state.formData.findIndex(form => form.base64Images !== undefined), 'base64Images', this.state.base64Images);
         this.replaceFormData(this.state.formData.findIndex(form => form.base64FileNames !== undefined), 'base64FileNames', this.state.base64FileNames);
 
@@ -230,8 +189,6 @@ class FormsContainer extends Component {
                 isBlanksUnfilled = true
             }
         });
-
-        console.log("isFormBlank: ", isFormBlank);
 
         return isBlanksUnfilled || isFormBlank
     }
@@ -287,17 +244,23 @@ class FormsContainer extends Component {
                 <div className={'forms-container'}>
                     <Form onSubmit={e => this.handleSubmit(e)}>
                         {this.state.formData.map(function(form, index) {
-                            if (form.date !== undefined || form.pictures !== undefined) return ''; //Do not display the date JSON
+                            if (form.date !== undefined || form.base64Images !== undefined) return ''; //Do not display the date JSON
                             if (form.table) {
                                 return <div key={index} className={'table-div'} dangerouslySetInnerHTML={{__html:form.value}}/>
                             } else {
                                 return (
-                                    <FormTextArea key={index}
-                                                  isValidated={form.isValidated}
-                                                  index={index} formTitle={form.title}
-                                                  formValue={form.value} placeholder={form.title}
-                                                  numOfRows={form.numOfRows}
-                                                  changeValue={(value, index) => this.changeValue(value, index)}/> )
+
+                                    <div key={index} className={"editorContainer"}>
+                                        <Form.Label className={'isValidated-' + form.isValidated}>
+                                            {form.title} {form.isValidated !== undefined ? form.isValidated === true ? "" : "*" : ""}
+                                        </Form.Label>
+                                        <FormTextArea
+                                                      isValidated={form.isValidated}
+                                                      index={index} formTitle={form.title}
+                                                      formValue={form.value} placeholder={form.title}
+                                                      numOfRows={form.numOfRows}
+                                                      changeValue={(value, index) => this.changeValue(value, index)}/>
+                                    </div>)
                             }
                         }.bind(this) )}
                         <div className={'image-uploader-container'}>

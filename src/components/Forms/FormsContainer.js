@@ -133,7 +133,7 @@ class FormsContainer extends Component {
             this.setState({isFormNew: false});
         }
 
-        this.setState({formData: JSON.parse(json), base64Images: JSON.parse(json).find(x => x.base64Images !== undefined).base64Images, base64FileNames: JSON.parse(json).find(x => x.base64FileNames !== undefined).base64FileNames})
+        this.setState({formData: JSON.parse(json), startDate: new Date(JSON.parse(json).find(x => x.date !== undefined).date), base64Images: JSON.parse(json).find(x => x.base64Images !== undefined).base64Images, base64FileNames: JSON.parse(json).find(x => x.base64FileNames !== undefined).base64FileNames})
     };
 
     saveJson = () => {

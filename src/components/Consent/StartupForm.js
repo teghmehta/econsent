@@ -54,8 +54,13 @@ class StartupForm extends Component {
         let rows = [];
         let sorted = Object.keys(localStorage).sort();
         sorted.forEach(function(key, i){
-            rows.push(<div key={i} className={"dropdown-div"}><Dropdown.Item key={i} href={"/form/" + key}>{key.length > 20 ? key.substring(0, Math.min(key.length, 70)) + '...' : key}</Dropdown.Item>
-                <Button onClick={() => this.deleteForm(key)} variant="danger">Delete</Button></div>)
+            let date = new Date(Date.parse(JSON.parse(localStorage.getItem(key)).find(x => x.date !== undefined).date)).toDateString().split(' ').slice(1).join(' ')
+            console.log(new Date(Date.parse(JSON.parse(localStorage.getItem(key)).find(x => x.date !== undefined).date)).toDateString().split(' ').slice(1).join(' '));
+            rows.push(
+                <div key={i} className={"dropdown-div"}>
+                    <Dropdown.Item key={i} href={"/form/" + key}>Informed Consent Form ({key.length > 20 ? key.substring(0, Math.min(key.length, 70)) + '...'  : key} / {date})</Dropdown.Item>
+                    <Button onClick={() => this.deleteForm(key)} variant="danger">Delete</Button>
+                </div>)
         }.bind(this));
         if (rows.length > 0) {
             return <DropdownButton id="dropdown-basic-button" title="Open Forms">

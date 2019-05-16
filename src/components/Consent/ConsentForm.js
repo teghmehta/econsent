@@ -58,52 +58,61 @@ class ConsentForm extends Component {
     }
 
     render() {
-        console.log('Informed Consent Form Version Date: '+ new Date(Date.parse(this.state.formData.find(x => x.date).date)).toDateString().split(' ').slice(1).join(' '));
-        return (
-            <div>
-                <ButtonToolbar/>
+
+        if (this.state.formData === null || this.state.formData.length === 0) {
+            return (
+                <div id='consent-form-container' className={'consent-form-container'}>
+                    <h3>This form hasn't been created yet. Go back to the Main Menu</h3>
+                    <Button media="print" className={'no-print'} variant="secondary" onClick={()=>this.props.history.push('/')} >Go Back</Button>
+                </div>
+            )
+        } else {
+            return (
+                <div>
+                    <ButtonToolbar/>
                     <Button media="print" className={'no-print'} variant="primary" onClick={() => window.print()} >Save</Button>
                     <Button media="print" className={'no-print'} variant="secondary" onClick={this.push.bind(this)} >Go Back</Button>
-                 <ButtonToolbar/>
-                <div id='consent-form-container' className={'consent-form-container'}>
-                    <table>
-                        <thead>
-                        <tr>
-                            <td>
-                            </td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>
-                                <div className="content">
-                                    <ImageHeader  base64Images={this.state.formData.find(x => x.base64Images).base64Images} pictures={this.getFileArrFromBase64Images(this.state.formData.find(x => x.base64Images).base64Images, this.state.formData.find(x => x.base64FileNames).base64FileNames)} base64FileNames={this.state.formData.find(x => x.base64FileNames).base64FileNames}/>
-                                    <h6 className={'consent-form-title'}>PATIENT INFORMED CONSENT TO PARTICIPATE IN A RESEARCH STUDY</h6>
+                    <ButtonToolbar/>
+                    <div id='consent-form-container' className={'consent-form-container'}>
+                        <table>
+                            <thead>
+                            <tr>
+                                <td>
+                                </td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <div className="content">
+                                        <ImageHeader  base64Images={this.state.formData.find(x => x.base64Images).base64Images} pictures={this.getFileArrFromBase64Images(this.state.formData.find(x => x.base64Images).base64Images, this.state.formData.find(x => x.base64FileNames).base64FileNames)} base64FileNames={this.state.formData.find(x => x.base64FileNames).base64FileNames}/>
+                                        <h6 className={'consent-form-title'}>PATIENT INFORMED CONSENT TO PARTICIPATE IN A RESEARCH STUDY</h6>
 
-                                    {this.state.formData.map((form, index) => {
-                                        let replacedItem = form.value.replace(/\s/g, '').replace('<br>', '');
-                                        if (form.isValidated === undefined && (replacedItem === '<p></p>' || replacedItem === '')) return '';
-                                        else return <ConsentText table={form.table} key={index} numOfRows={form.numOfRows} heading={form.title} text={form.value}/>
-                                    })}
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                        <tfoot>
-                        <tr>
-                            <td className={'footer-td'}>
-                                <div className="footer">
-                                    <p className={'print-header'}>Version Date:  {new Date(Date.parse(this.state.formData.find(x => x.date).date)).toDateString().split(' ').slice(1).join(' ')}</p>
-                                    <p className={'page-num'}></p>
-                                </div>
-                            </td>
-                        </tr>
-                        </tfoot>
-                    </table>
+                                        {this.state.formData.map((form, index) => {
+                                            let replacedItem = form.value.replace(/\s/g, '').replace('<br>', '');
+                                            if (form.isValidated === undefined && (replacedItem === '<p></p>' || replacedItem === '')) return '';
+                                            else return <ConsentText table={form.table} key={index} numOfRows={form.numOfRows} heading={form.title} text={form.value}/>
+                                        })}
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td className={'footer-td'}>
+                                    <div className="footer">
+                                        <p className={'print-header'}>Version Date:  {new Date(Date.parse(this.state.formData.find(x => x.date).date)).toDateString().split(' ').slice(1).join(' ')}</p>
+                                        <p className={'page-num'}></p>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
 
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        }
     }
 }
 

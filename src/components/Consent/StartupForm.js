@@ -53,12 +53,13 @@ class StartupForm extends Component {
     openForms() {
         let rows = [];
         let sorted = Object.keys(localStorage).sort();
+        console.log(sorted)
         sorted.forEach(function(key, i){
-            let date = new Date(Date.parse(JSON.parse(localStorage.getItem(key)).find(x => x.date !== undefined).date)).toDateString().split(' ').slice(1).join(' ')
-            console.log(new Date(Date.parse(JSON.parse(localStorage.getItem(key)).find(x => x.date !== undefined).date)).toDateString().split(' ').slice(1).join(' '));
+            let date = new Date(Date.parse(JSON.parse(localStorage.getItem(key)).find(x => x.date !== undefined).date)).toDateString().split(' ').slice(1).join(' ');
+            console.log(new Date(Date.parse(JSON.parse(localStorage.getItem(key)).find(x => x.date !== undefined).date)).toDateString().split(' ').slice(1).join(' ') + key);
             rows.push(
                 <div key={i} className={"dropdown-div"}>
-                    <Dropdown.Item key={i} href={"/form/" + key}>Informed Consent Form ({key.length > 20 ? key.substring(0, Math.min(key.length, 70)) + '...'  : key} / {date})</Dropdown.Item>
+                    <Dropdown.Item key={i} href={"/form/" + key}>Informed Consent Form ({key.length > 30 ? key.substring(0, Math.min(key.length, 70)) + '...'  : key + '/' + date})</Dropdown.Item>
                     <Button onClick={() => this.deleteForm(key)} variant="danger">Delete</Button>
                 </div>)
         }.bind(this));

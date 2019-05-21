@@ -135,16 +135,17 @@ class FormsContainer extends Component {
 
         let startDate;
 
-        if (JSON.parse(json).find(x => x.date !== undefined).date === "")  startDate = new Date();
-        else startDate = new Date(JSON.parse(json).find(x => x.date !== undefined).date)
+        if (JSON.parse(json).find(x => x.date !== undefined).date === "") {startDate = new Date(); console.log('sdsd')}
+        else {startDate = new Date(JSON.parse(json).find(x => x.date !== undefined).date)}
 
 
         this.setState({formData: JSON.parse(json), formName: this.props.formName, originalDate: startDate, startDate: startDate, base64Images: JSON.parse(json).find(x => x.base64Images !== undefined).base64Images, base64FileNames: JSON.parse(json).find(x => x.base64FileNames !== undefined).base64FileNames})
     };
 
     saveJson = () => {
-        let validJson = this.replaceAndValidatedOnSave();
         this.replaceFormData(this.state.formData.findIndex(form => form.date !== undefined), 'date', this.state.originalDate);
+        let validJson = this.replaceAndValidatedOnSave();
+        console.log("OG Date" + this.state.startDate)
         window.localStorage.setItem(
             this.props.formName,
             validJson

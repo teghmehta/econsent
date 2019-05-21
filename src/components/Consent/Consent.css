@@ -7,6 +7,10 @@
 
 }
 
+.image-col {
+    display: flex !important;
+    align-items: center !important;
+}
 
 .consent-form-container {
     background-color: white;

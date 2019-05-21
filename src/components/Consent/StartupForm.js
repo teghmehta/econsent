@@ -21,14 +21,15 @@ class StartupForm extends Component {
     }
 
     handleSubmit(event) {
+        let formName = this.state.formName + ' - ' + new Date().toDateString().split(' ').slice(1).join(' ');
         const form = event.currentTarget;
-        if (form.checkValidity() === false || this.isNameInvalid(this.state.formName)) {
+        if (form.checkValidity() === false || this.isNameInvalid(formName)) {
             event.preventDefault();
             event.stopPropagation();
             this.setState({validated: false , isInvalid: true})
         } else {
             this.setState({ validated: true });
-            this.props.history.push('/form/' + encodeURIComponent(this.state.formName))
+            this.props.history.push('/form/' + encodeURIComponent(formName))
         }
     }
     deleteForm(key) {
@@ -56,10 +57,9 @@ class StartupForm extends Component {
         console.log(sorted)
         sorted.forEach(function(key, i){
             let date = new Date(Date.parse(JSON.parse(localStorage.getItem(key)).find(x => x.date !== undefined).date)).toDateString().split(' ').slice(1).join(' ');
-            console.log(new Date(Date.parse(JSON.parse(localStorage.getItem(key)).find(x => x.date !== undefined).date)).toDateString().split(' ').slice(1).join(' ') + key);
             rows.push(
                 <div key={i} className={"dropdown-div"}>
-                    <Dropdown.Item key={i} href={"/form/" + key}>Informed Consent Form ({key.length > 30 ? key.substring(0, Math.min(key.length, 70)) + '...'  : key + '/' + date})</Dropdown.Item>
+                    <Dropdown.Item key={i} href={"/form/" + key}>Informed Consent Form ({key.length > 30 ? key.substring(0, Math.min(key.length, 70)) + '...'  : key})</Dropdown.Item>
                     <Button onClick={() => this.deleteForm(key)} variant="danger">Delete</Button>
                 </div>)
         }.bind(this));

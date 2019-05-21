@@ -16,30 +16,13 @@ class FormsContainer extends Component {
         super(props);
 
         this.formData = {};
-        this.state = {savingText: "", timeout: '', savedFormName: '', startDate: new Date(), lastPicturesLength: 0, base64Images: new Array(MAX_PICTURES), base64FileNames: new Array(MAX_PICTURES) };
+        this.state = {savingText: "", timeout: '', startDate: new Date(), lastPicturesLength: 0, base64Images: new Array(MAX_PICTURES), base64FileNames: new Array(MAX_PICTURES) };
         this.onDrop = this.onDrop.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleShow = this.handleShow.bind(this);
         this.saveOnCtrlS = this.saveOnCtrlS.bind(this)
         document.addEventListener("keydown", this.saveOnCtrlS, false);
     }
-
-    componentWillUnmount() {
-        this.unlisten();
-        document.removeEventListener('scroll', this.saveOnCtrlS, false);
-        clearTimeout(this.state.timeout)
-    }
-
-    componentWillMount () {
-        this.unlisten = this.props.history.listen(() => {
-            window.scrollTo(0, 0)
-        });
-
-        let savedFormName = this.props.formName + " / " +  this.state.startDate.toDateString().split(' ').slice(1).join(' ');
-        this.setState({savedFormName: savedFormName});
-        this.loadJson(savedFormName)
-    }
-
 
     //This function makes sure that a maximum of two new images can be added
     onDrop(pictures) {
@@ -106,6 +89,21 @@ class FormsContainer extends Component {
         }
     }
 
+
+    componentWillUnmount() {
+        this.unlisten();
+        document.removeEventListener('scroll', this.saveOnCtrlS, false);
+        clearTimeout(this.state.timeout)
+    }
+
+
+    componentWillMount () {
+        this.unlisten = this.props.history.listen(() => {
+            window.scrollTo(0, 0)
+        });
+        this.loadJson();
+    }
+
     validateJson (json) {
         let validJson;
 
@@ -118,11 +116,9 @@ class FormsContainer extends Component {
         return validJson
     }
 
-    loadJson = (savedFormName) => {
-        if (!savedFormName) savedFormName = this.state.savedFormName
-
-        const json = window.localStorage.getItem(savedFormName) || JSON.stringify(formData, null, 2);
-        if (JSON.parse(window.localStorage.getItem(savedFormName)) === null) {
+    loadJson = () => {
+        const json = window.localStorage.getItem(this.props.formName) || JSON.stringify(formData, null, 2);
+        if (JSON.parse(window.localStorage.getItem(this.state.formName)) === null) {
             this.setState({isFormNew: true});
             let validJson = this.validateJson(JSON.stringify(formData, null, 2));
             if (!validJson) {
@@ -130,7 +126,7 @@ class FormsContainer extends Component {
             }
 
             window.localStorage.setItem(
-                savedFormName,
+                this.props.formName,
                 validJson
             )
         } else {
@@ -140,7 +136,7 @@ class FormsContainer extends Component {
         let startDate;
 
         if (JSON.parse(json).find(x => x.date !== undefined).date === "")  startDate = new Date();
-        else startDate = new Date(JSON.parse(json).find(x => x.date !== undefined).date);
+        else startDate = new Date(JSON.parse(json).find(x => x.date !== undefined).date)
 
 
         this.setState({formData: JSON.parse(json), startDate: startDate, base64Images: JSON.parse(json).find(x => x.base64Images !== undefined).base64Images, base64FileNames: JSON.parse(json).find(x => x.base64FileNames !== undefined).base64FileNames})
@@ -171,7 +167,7 @@ class FormsContainer extends Component {
         }
 
         window.localStorage.setItem(
-            this.state.savedFormName,
+            this.props.formName,
             validJson
         )
     };
@@ -210,12 +206,12 @@ class FormsContainer extends Component {
             event.stopPropagation();
             alert("Please fill in all required* fields.")
         } else {
-            this.props.history.push('/submit/' + encodeURIComponent(this.state.savedFormName))
+            this.props.history.push('/submit/' + encodeURIComponent(this.props.formName))
         }
     }
 
     isFormNew() {
-        if (this.state.isFormNew) localStorage.removeItem(this.state.savedFormName);
+        if (this.state.isFormNew) localStorage.removeItem(this.props.formName);
     }
 
     replaceFormData(index, property, value) {
@@ -229,7 +225,7 @@ class FormsContainer extends Component {
         this.replaceFormData(index, 'value', value);
 
         let replacedItem = value.replace(/\s/g, '').replace('<br>', '');
-        if ((replacedItem === '<p></p>' || replacedItem === '') && (formStateData[index].isValidated !== undefined)) {
+        if ((replacedItem === '<p></p>' || replacedItem === '') && (formStateData[index].isValidated !== undefined)) { //if it is empty
             this.replaceFormData(index, 'isValidated', false)
         } else if (formStateData[index].isValidated !== undefined){
             this.replaceFormData(index, 'isValidated', true)
@@ -250,11 +246,11 @@ class FormsContainer extends Component {
     render() {
         return (
             <div className={'app-container'}>
-                <Header formName={this.state.savedFormName} handleShow={this.handleShow} savingText={this.state.savingText}/>
+                <Header formName={this.props.formName} handleShow={this.handleShow} savingText={this.state.savingText}/>
                 <div className={'forms-container'}>
                     <Form onSubmit={e => this.handleSubmit(e)}>
                         {this.state.formData.map(function(form, index) {
-                            if (form.date !== undefined || form.base64Images !== undefined) return '';
+                            if (form.date !== undefined || form.base64Images !== undefined) return ''; //Do not display the date JSON
                             if (form.table) {
                                 return <div key={index} className={'table-div'} dangerouslySetInnerHTML={{__html:form.value}}/>
                             } else {

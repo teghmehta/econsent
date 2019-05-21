@@ -16,7 +16,7 @@ class FormsContainer extends Component {
         super(props);
 
         this.formData = {};
-        this.state = {savingText: "", timeout: '', startDate: new Date(), lastPicturesLength: 0, base64Images: new Array(MAX_PICTURES), base64FileNames: new Array(MAX_PICTURES) };
+        this.state = {savingText: "", timeout: '', formName: '', originalDate: '', startDate: new Date(), lastPicturesLength: 0, base64Images: new Array(MAX_PICTURES), base64FileNames: new Array(MAX_PICTURES) };
         this.onDrop = this.onDrop.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleShow = this.handleShow.bind(this);
@@ -118,7 +118,7 @@ class FormsContainer extends Component {
 
     loadJson = () => {
         const json = window.localStorage.getItem(this.props.formName) || JSON.stringify(formData, null, 2);
-        if (JSON.parse(window.localStorage.getItem(this.state.formName)) === null) {
+        if (JSON.parse(window.localStorage.getItem(this.props.formName)) === null) {
             this.setState({isFormNew: true});
             let validJson = this.validateJson(JSON.stringify(formData, null, 2));
             if (!validJson) {
@@ -139,25 +139,42 @@ class FormsContainer extends Component {
         else startDate = new Date(JSON.parse(json).find(x => x.date !== undefined).date)
 
 
-        this.setState({formData: JSON.parse(json), startDate: startDate, base64Images: JSON.parse(json).find(x => x.base64Images !== undefined).base64Images, base64FileNames: JSON.parse(json).find(x => x.base64FileNames !== undefined).base64FileNames})
+        this.setState({formData: JSON.parse(json), formName: this.props.formName, originalDate: startDate, startDate: startDate, base64Images: JSON.parse(json).find(x => x.base64Images !== undefined).base64Images, base64FileNames: JSON.parse(json).find(x => x.base64FileNames !== undefined).base64FileNames})
     };
 
     saveJson = () => {
-        console.log(this.state.base64Images)
-        this.replaceFormData(this.state.formData.findIndex(form => form.date !== undefined), 'date', this.state.startDate);
+        let validJson = this.replaceAndValidatedOnSave();
+        this.replaceFormData(this.state.formData.findIndex(form => form.date !== undefined), 'date', this.state.originalDate);
+        window.localStorage.setItem(
+            this.props.formName,
+            validJson
+        );
+        if (this.state.formName !== this.props.formName ) {
+            console.log(this.props.formName)
+            this.replaceFormData(this.state.formData.findIndex(form => form.date !== undefined), 'date', this.state.startDate);
+            validJson = this.replaceAndValidatedOnSave();
+            window.localStorage.setItem(
+                this.state.formName,
+                validJson
+            );
+
+            this.props.history.push('/form/' + encodeURIComponent(this.state.formName))
+        }
+    };
+
+    replaceAndValidatedOnSave() {
         this.replaceFormData(this.state.formData.findIndex(form => form.base64Images !== undefined), 'base64Images', this.state.base64Images);
         this.replaceFormData(this.state.formData.findIndex(form => form.base64FileNames !== undefined), 'base64FileNames', this.state.base64FileNames);
-
-        this.setState({savingText:"Saved."});
-        let timeout = setTimeout(function() {
-            this.setState({savingText:""});
+        this.setState({savingText: "Saved."});
+        let timeout = setTimeout(function () {
+            this.setState({savingText: ""});
         }.bind(this), 1500);
         this.setState({timeout});
-        let  validJson;
+        let validJson;
         try {
             validJson = this.validateJson(JSON.stringify(this.state.formData, null, 2));
             this.setState({isFormNew: false});
-        } catch(e) {
+        } catch (e) {
             validJson = this.validateJson(JSON.stringify(formData, null, 2));
             this.setState({isFormNew: true});
         }
@@ -165,12 +182,8 @@ class FormsContainer extends Component {
         if (!validJson) {
             return;
         }
-
-        window.localStorage.setItem(
-            this.props.formName,
-            validJson
-        )
-    };
+        return validJson
+    }
 
     areFormsValidated() {
         let isFormBlank = false;
@@ -206,12 +219,12 @@ class FormsContainer extends Component {
             event.stopPropagation();
             alert("Please fill in all required* fields.")
         } else {
-            this.props.history.push('/submit/' + encodeURIComponent(this.props.formName))
+            this.props.history.push('/submit/' + encodeURIComponent(this.state.formName))
         }
     }
 
     isFormNew() {
-        if (this.state.isFormNew) localStorage.removeItem(this.props.formName);
+        if (this.state.isFormNew) localStorage.removeItem(this.state.formName);
     }
 
     replaceFormData(index, property, value) {
@@ -243,10 +256,21 @@ class FormsContainer extends Component {
         this.setState({ show: true });
     }
 
+    handleDateSelect(date) {
+        //make copy
+        let newFormName = this.state.formName.replace(' - ' + this.state.startDate.toDateString().split(' ').slice(1).join(' '), '');
+        console.log(newFormName)
+
+        this.setState({startDate: date}, () => {
+            this.setState({formName: newFormName + " - " + this.state.startDate.toDateString().split(' ').slice(1).join(' ')}, () => console.log(this.state.formName))
+        });
+
+    }
+
     render() {
         return (
             <div className={'app-container'}>
-                <Header formName={this.props.formName} handleShow={this.handleShow} savingText={this.state.savingText}/>
+                <Header formName={this.state.formName} handleShow={this.handleShow} savingText={this.state.savingText}/>
                 <div className={'forms-container'}>
                     <Form onSubmit={e => this.handleSubmit(e)}>
                         {this.state.formData.map(function(form, index) {
@@ -290,8 +314,7 @@ class FormsContainer extends Component {
                         <h6 className={'date-picker-header'}>Informed Consent Form Version Date:</h6>
                         <DatePicker
                             selected={this.state.startDate}
-                            onChange={(date) => this.setState({startDate: date})}
-                            onSelect={() => this.replaceFormData(this.state.formData.length -1 , 'date', this.state.startDate)}
+                            onChange={(date) => this.handleDateSelect(date)}
                         />
                     </ButtonToolbar>
 

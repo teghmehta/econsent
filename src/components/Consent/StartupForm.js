@@ -16,6 +16,7 @@ class StartupForm extends Component {
 
         this.handleChange = this.handleChange.bind(this);
     }
+
     handleChange(text) {
         this.setState({formName: text });
     }

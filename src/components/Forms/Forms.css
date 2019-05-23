@@ -180,3 +180,7 @@ td {
     padding: 0!important;
     margin: 10px 0 0 70px  !important;
 }
+
+#duplicate-button {
+    margin-left: 0 !important;
+}

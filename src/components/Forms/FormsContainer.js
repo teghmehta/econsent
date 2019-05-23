@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Forms.css';
-import {ButtonToolbar, Button, Modal, Form} from "react-bootstrap";
+import {ButtonToolbar, Button, Modal, Form, Row, Col} from "react-bootstrap";
 import Header from "../Header/Header";
 import {withRouter} from "react-router";
 import DatePicker from "react-datepicker";
@@ -16,7 +16,7 @@ class FormsContainer extends Component {
         super(props);
 
         this.formData = {};
-        this.state = {savingText: "", timeout: '', localStorageKey: '', startDate: new Date(), lastPicturesLength: 0, base64Images: new Array(MAX_PICTURES), base64FileNames: new Array(MAX_PICTURES) };
+        this.state = {savingText: "", timeout: '', localStorageKey: '', duplicateName: '', startDate: new Date(), lastPicturesLength: 0, base64Images: new Array(MAX_PICTURES), base64FileNames: new Array(MAX_PICTURES) };
         this.onDrop = this.onDrop.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleShow = this.handleShow.bind(this);
@@ -271,6 +271,10 @@ class FormsContainer extends Component {
         }
     }
 
+    handleDuplication(value) {
+        console.log(value)
+    }
+
     render() {
         return (
             <div className={'app-container'}>
@@ -314,6 +318,7 @@ class FormsContainer extends Component {
                     <ButtonToolbar>
                         <Button onClick={this.saveJson.bind(this)} variant="primary">Save</Button>
                         <Button variant="secondary" onClick={this.handleShow} >Go Back</Button>
+                        <Button onClick={() => this.setState({ showTextModal: true })} variant="outline-info">Duplicate Form</Button>
                         <Button type={"submit"} variant="outline-danger">Save and Submit</Button>
                         <h6 className={'date-picker-header'}>Informed Consent Form Version Date:</h6>
                         <DatePicker
@@ -324,6 +329,32 @@ class FormsContainer extends Component {
 
                     </Form>
                 </div>
+
+                <Modal show={this.state.showTextModal} onHide={() => this.setState({ showTextModal: false })}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Duplicate Form</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>Create Duplicate of {this.state.formName}</Modal.Body>
+                    <Modal.Footer>
+                            <Form.Group as={Row} controlId="">
+                                <Form.Label column sm="4">
+                                    Form Name
+                                </Form.Label>
+                                <Col sm="10">
+                                    <Form.Control required type="textarea" placeholder={this.props.formName + " - Copy#"}  onChange={e => this.setState({duplicateName: e.target.value})}/>
+                                    <Form.Control.Feedback type="invalid">Required</Form.Control.Feedback>
+                                </Col>
+                                <Col sm="10">
+                                    <Button id={"duplicate-button"} variant="primary" onClick={() => this.handleDuplication(this.state.duplicateName)}>
+                                        Duplicate
+                                    </Button>
+                                    <Button  variant="danger" onClick={() => this.setState({ showTextModal: false })}>
+                                        Cancel
+                                    </Button>
+                                </Col>
+                            </Form.Group>
+                    </Modal.Footer>
+                </Modal>
 
                 <Modal show={this.state.show} onHide={() => this.setState({ show: false })}>
                     <Modal.Header closeButton>

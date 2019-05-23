@@ -16,13 +16,193 @@ class FormsContainer extends Component {
         super(props);
 
         this.formData = {};
-        this.state = {savingText: "", timeout: '', formName: '', originalDate: '', startDate: new Date(), lastPicturesLength: 0, base64Images: new Array(MAX_PICTURES), base64FileNames: new Array(MAX_PICTURES) };
+        this.state = {savingText: "", timeout: '', localStorageKey: '', startDate: new Date(), lastPicturesLength: 0, base64Images: new Array(MAX_PICTURES), base64FileNames: new Array(MAX_PICTURES) };
         this.onDrop = this.onDrop.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleShow = this.handleShow.bind(this);
         this.saveOnCtrlS = this.saveOnCtrlS.bind(this)
         document.addEventListener("keydown", this.saveOnCtrlS, false);
     }
+
+
+    componentWillUnmount() {
+        this.unlisten();
+        document.removeEventListener('scroll', this.saveOnCtrlS, false);
+        clearTimeout(this.state.timeout)
+    }
+
+
+    componentWillMount () {
+        this.unlisten = this.props.history.listen(() => {
+            window.scrollTo(0, 0)
+        });
+        this.loadJson();
+    }
+
+    validateJson (json) {
+        let validJson;
+
+        try{
+            validJson = JSON.stringify(JSON.parse(json), null, 2)
+        } catch(e) {
+            throw e
+        }
+
+        return validJson
+    }
+
+    loadJson = () => {
+        let dateOBJ = new Date(Date.parse(this.props.date));
+        let localStorageKey = this.props.formName + ' - ' + dateOBJ.toDateString().split(' ').slice(1).join(' ');
+        this.setState({localStorageKey})
+        const json = window.localStorage.getItem(localStorageKey) || JSON.stringify(formData, null, 2);
+        if (JSON.parse(window.localStorage.getItem(localStorageKey)) === null) {
+            this.setState({isFormNew: true});
+            let validJson = this.validateJson(JSON.stringify(formData, null, 2));
+            if (!validJson) {
+                return;
+            }
+
+            window.localStorage.setItem(
+                localStorageKey,
+                validJson
+            )
+        } else {
+            this.setState({isFormNew: false});
+        }
+
+        let startDate;
+
+        console.log(JSON.parse(json).find(x => x.date !== undefined))
+        if (JSON.parse(json).find(x => x.date !== undefined).date === "") {startDate = dateOBJ;}
+        else {startDate = new Date(JSON.parse(json).find(x => x.date !== undefined).date)}
+
+
+        this.setState({formData: JSON.parse(json), formName: this.props.formName, startDate: startDate, base64Images: JSON.parse(json).find(x => x.base64Images !== undefined).base64Images, base64FileNames: JSON.parse(json).find(x => x.base64FileNames !== undefined).base64FileNames})
+    };
+
+    saveJson(shouldPush) {
+        this.replaceFormData(this.state.formData.findIndex(form => form.date !== undefined), 'date', this.props.date);
+        let validJson = this.replaceAndValidatedOnSave();
+        window.localStorage.setItem(
+            this.state.localStorageKey,
+            validJson
+        );
+        if (this.state.startDate.getTime() !== new Date(Date.parse(this.props.date)).getTime()) {
+            this.replaceFormData(this.state.formData.findIndex(form => form.date !== undefined), 'date', this.state.startDate);
+            validJson = this.replaceAndValidatedOnSave();
+            window.localStorage.setItem(
+                this.state.localStorageKey,
+                validJson
+            );
+
+            if (shouldPush) this.props.history.push('/form/' + encodeURIComponent(this.state.formName) + '/' + encodeURIComponent(this.state.startDate.toString()));
+            else this.props.history.push('/submit/' + encodeURIComponent(this.props.formName) + '/' + encodeURIComponent(this.state.startDate.toString()))
+        }
+    };
+
+    replaceAndValidatedOnSave() {
+        this.replaceFormData(this.state.formData.findIndex(form => form.base64Images !== undefined), 'base64Images', this.state.base64Images);
+        this.replaceFormData(this.state.formData.findIndex(form => form.base64FileNames !== undefined), 'base64FileNames', this.state.base64FileNames);
+        this.replaceFormData(this.state.formData.findIndex(form => form.formName !== undefined), 'formName', this.props.formName);
+
+        this.setState({savingText: "Saved."});
+        let timeout = setTimeout(function () {
+            this.setState({savingText: ""});
+        }.bind(this), 1500);
+        this.setState({timeout});
+        let validJson;
+        try {
+            validJson = this.validateJson(JSON.stringify(this.state.formData, null, 2));
+            this.setState({isFormNew: false});
+        } catch (e) {
+            validJson = this.validateJson(JSON.stringify(formData, null, 2));
+            this.setState({isFormNew: true});
+        }
+
+        if (!validJson) {
+            return;
+        }
+        return validJson
+    }
+
+    areFormsValidated() {
+        let isFormBlank = false;
+            this.state.formData.some((item, index) => {
+                let replacedItem = item.value.replace(/\s/g, '').replace('<br>', '');
+                if ((replacedItem === '<p></p>' || replacedItem === '')&& (item.isValidated !== undefined)) { //if it is empty
+                    this.replaceFormData(index, 'isValidated', false)
+                    isFormBlank = true;
+                    return;
+                } else if (item.isValidated !== undefined) {
+                    this.replaceFormData(index, 'isValidated', true)
+                }
+            }
+        );
+
+
+        let isBlanksUnfilled = false;
+        this.state.formData.some((item, index) => {
+            let flag = item.value.replace(/\s/g, '').indexOf("<strong>X</strong>") > -1;
+            if (flag) {
+                this.replaceFormData(index, 'isValidated', false);
+                isBlanksUnfilled = true
+            }
+        });
+
+        return isBlanksUnfilled || isFormBlank
+    }
+
+    handleSubmit(event) {
+        if (this.areFormsValidated()) {
+            event.preventDefault();
+            event.stopPropagation();
+            alert("Please fill in all required* fields.")
+            this.saveJson(true);
+        } else {
+            this.saveJson(false);
+        }
+    }
+
+    isFormNew() {
+        if (this.state.isFormNew) localStorage.removeItem(this.state.localStorageKey);
+    }
+
+    replaceFormData(index, property, value) {
+        let formStateData = this.state.formData;
+        formStateData[index][property] = value;
+        this.setState({formData: formStateData});
+    }
+
+    changeValue(value, index) {
+        let formStateData = this.state.formData;
+        this.replaceFormData(index, 'value', value);
+
+        let replacedItem = value.replace(/\s/g, '').replace('<br>', '');
+        if ((replacedItem === '<p></p>' || replacedItem === '') && (formStateData[index].isValidated !== undefined)) { //if it is empty
+            this.replaceFormData(index, 'isValidated', false)
+        } else if (formStateData[index].isValidated !== undefined){
+            this.replaceFormData(index, 'isValidated', true)
+        }
+    }
+
+    handleClose(saveFlag) {
+        this.setState({ show: false });
+        if (saveFlag) this.saveJson();
+        else this.isFormNew();
+        this.props.history.push('/')
+    }
+
+    handleShow() {
+        this.setState({ show: true });
+    }
+
+    handleDateSelect(date) {
+        this.setState({startDate: date});
+        this.setState({localStorageKey: this.props.formName + " - " + date.toDateString().split(' ').slice(1).join(' ')});
+
+    }
+
 
     //This function makes sure that a maximum of two new images can be added
     onDrop(pictures) {
@@ -89,189 +269,10 @@ class FormsContainer extends Component {
         }
     }
 
-
-    componentWillUnmount() {
-        this.unlisten();
-        document.removeEventListener('scroll', this.saveOnCtrlS, false);
-        clearTimeout(this.state.timeout)
-    }
-
-
-    componentWillMount () {
-        this.unlisten = this.props.history.listen(() => {
-            window.scrollTo(0, 0)
-        });
-        this.loadJson();
-    }
-
-    validateJson (json) {
-        let validJson;
-
-        try{
-            validJson = JSON.stringify(JSON.parse(json), null, 2)
-        } catch(e) {
-            throw e
-        }
-
-        return validJson
-    }
-
-    loadJson = () => {
-        const json = window.localStorage.getItem(this.props.formName) || JSON.stringify(formData, null, 2);
-        if (JSON.parse(window.localStorage.getItem(this.props.formName)) === null) {
-            this.setState({isFormNew: true});
-            let validJson = this.validateJson(JSON.stringify(formData, null, 2));
-            if (!validJson) {
-                return;
-            }
-
-            window.localStorage.setItem(
-                this.props.formName,
-                validJson
-            )
-        } else {
-            this.setState({isFormNew: false});
-        }
-
-        let startDate;
-
-        if (JSON.parse(json).find(x => x.date !== undefined).date === "") {startDate = new Date(); console.log('sdsd')}
-        else {startDate = new Date(JSON.parse(json).find(x => x.date !== undefined).date)}
-
-
-        this.setState({formData: JSON.parse(json), formName: this.props.formName, originalDate: startDate, startDate: startDate, base64Images: JSON.parse(json).find(x => x.base64Images !== undefined).base64Images, base64FileNames: JSON.parse(json).find(x => x.base64FileNames !== undefined).base64FileNames})
-    };
-
-    saveJson = () => {
-        this.replaceFormData(this.state.formData.findIndex(form => form.date !== undefined), 'date', this.state.originalDate);
-        let validJson = this.replaceAndValidatedOnSave();
-        console.log("OG Date" + this.state.startDate)
-        window.localStorage.setItem(
-            this.props.formName,
-            validJson
-        );
-        if (this.state.formName !== this.props.formName ) {
-            console.log(this.props.formName)
-            this.replaceFormData(this.state.formData.findIndex(form => form.date !== undefined), 'date', this.state.startDate);
-            validJson = this.replaceAndValidatedOnSave();
-            window.localStorage.setItem(
-                this.state.formName,
-                validJson
-            );
-
-            this.props.history.push('/form/' + encodeURIComponent(this.state.formName))
-        }
-    };
-
-    replaceAndValidatedOnSave() {
-        this.replaceFormData(this.state.formData.findIndex(form => form.base64Images !== undefined), 'base64Images', this.state.base64Images);
-        this.replaceFormData(this.state.formData.findIndex(form => form.base64FileNames !== undefined), 'base64FileNames', this.state.base64FileNames);
-        this.setState({savingText: "Saved."});
-        let timeout = setTimeout(function () {
-            this.setState({savingText: ""});
-        }.bind(this), 1500);
-        this.setState({timeout});
-        let validJson;
-        try {
-            validJson = this.validateJson(JSON.stringify(this.state.formData, null, 2));
-            this.setState({isFormNew: false});
-        } catch (e) {
-            validJson = this.validateJson(JSON.stringify(formData, null, 2));
-            this.setState({isFormNew: true});
-        }
-
-        if (!validJson) {
-            return;
-        }
-        return validJson
-    }
-
-    areFormsValidated() {
-        let isFormBlank = false;
-            this.state.formData.some((item, index) => {
-                let replacedItem = item.value.replace(/\s/g, '').replace('<br>', '');
-                if ((replacedItem === '<p></p>' || replacedItem === '')&& (item.isValidated !== undefined)) { //if it is empty
-                    this.replaceFormData(index, 'isValidated', false)
-                    isFormBlank = true;
-                    return;
-                } else if (item.isValidated !== undefined) {
-                    this.replaceFormData(index, 'isValidated', true)
-                }
-            }
-        );
-
-
-        let isBlanksUnfilled = false;
-        this.state.formData.some((item, index) => {
-            let flag = item.value.replace(/\s/g, '').indexOf("<strong>X</strong>") > -1;
-            if (flag) {
-                this.replaceFormData(index, 'isValidated', false);
-                isBlanksUnfilled = true
-            }
-        });
-
-        return isBlanksUnfilled || isFormBlank
-    }
-
-    handleSubmit(event) {
-        this.saveJson();
-        if (this.areFormsValidated()) {
-            event.preventDefault();
-            event.stopPropagation();
-            alert("Please fill in all required* fields.")
-        } else {
-            this.props.history.push('/submit/' + encodeURIComponent(this.state.formName))
-        }
-    }
-
-    isFormNew() {
-        if (this.state.isFormNew) localStorage.removeItem(this.state.formName);
-    }
-
-    replaceFormData(index, property, value) {
-        let formStateData = this.state.formData;
-        formStateData[index][property] = value;
-        this.setState({formData: formStateData});
-    }
-
-    changeValue(value, index) {
-        let formStateData = this.state.formData;
-        this.replaceFormData(index, 'value', value);
-
-        let replacedItem = value.replace(/\s/g, '').replace('<br>', '');
-        if ((replacedItem === '<p></p>' || replacedItem === '') && (formStateData[index].isValidated !== undefined)) { //if it is empty
-            this.replaceFormData(index, 'isValidated', false)
-        } else if (formStateData[index].isValidated !== undefined){
-            this.replaceFormData(index, 'isValidated', true)
-        }
-    }
-
-    handleClose(saveFlag) {
-        this.setState({ show: false });
-        if (saveFlag) this.saveJson();
-        else this.isFormNew();
-        this.props.history.push('/')
-    }
-
-    handleShow() {
-        this.setState({ show: true });
-    }
-
-    handleDateSelect(date) {
-        //make copy
-        let newFormName = this.state.formName.replace(' - ' + this.state.startDate.toDateString().split(' ').slice(1).join(' '), '');
-        console.log(newFormName)
-
-        this.setState({startDate: date}, () => {
-            this.setState({formName: newFormName + " - " + this.state.startDate.toDateString().split(' ').slice(1).join(' ')}, () => console.log(this.state.formName))
-        });
-
-    }
-
     render() {
         return (
             <div className={'app-container'}>
-                <Header formName={this.state.formName} handleShow={this.handleShow} savingText={this.state.savingText}/>
+                <Header formName={this.state.localStorageKey} handleShow={this.handleShow} savingText={this.state.savingText}/>
                 <div className={'forms-container'}>
                     <Form onSubmit={e => this.handleSubmit(e)}>
                         {this.state.formData.map(function(form, index) {

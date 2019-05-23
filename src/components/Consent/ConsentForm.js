@@ -18,7 +18,7 @@ class ConsentForm extends Component {
 
 
     loadJson = () => {
-        const json = window.localStorage.getItem(this.props.formName);
+        const json = window.localStorage.getItem(this.props.formName + ' - ' + new Date(Date.parse(this.props.date)).toDateString().split(' ').slice(1).join(' '));
 
         console.log('ConsentForm', JSON.parse(json));
 
@@ -54,7 +54,7 @@ class ConsentForm extends Component {
     }
 
     push() {
-        this.props.history.push('/form/' + this.props.formName)
+        this.props.history.push('/form/' + this.props.formName + '/' + this.props.date)
     }
 
     render() {

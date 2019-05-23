@@ -22,15 +22,15 @@ class StartupForm extends Component {
     }
 
     handleSubmit(event) {
-        let formName = this.state.formName + ' - ' + new Date().toDateString().split(' ').slice(1).join(' ');
+        let date = new Date();
         const form = event.currentTarget;
-        if (form.checkValidity() === false || this.isNameInvalid(formName)) {
+        if (form.checkValidity() === false || this.isNameInvalid(this.state.formName)) {
             event.preventDefault();
             event.stopPropagation();
             this.setState({validated: false , isInvalid: true})
         } else {
             this.setState({ validated: true });
-            this.props.history.push('/form/' + encodeURIComponent(formName))
+            this.props.history.push('/form/' + encodeURIComponent(this.state.formName) + '/' + encodeURIComponent(date.toString()));
         }
     }
     deleteForm(key) {
@@ -55,12 +55,12 @@ class StartupForm extends Component {
     openForms() {
         let rows = [];
         let sorted = Object.keys(localStorage).sort();
-        console.log(sorted)
         sorted.forEach(function(key, i){
-            let date = new Date(Date.parse(JSON.parse(localStorage.getItem(key)).find(x => x.date !== undefined).date)).toDateString().split(' ').slice(1).join(' ');
+            let date = new Date(Date.parse(JSON.parse(localStorage.getItem(key)).find(x => x.date !== undefined).date)).toString();
+            let formName = JSON.parse(localStorage.getItem(key)).find(x => x.formName !== undefined).formName;
             rows.push(
                 <div key={i} className={"dropdown-div"}>
-                    <Dropdown.Item key={i} href={"/form/" + key}>Informed Consent Form ({key.length > 30 ? key.substring(0, Math.min(key.length, 70)) + '...'  : key})</Dropdown.Item>
+                    <Dropdown.Item key={i} href={"/form/" + formName + '/' + date}>Informed Consent Form ({key.length > 30 ? key.substring(0, Math.min(key.length, 70)) + '...'  : key })</Dropdown.Item>
                     <Button onClick={() => this.deleteForm(key)} variant="danger">Delete</Button>
                 </div>)
         }.bind(this));

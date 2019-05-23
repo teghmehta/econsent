@@ -39,22 +39,21 @@ class StartupForm extends Component {
     }
 
     isNameInvalid(name) {
-        if (localStorage.getItem(name) !== null || name.length === 250 || !name.replace(/\s/g, '').length) {
-            if (!name.replace(/\s/g, '').length) {
-                return true;
-            }
+        if (localStorage.getItem(name + ' - ' + new Date().toDateString().split(' ').slice(1).join(' ')) !== null || name.length === 250 || !name.replace(/\s/g, '').length) {
             try {
                 encodeURIComponent(name);
             } catch (e) {
-                return false
+                return true;
             }
+            return true;
         }
-        return false
+        return false;
     }
 
     openForms() {
         let rows = [];
         let sorted = Object.keys(localStorage).sort();
+        console.log(sorted)
         sorted.forEach(function(key, i){
             let date = new Date(Date.parse(JSON.parse(localStorage.getItem(key)).find(x => x.date !== undefined).date)).toString();
             let formName = JSON.parse(localStorage.getItem(key)).find(x => x.formName !== undefined).formName;

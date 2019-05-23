@@ -96,8 +96,9 @@ class FormsContainer extends Component {
                 validJson
             );
 
-            if (shouldPush) this.props.history.push('/form/' + encodeURIComponent(this.state.formName) + '/' + encodeURIComponent(this.state.startDate.toString()));
-            else this.props.history.push('/submit/' + encodeURIComponent(this.props.formName) + '/' + encodeURIComponent(this.state.startDate.toString()))
+            console.log(this.state.startDate.getTime() !== new Date(Date.parse(this.props.date)).getTime(), this.state.startDate, new Date(Date.parse(this.props.date)));
+
+            if (!shouldPush) this.props.history.push('/form/' + encodeURIComponent(this.state.formName) + '/' + encodeURIComponent(this.state.startDate.toString()));
         }
     };
 
@@ -158,9 +159,10 @@ class FormsContainer extends Component {
             event.preventDefault();
             event.stopPropagation();
             alert("Please fill in all required* fields.")
-            this.saveJson(true);
+            this.saveJson();
         } else {
-            this.saveJson(false);
+            this.saveJson(true);
+            this.props.history.push('/submit/' + encodeURIComponent(this.props.formName) + '/' + encodeURIComponent(this.state.startDate.toString()))
         }
     }
 

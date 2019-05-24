@@ -84,15 +84,13 @@ class FormsContainer extends Component {
     };
 
     saveJson(shouldPush) {
-        this.replaceFormData(this.state.formData.findIndex(form => form.date !== undefined), 'date', this.props.date);
-        let validJson = this.replaceAndValidatedOnSave();
+        let validJson = this.replaceAndValidatedOnSave(this.props.date);
         window.localStorage.setItem(
             this.state.localStorageKey,
             validJson
         );
         if (this.state.startDate.getTime() !== new Date(Date.parse(this.props.date)).getTime()) {
-            this.replaceFormData(this.state.formData.findIndex(form => form.date !== undefined), 'date', this.state.startDate);
-            validJson = this.replaceAndValidatedOnSave();
+            validJson = this.replaceAndValidatedOnSave(this.state.startDate);
             window.localStorage.setItem(
                 this.state.localStorageKey,
                 validJson
@@ -104,7 +102,8 @@ class FormsContainer extends Component {
         }
     };
 
-    replaceAndValidatedOnSave() {
+    replaceAndValidatedOnSave(date) {
+        this.replaceFormData(this.state.formData.findIndex(form => form.date !== undefined), 'date', date);
         this.replaceFormData(this.state.formData.findIndex(form => form.base64Images !== undefined), 'base64Images', this.state.base64Images);
         this.replaceFormData(this.state.formData.findIndex(form => form.base64FileNames !== undefined), 'base64FileNames', this.state.base64FileNames);
         this.replaceFormData(this.state.formData.findIndex(form => form.formName !== undefined), 'formName', this.props.formName);
@@ -273,23 +272,27 @@ class FormsContainer extends Component {
         }
     }
 
-    handleDuplication(localStorageKey) {
+    handleDuplication(localStorageKey, date) {
         //save
-        console.log(localStorageKey);
-    }
-
-    isNameInvalid(name) {
-        if (localStorage.getItem(name)) {
-            try {
-                encodeURIComponent(name);
-            } catch (e) {
-                return true;
-            }
-            return true;
+        let validJson;
+        try {
+            validJson = this.validateJson(JSON.stringify(this.state.formData, null, 2));
+            this.setState({isFormNew: false});
+        } catch (e) {
+            validJson = this.validateJson(JSON.stringify(formData, null, 2));
+            this.setState({isFormNew: true});
         }
-        return false;
-    }
 
+        if (!validJson) {
+            return;
+        }
+        validJson = JSON.parse(validJson);
+        validJson[validJson.findIndex(form => form.date !== undefined)].date = date;
+        window.localStorage.setItem(
+            localStorageKey,
+            validJson
+        );
+    }
 
 
     render() {
@@ -324,7 +327,7 @@ class FormsContainer extends Component {
                     </Form>
                 </div>
 
-                <DuplicateModal handleDuplication={(localStorageKey) => this.handleDuplication(localStorageKey)} formName={this.state.formName} showTextModal={this.state.showTextModal}  closeTextModal={() => this.setState({showTextModal: false})}/>
+                <DuplicateModal handleDuplication={(localStorageKey, date) => this.handleDuplication(localStorageKey, date)} formName={this.state.formName} showTextModal={this.state.showTextModal}  closeTextModal={() => this.setState({showTextModal: false})}/>
 
                 <ExitModal handleClose={(flag) => this.handleClose(flag)} show={this.state.show} hide={() => this.setState({ show: false })}/>
             </div>

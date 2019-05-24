@@ -272,7 +272,7 @@ class FormsContainer extends Component {
         }
     }
 
-    handleDuplication(localStorageKey, date) {
+    handleDuplication(localStorageKey, formName, date) {
         //save
         let validJson;
         try {
@@ -288,10 +288,13 @@ class FormsContainer extends Component {
         }
         validJson = JSON.parse(validJson);
         validJson[validJson.findIndex(form => form.date !== undefined)].date = date;
+        validJson[validJson.findIndex(form => form.formName !== undefined)].formName = formName;
         window.localStorage.setItem(
             localStorageKey,
-            validJson
+            JSON.stringify(validJson)
         );
+        this.setState({showTextModal: false})
+
     }
 
 
@@ -327,7 +330,7 @@ class FormsContainer extends Component {
                     </Form>
                 </div>
 
-                <DuplicateModal handleDuplication={(localStorageKey, date) => this.handleDuplication(localStorageKey, date)} formName={this.state.formName} showTextModal={this.state.showTextModal}  closeTextModal={() => this.setState({showTextModal: false})}/>
+                <DuplicateModal handleDuplication={(localStorageKey, formName, date) => this.handleDuplication(localStorageKey, formName, date)} formName={this.props.formName} showTextModal={this.state.showTextModal}  closeTextModal={() => this.setState({showTextModal: false})}/>
 
                 <ExitModal handleClose={(flag) => this.handleClose(flag)} show={this.state.show} hide={() => this.setState({ show: false })}/>
             </div>

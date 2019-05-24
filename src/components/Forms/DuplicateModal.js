@@ -33,7 +33,7 @@ class DuplicateModal extends Component {
             this.setState({ validated: true });
             event.preventDefault();
             event.stopPropagation();
-           this.props.handleDuplication(localStorageKey, this.state.startDate)
+           this.props.handleDuplication(localStorageKey, this.state.formName, this.state.startDate)
         }
     }
 

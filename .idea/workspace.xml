@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c02733d7-d4a9-4ce8-a87a-d7686d50c11f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/Forms/BtnToolbar.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Forms/DuplicateModal.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Forms/ExitModal.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Forms/ImgUploader.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Forms/Forms.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Forms/Forms.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Forms/DuplicateModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Forms/DuplicateModal.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Forms/FormsContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Forms/FormsContainer.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -21,6 +17,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/constants/constants.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1575">
+              <caret line="105" lean-forward="true" selection-start-line="105" selection-end-line="105" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Consent/StartupForm.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -42,11 +47,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/Forms/FormsContainer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="277" column="37" selection-start-line="277" selection-start-column="37" selection-end-line="277" selection-end-column="37" />
+            <state relative-caret-position="754">
+              <caret line="278" column="88" lean-forward="true" selection-start-line="278" selection-start-column="88" selection-end-line="278" selection-end-column="88" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -54,11 +59,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Forms/DuplicateModal.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="367">
-              <caret line="32" column="70" selection-start-line="32" selection-start-column="70" selection-end-line="32" selection-end-column="70" />
+            <state relative-caret-position="412">
+              <caret line="35" column="78" selection-start-line="35" selection-start-column="78" selection-end-line="35" selection-end-column="78" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -138,8 +143,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>toString</find>
-      <find>rows</find>
       <find>console.l</find>
       <find>isFormNew</find>
       <find>blankValidated</find>
@@ -166,8 +169,10 @@
       <find>originalDate</find>
       <find>' - '</find>
       <find>.toDateString().split(' ').slice(1).join(' ')</find>
+      <find>-</find>
       <find>d</find>
       <find>handleDateSele</find>
+      <find>this.props.formName</find>
     </findStrings>
     <replaceStrings>
       <replace>title</replace>
@@ -176,6 +181,7 @@
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src</dir>
+      <dir>$PROJECT_DIR$/src/components</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -217,8 +223,8 @@
         <option value="$PROJECT_DIR$/src/components/Forms/ExitModal.js" />
         <option value="$PROJECT_DIR$/src/components/Forms/BtnToolbar.js" />
         <option value="$PROJECT_DIR$/src/components/Forms/Forms.css" />
-        <option value="$PROJECT_DIR$/src/components/Forms/FormsContainer.js" />
         <option value="$PROJECT_DIR$/src/components/Forms/DuplicateModal.js" />
+        <option value="$PROJECT_DIR$/src/components/Forms/FormsContainer.js" />
       </list>
     </option>
   </component>
@@ -417,21 +423,7 @@
       <workItem from="1554753434748" duration="8835000" />
       <workItem from="1555001382171" duration="77064000" />
       <workItem from="1556735156094" duration="70300000" />
-      <workItem from="1558459623101" duration="23345000" />
-    </task>
-    <task id="LOCAL-00005" summary="Minor bugs">
-      <created>1554926171403</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1554926171403</updated>
-    </task>
-    <task id="LOCAL-00006" summary="I added more ccs to consent form, added a startup form, added React Router, and proper routing to everything, and it scrolls up when it is clicked.">
-      <created>1555009620292</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1555009620292</updated>
+      <workItem from="1558459623101" duration="24723000" />
     </task>
     <task id="LOCAL-00007" summary="Added the form Name and passed it as a prop to the header and form container and displayed it">
       <created>1555012696138</created>
@@ -762,11 +754,25 @@
       <option name="project" value="LOCAL" />
       <updated>1558641295795</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="Refactored the FormsContainer. Moved everyhting to separate components. Added more basecode to the duplicate.">
+      <created>1558722163576</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1558722163576</updated>
+    </task>
+    <task id="LOCAL-00055" summary="Added duplication working.">
+      <created>1558723006598</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1558723006598</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="193967000" />
+    <option name="totallyTimeSpent" value="195345000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
@@ -798,8 +804,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Attempting to add a table for Documentation of Informed Consent" />
-    <MESSAGE value="Added Table for Informed Consent but the Validation for the study title needs to be added" />
     <MESSAGE value="Fixed the fill in the blank: Removed all the code in FormTextArea and replaced it with a single function in FormContainer that loops through the array and checks if it contains the Bold X" />
     <MESSAGE value="Validates every Form except funder and co-investigators. If it is not empty it submits" />
     <MESSAGE value="This is the potential working version of the validation of forms" />
@@ -823,7 +827,9 @@
     <MESSAGE value="This is a version of the Change Date, and Save Copy. Working. Bugs not found or tested yet." />
     <MESSAGE value="Bugs tested and working except for one bug:&#10;on date change -&gt; direct submit -&gt; back to forms, then save, it scrolls to the top. Basically the .prop.date is the last forms date. Even though in React Tools it is the same and startDate. Why is the props not correct? Not a huge issue. Just a rare case where it scrolls to the top" />
     <MESSAGE value="Added base code for duplication" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added base code for duplication" />
+    <MESSAGE value="Refactored the FormsContainer. Moved everyhting to separate components. Added more basecode to the duplicate." />
+    <MESSAGE value="Added duplication working." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added duplication working." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/public/favicon.ico" />
@@ -954,13 +960,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/constants/constants.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="105" lean-forward="true" selection-start-line="105" selection-end-line="105" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Consent/ConsentForm.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="138">
@@ -1015,16 +1014,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Consent/StartupForm.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1133">
-          <caret line="78" column="25" lean-forward="true" selection-start-line="78" selection-start-column="25" selection-end-line="78" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Forms/ExitModal.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -1045,10 +1034,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Forms/FormsContainer.js">
+    <entry file="file://$PROJECT_DIR$/src/constants/constants.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="277" column="37" selection-start-line="277" selection-start-column="37" selection-end-line="277" selection-end-column="37" />
+        <state relative-caret-position="1575">
+          <caret line="105" lean-forward="true" selection-start-line="105" selection-end-line="105" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Consent/StartupForm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1133">
+          <caret line="78" column="25" lean-forward="true" selection-start-line="78" selection-start-column="25" selection-end-line="78" selection-end-column="25" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
@@ -1057,8 +1053,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Forms/DuplicateModal.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="32" column="70" selection-start-line="32" selection-start-column="70" selection-end-line="32" selection-end-column="70" />
+        <state relative-caret-position="412">
+          <caret line="35" column="78" selection-start-line="35" selection-start-column="78" selection-end-line="35" selection-end-column="78" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Forms/FormsContainer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="754">
+          <caret line="278" column="88" lean-forward="true" selection-start-line="278" selection-start-column="88" selection-end-line="278" selection-end-column="88" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>

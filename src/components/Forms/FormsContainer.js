@@ -3,10 +3,12 @@ import './Forms.css';
 import {ButtonToolbar, Button, Modal, Form, Row, Col} from "react-bootstrap";
 import Header from "../Header/Header";
 import {withRouter} from "react-router";
-import DatePicker from "react-datepicker";
-import ImageUploader from 'react-images-upload';
 import "react-datepicker/dist/react-datepicker.css";
 import FormTextArea from "./FormTextArea";
+import DuplicateModal from "./DuplicateModal";
+import BtnToolbar from "./BtnToolbar";
+import ImgUploader from "./ImgUploader";
+import ExitModal from "./ExitModal";
 let formData = require('../../constants/constants');
 const MAX_PICTURES = 2;
 
@@ -16,7 +18,7 @@ class FormsContainer extends Component {
         super(props);
 
         this.formData = {};
-        this.state = {savingText: "", timeout: '', localStorageKey: '', duplicateName: '', startDate: new Date(), lastPicturesLength: 0, base64Images: new Array(MAX_PICTURES), base64FileNames: new Array(MAX_PICTURES) };
+        this.state = {savingText: "", timeout: '', isDuplicateFormValid: false, localStorageKey: '', duplicateName: '', startDate: new Date(), lastPicturesLength: 0, base64Images: new Array(MAX_PICTURES), base64FileNames: new Array(MAX_PICTURES) };
         this.onDrop = this.onDrop.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleShow = this.handleShow.bind(this);
@@ -271,9 +273,24 @@ class FormsContainer extends Component {
         }
     }
 
-    handleDuplication(value) {
-        console.log(value)
+    handleDuplication(localStorageKey) {
+        //save
+        console.log(localStorageKey);
     }
+
+    isNameInvalid(name) {
+        if (localStorage.getItem(name)) {
+            try {
+                encodeURIComponent(name);
+            } catch (e) {
+                return true;
+            }
+            return true;
+        }
+        return false;
+    }
+
+
 
     render() {
         return (
@@ -301,78 +318,15 @@ class FormsContainer extends Component {
                                     </div>)
                             }
                         }.bind(this) )}
-                        <div className={'image-uploader-container'}>
-                            <h6 className={'image-uploader-header'}>Upload Image used for Consent Form Header</h6>
-                            <ImageUploader
-                                className={'image-uploader'}
-                                buttonText='Choose images'
-                                onChange={(e) => this.onDrop(e)}
-                                withPreview={false}
-                                withIcon={false}
-                                label={'Max File Size: 5MB'}
-                                imgExtension={['.jpg', '.png']}
-                                maxFileSize={5242880}
-                            />
-                            {this.state.base64FileNames.map((name, index) => <p key={index}> {name}<Button onClick={() =>this.deletePhoto(name, index)} variant="danger">Delete</Button></p>)}
-                        </div>
-                    <ButtonToolbar>
-                        <Button onClick={this.saveJson.bind(this)} variant="primary">Save</Button>
-                        <Button variant="secondary" onClick={this.handleShow} >Go Back</Button>
-                        <Button onClick={() => this.setState({ showTextModal: true })} variant="outline-info">Duplicate Form</Button>
-                        <Button type={"submit"} variant="outline-danger">Save and Submit</Button>
-                        <h6 className={'date-picker-header'}>Informed Consent Form Version Date:</h6>
-                        <DatePicker
-                            selected={this.state.startDate}
-                            onChange={(date) => this.handleDateSelect(date)}
-                        />
-                    </ButtonToolbar>
 
+                        <BtnToolbar startDate={this.state.startDate} handleShow={() => this.handleShow()} handleDateSelect={(date) => this.handleDateSelect(date)} saveJson={() => this.saveJson()} showDuplicateModal={() => this.setState({ showTextModal: true })}/>
+                        <ImgUploader base64FileNames={this.state.base64FileNames} onDrop={(e) => this.onDrop(e)} deletePhoto={(name, index) => this.deletePhoto(name, index)}/>
                     </Form>
                 </div>
 
-                <Modal show={this.state.showTextModal} onHide={() => this.setState({ showTextModal: false })}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Duplicate Form</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>Create Duplicate of {this.state.formName}</Modal.Body>
-                    <Modal.Footer>
-                            <Form.Group as={Row} controlId="">
-                                <Form.Label column sm="4">
-                                    Form Name
-                                </Form.Label>
-                                <Col sm="10">
-                                    <Form.Control required type="textarea" placeholder={this.props.formName + " - Copy#"}  onChange={e => this.setState({duplicateName: e.target.value})}/>
-                                    <Form.Control.Feedback type="invalid">Required</Form.Control.Feedback>
-                                </Col>
-                                <Col sm="10">
-                                    <Button id={"duplicate-button"} variant="primary" onClick={() => this.handleDuplication(this.state.duplicateName)}>
-                                        Duplicate
-                                    </Button>
-                                    <Button  variant="danger" onClick={() => this.setState({ showTextModal: false })}>
-                                        Cancel
-                                    </Button>
-                                </Col>
-                            </Form.Group>
-                    </Modal.Footer>
-                </Modal>
+                <DuplicateModal handleDuplication={(localStorageKey) => this.handleDuplication(localStorageKey)} formName={this.state.formName} showTextModal={this.state.showTextModal}  closeTextModal={() => this.setState({showTextModal: false})}/>
 
-                <Modal show={this.state.show} onHide={() => this.setState({ show: false })}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Save Changes</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>Do you want to save your changes before you go back?</Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={() => this.handleClose(false)}>
-                            Discard
-                        </Button>
-                        <Button variant="primary" onClick={() => this.handleClose(true)}>
-                            Save Changes
-                        </Button>
-                        <Button variant="danger" onClick={() => this.setState({ show: false })}>
-                            Cancel
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
+                <ExitModal handleClose={(flag) => this.handleClose(flag)} show={this.state.show} hide={() => this.setState({ show: false })}/>
             </div>
         );
     }

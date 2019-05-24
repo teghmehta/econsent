@@ -194,4 +194,10 @@ td {
 
 .dup-modal .forms-container {
     width: 100%;
+    padding-bottom: 0;
+    padding-top: 0;
+}
+
+.dup-modal-top-row {
+    padding-bottom: 20px !important;
 }

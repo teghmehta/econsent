@@ -4,7 +4,7 @@
     <list default="true" id="c02733d7-d4a9-4ce8-a87a-d7686d50c11f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Forms/DuplicateModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Forms/DuplicateModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Forms/FormsContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Forms/FormsContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Forms/Forms.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Forms/Forms.css" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -38,20 +38,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/Forms/Forms.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1146">
-              <caret line="195" column="16" selection-start-line="195" selection-start-column="16" selection-end-line="195" selection-end-column="16" />
+            <state relative-caret-position="1093">
+              <caret line="196" column="21" selection-start-line="196" selection-start-column="21" selection-end-line="196" selection-end-column="21" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Forms/FormsContainer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="754">
-              <caret line="278" column="88" lean-forward="true" selection-start-line="278" selection-start-column="88" selection-end-line="278" selection-end-column="88" />
+            <state relative-caret-position="960">
+              <caret line="332" column="32" selection-start-line="332" selection-start-column="32" selection-end-line="332" selection-end-column="32" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -62,8 +62,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Forms/DuplicateModal.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="412">
-              <caret line="35" column="78" selection-start-line="35" selection-start-column="78" selection-end-line="35" selection-end-column="78" />
+            <state relative-caret-position="952">
+              <caret line="85" column="82" selection-start-line="85" selection-start-column="82" selection-end-line="85" selection-end-column="82" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -143,9 +143,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>console.l</find>
-      <find>isFormNew</find>
-      <find>blankValidated</find>
       <find>form</find>
       <find>q</find>
       <find>, ,</find>
@@ -160,7 +157,6 @@
       <find>formName</find>
       <find>savedName</find>
       <find>findIn</find>
-      <find>history</find>
       <find>saveJSON</find>
       <find>save</find>
       <find>state.formName</find>
@@ -171,8 +167,12 @@
       <find>.toDateString().split(' ').slice(1).join(' ')</find>
       <find>-</find>
       <find>d</find>
-      <find>handleDateSele</find>
       <find>this.props.formName</find>
+      <find>push</find>
+      <find>timeout</find>
+      <find>history</find>
+      <find>this.props.formNa</find>
+      <find>handleDateSele</find>
     </findStrings>
     <replaceStrings>
       <replace>title</replace>
@@ -222,9 +222,9 @@
         <option value="$PROJECT_DIR$/src/components/Forms/ImgUploader.js" />
         <option value="$PROJECT_DIR$/src/components/Forms/ExitModal.js" />
         <option value="$PROJECT_DIR$/src/components/Forms/BtnToolbar.js" />
-        <option value="$PROJECT_DIR$/src/components/Forms/Forms.css" />
-        <option value="$PROJECT_DIR$/src/components/Forms/DuplicateModal.js" />
         <option value="$PROJECT_DIR$/src/components/Forms/FormsContainer.js" />
+        <option value="$PROJECT_DIR$/src/components/Forms/DuplicateModal.js" />
+        <option value="$PROJECT_DIR$/src/components/Forms/Forms.css" />
       </list>
     </option>
   </component>
@@ -423,14 +423,7 @@
       <workItem from="1554753434748" duration="8835000" />
       <workItem from="1555001382171" duration="77064000" />
       <workItem from="1556735156094" duration="70300000" />
-      <workItem from="1558459623101" duration="24723000" />
-    </task>
-    <task id="LOCAL-00007" summary="Added the form Name and passed it as a prop to the header and form container and displayed it">
-      <created>1555012696138</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1555012696138</updated>
+      <workItem from="1558459623101" duration="26433000" />
     </task>
     <task id="LOCAL-00008" summary="Fixed css bug with the pre vs preline spacing of the lines in the form">
       <created>1555088882793</created>
@@ -768,11 +761,18 @@
       <option name="project" value="LOCAL" />
       <updated>1558723006598</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="Working version">
+      <created>1558723773216</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1558723773216</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="195345000" />
+    <option name="totallyTimeSpent" value="197055000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
@@ -804,7 +804,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fixed the fill in the blank: Removed all the code in FormTextArea and replaced it with a single function in FormContainer that loops through the array and checks if it contains the Bold X" />
     <MESSAGE value="Validates every Form except funder and co-investigators. If it is not empty it submits" />
     <MESSAGE value="This is the potential working version of the validation of forms" />
     <MESSAGE value="Release: Add Validation * or something to display that the form needs to be validated&#10;&#10;Fully working" />
@@ -829,7 +828,8 @@
     <MESSAGE value="Added base code for duplication" />
     <MESSAGE value="Refactored the FormsContainer. Moved everyhting to separate components. Added more basecode to the duplicate." />
     <MESSAGE value="Added duplication working." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added duplication working." />
+    <MESSAGE value="Working version" />
+    <option name="LAST_COMMIT_MESSAGE" value="Working version" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/public/favicon.ico" />
@@ -1007,13 +1007,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Forms/Forms.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1146">
-          <caret line="195" column="16" selection-start-line="195" selection-start-column="16" selection-end-line="195" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Forms/ExitModal.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -1051,23 +1044,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Forms/DuplicateModal.js">
+    <entry file="file://$PROJECT_DIR$/src/components/Forms/FormsContainer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="412">
-          <caret line="35" column="78" selection-start-line="35" selection-start-column="78" selection-end-line="35" selection-end-column="78" />
+        <state relative-caret-position="960">
+          <caret line="332" column="32" selection-start-line="332" selection-start-column="32" selection-end-line="332" selection-end-column="32" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Forms/FormsContainer.js">
+    <entry file="file://$PROJECT_DIR$/src/components/Forms/DuplicateModal.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="754">
-          <caret line="278" column="88" lean-forward="true" selection-start-line="278" selection-start-column="88" selection-end-line="278" selection-end-column="88" />
+        <state relative-caret-position="952">
+          <caret line="85" column="82" selection-start-line="85" selection-start-column="82" selection-end-line="85" selection-end-column="82" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Forms/Forms.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1093">
+          <caret line="196" column="21" selection-start-line="196" selection-start-column="21" selection-end-line="196" selection-end-column="21" />
         </state>
       </provider>
     </entry>

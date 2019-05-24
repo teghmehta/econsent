@@ -65,23 +65,27 @@ class DuplicateModal extends Component {
                         validated={this.state.validated}
                         onSubmit={e => this.handleSubmit(e, )}
                     >
-                        <Form.Control id={'form-group-no-padding'}isInvalid={this.state.isInvalid} maxLength="250" type="text" placeholder={this.props.formName + " - Copy#"} required value={this.state.formName} onChange={e => this.handleChange(e.target.value)}/>
-                        <Form.Control.Feedback type="invalid">
-                            That name is either invalid or taken. Please provide a valid name.
-                        </Form.Control.Feedback>
-                        <DatePicker
-                            selected={this.state.startDate}
-                            onChange={(date) => this.setState({startDate: date})}
-                        />
-                        <ButtonToolbar>
-                            <Button type={'submit'} id={"duplicate-button"} variant="primary">
-                                Duplicate
-                            </Button>
-                            <Button  variant="danger" onClick={() => this.props.closeTextModal()}>
-                                Cancel
-                            </Button>
-                        </ButtonToolbar>
-
+                        <Row
+                            className={'date-picker-modal'}>
+                            <Form.Control id={'form-group-no-padding'}isInvalid={this.state.isInvalid} maxLength="250" type="text" placeholder={this.props.formName + " - Copy#"} required onChange={e => this.handleChange(e.target.value)}/>
+                            <Form.Control.Feedback type="invalid">
+                                That name is either invalid or taken. Please provide a valid name.
+                            </Form.Control.Feedback>
+                        </Row>
+                        <Row>
+                            <ButtonToolbar>
+                                <Button type={'submit'} id={"duplicate-button"} variant="primary">
+                                    Duplicate
+                                </Button>
+                                <Button  variant="danger" onClick={() => this.props.closeTextModal()}>
+                                    Cancel
+                                </Button>
+                            </ButtonToolbar>
+                            <DatePicker
+                                selected={this.state.startDate}
+                                onChange={(date) => this.setState({startDate: date})}
+                            />
+                        </Row>
                     </Form>
                 </Modal.Footer>
             </Modal>

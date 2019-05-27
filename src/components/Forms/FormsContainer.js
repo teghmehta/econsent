@@ -11,6 +11,7 @@ import ImgUploader from "./ImgUploader";
 import ExitModal from "./ExitModal";
 let formData = require('../../constants/constants');
 const MAX_PICTURES = 2;
+const FILL_IN_HERE = "FILLINHERE"
 
 class FormsContainer extends Component {
 
@@ -145,7 +146,7 @@ class FormsContainer extends Component {
 
         let isBlanksUnfilled = false;
         this.state.formData.some((item, index) => {
-            let flag = item.value.replace(/\s/g, '').indexOf("<strong>X</strong>") > -1;
+            let flag = item.value.replace(/\s/g, '').indexOf("<s>" + FILL_IN_HERE + "</s>") > -1 || (item.value.replace(/\s/g, '').indexOf("<s>") > -1 && item.value.replace(/\s/g, '').indexOf("</s>") > -1);
             if (flag) {
                 this.replaceFormData(index, 'isValidated', false);
                 isBlanksUnfilled = true
@@ -182,7 +183,8 @@ class FormsContainer extends Component {
         this.replaceFormData(index, 'value', value);
 
         let replacedItem = value.replace(/\s/g, '').replace('<br>', '');
-        if ((replacedItem === '<p></p>' || replacedItem === '') && (formStateData[index].isValidated !== undefined)) { //if it is empty
+        let areBlanksUnfilled = replacedItem.indexOf("<s>" + FILL_IN_HERE + "</s>") > -1 || (replacedItem.indexOf("<s>") > -1 && replacedItem.indexOf("</s>") > -1);
+        if ((replacedItem === '<p></p>' || replacedItem === '' || areBlanksUnfilled) && (formStateData[index].isValidated !== undefined) ) { //if it is empty
             this.replaceFormData(index, 'isValidated', false)
         } else if (formStateData[index].isValidated !== undefined){
             this.replaceFormData(index, 'isValidated', true)

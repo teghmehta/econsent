@@ -201,3 +201,10 @@ td {
 .dup-modal-top-row {
     padding-bottom: 20px !important;
 }
+
+s {
+    color: red;
+    font-size: 0.9em !important;
+    font-weight: 700;
+    text-decoration: none;
+}

@@ -183,8 +183,7 @@ class FormsContainer extends Component {
         this.replaceFormData(index, 'value', value);
 
         let replacedItem = value.replace(/\s/g, '').replace('<br>', '');
-        let areBlanksUnfilled = replacedItem.indexOf("<s>" + FILL_IN_HERE + "</s>") > -1 || (replacedItem.indexOf("<s>") > -1 && replacedItem.indexOf("</s>") > -1);
-        if ((replacedItem === '<p></p>' || replacedItem === '' || areBlanksUnfilled) && (formStateData[index].isValidated !== undefined) ) { //if it is empty
+        if ((replacedItem === '<p></p>' || replacedItem === '') && (formStateData[index].isValidated !== undefined) ) { //if it is empty
             this.replaceFormData(index, 'isValidated', false)
         } else if (formStateData[index].isValidated !== undefined){
             this.replaceFormData(index, 'isValidated', true)

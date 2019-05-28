@@ -4,12 +4,14 @@ import ImageHeader from "./ImageHeader";
 import ConsentText from "./ConsentText";
 import {Button, ButtonToolbar} from "react-bootstrap";
 import {withRouter} from "react-router";
+import ConsentTextArea from "./ConsentTextArea";
+import ConsentTable from "./ConsentTable";
 
 class ConsentForm extends Component {
 
     constructor (props) {
         super(props);
-        this.state = {formData: []}
+        this.state = {formData: [], participant: ["", ""], personObtaining: ["", ""]}
     }
 
     componentWillMount () {
@@ -30,13 +32,7 @@ class ConsentForm extends Component {
     getFileArrFromBase64Images(base64Images, base64FileNames) {
         let ImageArray = [];
         ImageArray.push(base64Images.map((base64Picture, index) => {
-            // const i = base64Picture.indexOf('base64,');
-            // const buffer = Buffer.from(base64Picture.slice(i + 7), 'base64');
             let name = base64FileNames[index];
-            // const file = new File({buffer: buffer, name, type: 'image/png'});
-            // new File
-            // console.log(file)
-
             const byteString = atob(base64Picture.split(',')[1]);
             const ab = new ArrayBuffer(byteString.length);
             const ia = new Uint8Array(ab);
@@ -57,8 +53,14 @@ class ConsentForm extends Component {
         this.props.history.push('/form/' + this.props.formName + '/' + this.props.date)
     }
 
-    render() {
+    changeTableValues(property, value, index) {
+        console.log(property, value);
+        let propertArr = this.state[property];
+        propertArr[index] = value;
+        this.setState({[property]: propertArr})
+    }
 
+    render() {
         if (this.state.formData === null || this.state.formData.length === 0) {
             return (
                 <div id='consent-form-container' className={'consent-form-container'}>
@@ -72,6 +74,7 @@ class ConsentForm extends Component {
                     <ButtonToolbar/>
                     <Button media="print" className={'no-print'} variant="primary" onClick={() => window.print()} >Save</Button>
                     <Button media="print" className={'no-print'} variant="secondary" onClick={this.push.bind(this)} >Go Back</Button>
+                    <Button media="print" className={'no-print'} variant="danger" >Submit</Button>
                     <ButtonToolbar/>
                     <div id='consent-form-container' className={'consent-form-container'}>
                         <table>
@@ -91,6 +94,11 @@ class ConsentForm extends Component {
                                         {this.state.formData.map((form, index) => {
                                             let replacedItem = form.value.replace(/\s/g, '').replace('<br>', '');
                                             if (form.isValidated === undefined && (replacedItem === '<p></p>' || replacedItem === '')) return '';
+
+                                            else if (form.table) return <ConsentTable changeParticipantName={(name) => this.changeTableValues('participant', name, 0)} changePersonObtainingName={(name) => this.changeTableValues('personObtaining', name, 0)}
+                                                                                      changeParticipantDate={(name) => this.changeTableValues('participant', name, 1)} changePersonObtainingDate={(date) => this.changeTableValues('personObtaining', date, 1)}
+                                                                                      nameText={form.value} isFinal={this.props.isFinal}/>;
+
                                             else return <ConsentText table={form.table} key={index} numOfRows={form.numOfRows} heading={form.title} text={form.value}/>
                                         })}
                                     </div>
@@ -102,7 +110,6 @@ class ConsentForm extends Component {
                                 <td className={'footer-td'}>
                                     <div className="footer">
                                         <p className={'print-header'}>Version Date:  {new Date(Date.parse(this.state.formData.find(x => x.date).date)).toDateString().split(' ').slice(1).join(' ')}</p>
-                                        <p className={'page-num'}></p>
                                     </div>
                                 </td>
                             </tr>

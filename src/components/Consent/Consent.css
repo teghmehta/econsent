@@ -109,6 +109,15 @@ li {
     margin-bottom: 0.3rem !important;
 }
 
+.consent-table td{
+    padding-bottom: 0;
+}
+
+td .form-group {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    width: 100%;
+}
 
 .consent-back-button {
     float: left;

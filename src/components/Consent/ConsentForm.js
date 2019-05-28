@@ -11,7 +11,7 @@ class ConsentForm extends Component {
 
     constructor (props) {
         super(props);
-        this.state = {formData: [], participant: ["", ""], personObtaining: ["", ""]}
+        this.state = {formData: [], participant: ["", ""], personObtaining: ["", ""], }
     }
 
     componentWillMount () {
@@ -60,6 +60,10 @@ class ConsentForm extends Component {
         this.setState({[property]: propertArr})
     }
 
+    submitTextFields() {
+        this.props.history.push('/submit/' + encodeURIComponent(this.props.formName) + '/' + encodeURIComponent(this.props.date) + '/' + encodeURIComponent('true'), {participant: this.state.participant, personObtaining: this.state.personObtaining})
+    }
+
     render() {
         if (this.state.formData === null || this.state.formData.length === 0) {
             return (
@@ -74,7 +78,7 @@ class ConsentForm extends Component {
                     <ButtonToolbar/>
                     <Button media="print" className={'no-print'} variant="primary" onClick={() => window.print()} >Save</Button>
                     <Button media="print" className={'no-print'} variant="secondary" onClick={this.push.bind(this)} >Go Back</Button>
-                    <Button media="print" className={'no-print'} variant="danger" >Submit</Button>
+                    <Button media="print" className={'no-print'} variant="danger" onClick={() => this.submitTextFields()}>Submit</Button>
                     <ButtonToolbar/>
                     <div id='consent-form-container' className={'consent-form-container'}>
                         <table>
@@ -97,7 +101,8 @@ class ConsentForm extends Component {
 
                                             else if (form.table) return <ConsentTable changeParticipantName={(name) => this.changeTableValues('participant', name, 0)} changePersonObtainingName={(name) => this.changeTableValues('personObtaining', name, 0)}
                                                                                       changeParticipantDate={(name) => this.changeTableValues('participant', name, 1)} changePersonObtainingDate={(date) => this.changeTableValues('personObtaining', date, 1)}
-                                                                                      nameText={form.value} isFinal={this.props.isFinal}/>;
+                                                                                      nameText={form.value} isFinal={this.props.isFinal} participant={this.props.location.participant} personObtaining={this.props.location.personObtaining}
+                                                                                      resetForm={() => this.props.history.push('/submit/' + encodeURIComponent(this.props.formName) + '/' + encodeURIComponent(this.props.date) + '/' + encodeURIComponent('false'))}/>;
 
                                             else return <ConsentText table={form.table} key={index} numOfRows={form.numOfRows} heading={form.title} text={form.value}/>
                                         })}

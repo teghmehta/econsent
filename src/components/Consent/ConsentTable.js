@@ -17,6 +17,11 @@ class ConsentTable extends Component {
         this.handleDate = this.handleDate.bind(this);
     }
 
+    componentWillReceiveProps(nextProps, nextContext) {
+        console.log('e')
+
+    }
+
     handleName(name) {
         if (this.props.nameText === 'Name of Participant') {
             this.props.changeParticipantName(name);
@@ -37,21 +42,25 @@ class ConsentTable extends Component {
         return this.state.formValue !== nextState.formValue;
     }
 
+
+
     render() {
+        if (this.props.isFinal === 'true' & (this.props.participant === undefined || this.props.personObtaining === undefined)) this.props.resetForm();
+        console.log(this.props.participant)
         return (
             <table className={'consent-table'}>
                 <tbody>
                     <tr>
                         <td className="name-td">
                             {this.props.isFinal === 'false' ?
-                                <ConsentTextArea handleChange={(name) => this.handleName(name)}/> : 'true'}
+                                <ConsentTextArea handleChange={(name) => this.handleName(name)}/> : (this.props.nameText === 'Name of Participant' ? this.props.participant[0] : this.props.personObtaining[0])}
                         </td>
                         <td className="signature-td">
 
                         </td>
                         <td className="date-td">
                             {this.props.isFinal === 'false' ?
-                                <ConsentTextArea handleChange={(date) => this.handleDate(date)}/> : 'true'}
+                                <ConsentTextArea handleChange={(date) => this.handleDate(date)}/> : (this.props.nameText === 'Name of Participant' ? this.props.participant[1] : this.props.personObtaining[1])}
                         </td>
                     </tr>
                     <tr>

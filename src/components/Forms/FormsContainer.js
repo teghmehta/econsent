@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Forms.css';
-import {ButtonToolbar, Button, Modal, Form, Row, Col} from "react-bootstrap";
+import {Form} from "react-bootstrap";
 import Header from "../Header/Header";
 import {withRouter} from "react-router";
 import "react-datepicker/dist/react-datepicker.css";
@@ -9,9 +9,15 @@ import DuplicateModal from "./DuplicateModal";
 import BtnToolbar from "./BtnToolbar";
 import ImgUploader from "./ImgUploader";
 import ExitModal from "./ExitModal";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 let formData = require('../../constants/constants');
 const MAX_PICTURES = 2;
 const FILL_IN_HERE = "FILLINHERE"
+const options = {
+    autoClose: 2000,
+    hideProgressBar: true,
+};
 
 class FormsContainer extends Component {
 
@@ -85,6 +91,7 @@ class FormsContainer extends Component {
     };
 
     saveJson(shouldPush) {
+        toast.info("Saved.", options);
         let validJson = this.replaceAndValidatedOnSave(this.props.date);
         window.localStorage.setItem(
             this.state.localStorageKey,
@@ -295,7 +302,7 @@ class FormsContainer extends Component {
             JSON.stringify(validJson)
         );
         this.setState({showTextModal: false})
-
+        toast.info("Form Duplicated.", options);
     }
 
 
@@ -304,6 +311,7 @@ class FormsContainer extends Component {
             <div className={'app-container'}>
                 <Header formName={this.state.localStorageKey} handleShow={this.handleShow} savingText={this.state.savingText}/>
                 <div className={'forms-container'}>
+                    <ToastContainer />
                     <Form onSubmit={e => this.handleSubmit(e)}>
                         {this.state.formData.map(function(form, index) {
                             if (form.date !== undefined || form.base64Images !== undefined) return ''; //Do not display the date JSON

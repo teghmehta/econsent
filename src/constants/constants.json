@@ -141,7 +141,9 @@
 
   {
     "table": "participant",
-    "value": "Name of Participant"
+    "value": "Name of Participant",
+    "name": "",
+    "consentDate": ""
   },
   {
     "title": "",
@@ -151,7 +153,9 @@
   },
   {
     "table": "person-obtaining",
-    "value": "Name of Person obtaining consent (print)"
+    "value": "Name of Person obtaining consent (print)",
+    "name": "",
+    "consentDate": ""
   },
   {
     "date": "",

@@ -4,14 +4,13 @@ import ImageHeader from "./ImageHeader";
 import ConsentText from "./ConsentText";
 import {Button, ButtonToolbar} from "react-bootstrap";
 import {withRouter} from "react-router";
-import ConsentTextArea from "./ConsentTextArea";
 import ConsentTable from "./ConsentTable";
 
 class ConsentForm extends Component {
 
     constructor (props) {
         super(props);
-        this.state = {formData: [], participant: ["", ""], personObtaining: ["", ""], }
+        this.state = {formData: [], participant: ["", ""], personObtaining: ["", ""], isFinal: false}
     }
 
     componentWillMount () {
@@ -26,7 +25,7 @@ class ConsentForm extends Component {
 
         this.setState({formData: JSON.parse(json)});
 
-        console.log('ConsentForm', this.state.formData);
+
     };
 
     getFileArrFromBase64Images(base64Images, base64FileNames) {
@@ -61,7 +60,25 @@ class ConsentForm extends Component {
     }
 
     submitTextFields() {
-        this.props.history.push('/submit/' + encodeURIComponent(this.props.formName) + '/' + encodeURIComponent(this.props.date) + '/' + encodeURIComponent('true'), {participant: this.state.participant, personObtaining: this.state.personObtaining})
+        // let formData = this.state.formData;
+        // let nameOfParticpatingIndex = this.state.formData.findIndex(form => form.value === 'Name of Participant');
+        // let nameOfPersonObtainingIndex = this.state.formData.findIndex(form => form.value === 'Name of Person obtaining consent (print)');
+        // console.log(formData[nameOfParticpatingIndex], formData[nameOfPersonObtainingIndex])
+        // formData[nameOfParticpatingIndex].name = this.state.participant[0];
+        // formData[nameOfParticpatingIndex].consentDate = this.state.participant[1];
+        // formData[nameOfPersonObtainingIndex].name = this.state.personObtaining[0];
+        // formData[nameOfPersonObtainingIndex].consentDate = this.state.personObtaining[1];
+        // let validJson;
+        // validJson = this.validateJson(JSON.stringify(formData));
+        // if (!validJson) {
+        //     return;
+        // }
+        // window.localStorage.setItem(
+        //     this.props.formName + ' - ' + new Date(Date.parse(this.props.date)).toDateString().split(' ').slice(1).join(' '),
+        //     validJson
+        // );
+        // this.props.history.push('/submit/' + encodeURIComponent(this.props.formName) + '/' + encodeURIComponent(this.props.date) + '/' + encodeURIComponent('true'))
+        this.setState({isFinal: true})
     }
 
     render() {
@@ -92,7 +109,9 @@ class ConsentForm extends Component {
                             <tr>
                                 <td>
                                     <div className="content">
-                                        <ImageHeader  base64Images={this.state.formData.find(x => x.base64Images).base64Images} pictures={this.getFileArrFromBase64Images(this.state.formData.find(x => x.base64Images).base64Images, this.state.formData.find(x => x.base64FileNames).base64FileNames)} base64FileNames={this.state.formData.find(x => x.base64FileNames).base64FileNames}/>
+                                        <ImageHeader  base64Images={this.state.formData.find(x => x.base64Images).base64Images}
+                                                      pictures={this.getFileArrFromBase64Images(this.state.formData.find(x => x.base64Images).base64Images, this.state.formData.find(x => x.base64FileNames).base64FileNames)}
+                                                      base64FileNames={this.state.formData.find(x => x.base64FileNames).base64FileNames}/>
                                         <h6 className={'consent-form-title'}>PATIENT INFORMED CONSENT TO PARTICIPATE IN A RESEARCH STUDY</h6>
 
                                         {this.state.formData.map((form, index) => {
@@ -101,8 +120,7 @@ class ConsentForm extends Component {
 
                                             else if (form.table) return <ConsentTable changeParticipantName={(name) => this.changeTableValues('participant', name, 0)} changePersonObtainingName={(name) => this.changeTableValues('personObtaining', name, 0)}
                                                                                       changeParticipantDate={(name) => this.changeTableValues('participant', name, 1)} changePersonObtainingDate={(date) => this.changeTableValues('personObtaining', date, 1)}
-                                                                                      nameText={form.value} isFinal={this.props.isFinal} participant={this.props.location.participant} personObtaining={this.props.location.personObtaining}
-                                                                                      resetForm={() => this.props.history.push('/submit/' + encodeURIComponent(this.props.formName) + '/' + encodeURIComponent(this.props.date) + '/' + encodeURIComponent('false'))}/>;
+                                                                                      nameText={form.value} isFinal={this.state.isFinal} participant={this.state.participant} personObtaining={this.state.personObtaining} />;
 
                                             else return <ConsentText table={form.table} key={index} numOfRows={form.numOfRows} heading={form.title} text={form.value}/>
                                         })}

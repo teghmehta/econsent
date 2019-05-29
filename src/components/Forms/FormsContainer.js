@@ -171,7 +171,7 @@ class FormsContainer extends Component {
             this.saveJson();
         } else {
             this.saveJson(true);
-            this.props.history.push('/submit/' + encodeURIComponent(this.props.formName) + '/' + encodeURIComponent(this.state.startDate.toString()) + '/' + encodeURIComponent('false'))
+            this.props.history.push('/submit/' + encodeURIComponent(this.props.formName) + '/' + encodeURIComponent(this.state.startDate.toString()));
         }
     }
 

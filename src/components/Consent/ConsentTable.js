@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import 'react-quill/dist/quill.snow.css';
 import ConsentTextArea from "./ConsentTextArea";
 import DatePicker from "react-datepicker";
-
+import SignatureCanvas from "react-signature-canvas";
+import Image from "react-bootstrap/Image";
 class ConsentTable extends Component {
     constructor(props) {
         super(props);
@@ -14,6 +15,7 @@ class ConsentTable extends Component {
 
         this.handleName = this.handleName.bind(this);
         this.handleDate = this.handleDate.bind(this);
+        this.displaySignature = this.displaySignature.bind(this);
         this.handleDate(this.state.date);
     }
 
@@ -55,6 +57,15 @@ class ConsentTable extends Component {
         }
     }
 
+    displaySignature() {
+        if (!this.props.isFinal) {
+            return  <SignatureCanvas ref={(ref) => { this.sigPad = ref }} penColor='black' canvasProps={{width: 500, height: 200, className: 'sigCanvas'}} />
+        } else {
+            return ''
+                // <Image src={this.props.sigPad}/>;
+        }
+    }
+
 
     render() {
         console.log(this.props.participant)
@@ -66,7 +77,7 @@ class ConsentTable extends Component {
                             {this.displayConsentAreaText(0)}
                         </td>
                         <td className="signature-td">
-
+                            {this.displaySignature()}
                         </td>
                         <td className="date-td">
                             {this.displayConsentAreaText(1)}

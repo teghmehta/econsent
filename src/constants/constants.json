@@ -155,7 +155,7 @@
     "table": "person-obtaining",
     "value": "Name of Person obtaining consent (print)",
     "name": "",
-    "consentDate": ""
+    "date": ""
   },
   {
     "date": "",

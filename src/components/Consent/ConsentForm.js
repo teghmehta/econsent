@@ -60,24 +60,6 @@ class ConsentForm extends Component {
     }
 
     submitTextFields() {
-        // let formData = this.state.formData;
-        // let nameOfParticpatingIndex = this.state.formData.findIndex(form => form.value === 'Name of Participant');
-        // let nameOfPersonObtainingIndex = this.state.formData.findIndex(form => form.value === 'Name of Person obtaining consent (print)');
-        // console.log(formData[nameOfParticpatingIndex], formData[nameOfPersonObtainingIndex])
-        // formData[nameOfParticpatingIndex].name = this.state.participant[0];
-        // formData[nameOfParticpatingIndex].consentDate = this.state.participant[1];
-        // formData[nameOfPersonObtainingIndex].name = this.state.personObtaining[0];
-        // formData[nameOfPersonObtainingIndex].consentDate = this.state.personObtaining[1];
-        // let validJson;
-        // validJson = this.validateJson(JSON.stringify(formData));
-        // if (!validJson) {
-        //     return;
-        // }
-        // window.localStorage.setItem(
-        //     this.props.formName + ' - ' + new Date(Date.parse(this.props.date)).toDateString().split(' ').slice(1).join(' '),
-        //     validJson
-        // );
-        // this.props.history.push('/submit/' + encodeURIComponent(this.props.formName) + '/' + encodeURIComponent(this.props.date) + '/' + encodeURIComponent('true'))
         this.setState({isFinal: true})
     }
 

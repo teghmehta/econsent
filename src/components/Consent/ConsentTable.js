@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
-import ReactQuill, {Quill} from "react-quill";
 import 'react-quill/dist/quill.snow.css';
-import {Form} from "react-bootstrap";
 import ConsentTextArea from "./ConsentTextArea";
+import DatePicker from "react-datepicker";
 
 class ConsentTable extends Component {
     constructor(props) {
         super(props);
         this.state = {
             name: '',
-            date: '',
+            date: new Date(),
             validated: false
         };
 
         this.handleName = this.handleName.bind(this);
         this.handleDate = this.handleDate.bind(this);
+        this.handleDate(this.state.date);
     }
 
     handleName(name) {
@@ -26,6 +26,8 @@ class ConsentTable extends Component {
     }
 
     handleDate(date) {
+        this.setState({date});
+        date = date.toDateString().split(' ').slice(1).join(' ');
         if (this.props.nameText === 'Name of Participant') {
             this.props.changeParticipantDate(date);
         } else {
@@ -39,7 +41,10 @@ class ConsentTable extends Component {
             if (index === 0) {
                 return <ConsentTextArea handleChange={(name) => this.handleName(name)}/>;
             } else {
-                return <ConsentTextArea handleChange={(date) => this.handleDate(date)}/>;
+                return <DatePicker
+                    selected={this.state.date}
+                    onChange={(date) => this.handleDate(date)}
+                />
             }
         } else {
             if (this.props.nameText === 'Name of Participant') {

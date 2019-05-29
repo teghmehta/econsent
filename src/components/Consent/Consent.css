@@ -26,6 +26,10 @@
     page-break-after: always;
 }
 
+.date-td {
+    padding-bottom: 0;
+}
+
 .footer {
     font-size: 0.8em;
     text-align: center;

@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c02733d7-d4a9-4ce8-a87a-d7686d50c11f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/Consent/SignaturePad.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Consent/ConsentForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Consent/ConsentForm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Consent/ConsentTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Consent/ConsentTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Consent/ConsentTextArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Consent/ConsentTextArea.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/constants.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/constants.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Forms/FormsContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Forms/FormsContainer.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -24,8 +21,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Forms/FormsContainer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="632">
-              <caret line="64" column="112" selection-start-line="64" selection-start-column="67" selection-end-line="64" selection-end-column="112" />
+            <state relative-caret-position="-877">
+              <caret line="15" column="34" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Consent/StartupForm.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="615">
+              <caret line="41" column="171" selection-start-line="41" selection-start-column="140" selection-end-line="41" selection-end-column="171" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -57,11 +66,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/Consent/ConsentForm.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="101" selection-start-line="101" selection-end-line="101" />
+            <state relative-caret-position="165">
+              <caret line="84" column="20" lean-forward="true" selection-start-line="84" selection-start-column="20" selection-end-line="84" selection-end-column="40" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -69,14 +78,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Consent/ConsentTable.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="236">
-              <caret line="65" column="9" lean-forward="true" selection-start-line="65" selection-start-column="9" selection-end-line="65" selection-end-column="9" />
+            <state relative-caret-position="872">
+              <caret line="64" column="45" selection-start-line="64" selection-start-column="45" selection-end-line="64" selection-end-column="45" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Consent/ConsentTextArea.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="41" selection-start-column="41" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -110,24 +128,6 @@
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/App.test.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="33" selection-start-line="1" selection-start-column="33" selection-end-line="1" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Consent/ConsentTextArea.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="41" selection-start-column="41" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -226,14 +226,14 @@
         <option value="$PROJECT_DIR$/src/components/Forms/Forms.css" />
         <option value="$PROJECT_DIR$/src/components/Consent/FinalForm.js" />
         <option value="$PROJECT_DIR$/src/constants/constants.json" />
-        <option value="$PROJECT_DIR$/src/components/Forms/FormsContainer.js" />
         <option value="$PROJECT_DIR$/src/App.js" />
-        <option value="$PROJECT_DIR$/src/components/Consent/ConsentForm.js" />
         <option value="$PROJECT_DIR$/src/components/Consent/Consent.css" />
         <option value="$PROJECT_DIR$/src/components/Consent/ConsentTextArea.js" />
         <option value="$PROJECT_DIR$/src/components/Consent/SignaturePad.js" />
         <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/src/components/Forms/FormsContainer.js" />
         <option value="$PROJECT_DIR$/src/components/Consent/ConsentTable.js" />
+        <option value="$PROJECT_DIR$/src/components/Consent/ConsentForm.js" />
       </list>
     </option>
   </component>
@@ -243,7 +243,7 @@
     <other-services-enabled>true</other-services-enabled>
     <auto-save>true</auto-save>
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
+  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
     <option name="width" value="1440" />
     <option name="height" value="900" />
   </component>
@@ -432,21 +432,7 @@
       <workItem from="1554753434748" duration="8835000" />
       <workItem from="1555001382171" duration="77064000" />
       <workItem from="1556735156094" duration="70300000" />
-      <workItem from="1558459623101" duration="51555000" />
-    </task>
-    <task id="LOCAL-00016" summary="made header width 200% because when width is 700px it only goes halfway">
-      <created>1555431753571</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1555431753571</updated>
-    </task>
-    <task id="LOCAL-00017" summary="Removed the 200% thing on both the form control and header">
-      <created>1555432027605</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1555432027605</updated>
+      <workItem from="1558459623101" duration="56774000" />
     </task>
     <task id="LOCAL-00018" summary="got rid of directly changing state instead of using setState in FormsContainer and other warnings">
       <created>1555432343514</created>
@@ -777,17 +763,31 @@
       <option name="project" value="LOCAL" />
       <updated>1559157057238</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="Added the signature. The next step is linking it to the ConsentForm page and passing in the base64Url">
+      <created>1559159890721</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1559159890721</updated>
+    </task>
+    <task id="LOCAL-00066" summary="Got signature to work. Untested">
+      <created>1559244103729</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1559244103729</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="222177000" />
+    <option name="totallyTimeSpent" value="227396000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <frame x="0" y="0" width="2560" height="1440" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18252291" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.10200866" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -835,8 +835,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="I cleaned up the code, it works. On save I now save the images too which then the ConsentForm.js now can read in state. The next step is displaying the photos in the ConsentForm" />
-    <MESSAGE value="Now I am converting the image to base64. This way the forms can read it as a file later. But i stillhaven't been able to convert it back from base64 to File" />
     <MESSAGE value="I was able to convert back to File type form base64. I also added another property called base64FileNames which keeps track of the file names for every image." />
     <MESSAGE value="Added Adding Images to the Image Header. But now there are performace issues when typing in the forms" />
     <MESSAGE value="I fixed the performace issue. I added shouldComponentUpdate and made it so the forms that are not being edited do not update. I also moved out the container and label for quill out so it can still be validated. If it isn't updated in the component, then it wont show a Red Label if it is not valid." />
@@ -860,7 +858,9 @@
     <MESSAGE value="SO i tried to pass in the participant and personObtaining as props thru the history.push, but its not working. Also when you go straight to /true and those 2 are undefined, it shows an error. I was trying to redirect it back to /false if that is the case. But it does but still shows the error." />
     <MESSAGE value="I fixed it. Instead of pushing a new URL I just update the state. Now When you type text it shows up on the form. But now I need to validate the form" />
     <MESSAGE value="Added a date picker in place of validation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added a date picker in place of validation" />
+    <MESSAGE value="Added the signature. The next step is linking it to the ConsentForm page and passing in the base64Url" />
+    <MESSAGE value="Got signature to work. Untested" />
+    <option name="LAST_COMMIT_MESSAGE" value="Got signature to work. Untested" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/public/favicon.ico" />
@@ -1059,57 +1059,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Consent/StartupForm.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="741">
-          <caret line="78" column="25" selection-start-line="78" selection-start-column="25" selection-end-line="78" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Consent/Consent.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="149">
           <caret line="28" column="9" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Forms/FormTextArea.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Forms/BtnToolbar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="67" selection-start-line="11" selection-start-column="67" selection-end-line="11" selection-end-column="67" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Forms/FormsContainer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="632">
-          <caret line="64" column="112" selection-start-line="64" selection-start-column="67" selection-end-line="64" selection-end-column="112" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Consent/ConsentTextArea.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="41" selection-start-column="41" selection-end-column="41" />
         </state>
       </provider>
     </entry>
@@ -1147,10 +1100,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Consent/ConsentForm.js">
+    <entry file="file://$PROJECT_DIR$/src/components/Consent/ConsentTextArea.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="101" selection-start-line="101" selection-end-line="101" />
+        <state>
+          <caret column="41" selection-start-column="41" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Forms/FormTextArea.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Forms/FormsContainer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-877">
+          <caret line="15" column="34" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Forms/BtnToolbar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="67" selection-start-line="11" selection-start-column="67" selection-end-line="11" selection-end-column="67" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Consent/StartupForm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="41" column="171" selection-start-line="41" selection-start-column="140" selection-end-line="41" selection-end-column="171" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
@@ -1159,8 +1149,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Consent/ConsentTable.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="65" column="9" lean-forward="true" selection-start-line="65" selection-start-column="9" selection-end-line="65" selection-end-column="9" />
+        <state relative-caret-position="872">
+          <caret line="64" column="45" selection-start-line="64" selection-start-column="45" selection-end-line="64" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Consent/ConsentForm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="84" column="20" lean-forward="true" selection-start-line="84" selection-start-column="20" selection-end-line="84" selection-end-column="40" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>

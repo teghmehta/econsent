@@ -13,9 +13,10 @@ class ConsentTable extends Component {
             validated: false
         };
 
-        this.handleName = this.handleName.bind(this);
-        this.handleDate = this.handleDate.bind(this);
+        // this.handleName = this.handleName.bind(this);
+        // this.handleDate = this.handleDate.bind(this);
         this.displaySignature = this.displaySignature.bind(this);
+        // this.handleDate(this.state.date);
         this.handleDate(this.state.date);
     }
 
@@ -23,29 +24,24 @@ class ConsentTable extends Component {
         this.props.onRef(this)
     }
 
-    handleName(name) {
-        if (this.props.nameText === 'Name of Participant') {
-            this.props.changeParticipantName(name);
-        } else {
-            this.props.changePersonObtainingName(name);
-        }
-    }
-
+    // handleName(name) {
+    //     if (this.props.nameText === 'Name of Participant') {
+    //         this.props.changeParticipantName(name);
+    //     } else {
+    //         this.props.changePersonObtainingName(name);
+    //     }
+    // }
+    //
     handleDate(date) {
         this.setState({date});
-        date = date.toDateString().split(' ').slice(1).join(' ');
-        if (this.props.nameText === 'Name of Participant') {
-            this.props.changeParticipantDate(date);
-        } else {
-            this.props.changePersonObtainingDate(date);
-        }
+        this.props.changeNameDateArray(date)
     }
 
 
     displayConsentAreaText(index) {
         if (!this.props.isFinal) {
             if (index === 0) {
-                return <ConsentTextArea handleChange={(name) => this.handleName(name)}/>;
+                return <ConsentTextArea handleChange={(name) => this.props.changeNameDateArray(name)}/>;
             } else {
                 return <DatePicker
                     selected={this.state.date}
@@ -64,7 +60,9 @@ class ConsentTable extends Component {
     trim = () => {
         this.setState({trimmedDataURL: this.sigPad.getTrimmedCanvas()
                 .toDataURL('image/png')})
-    }
+    };
+
+    isEmpty() { return this.sigPad.isEmpty();}
 
     displaySignature() {
         if (!this.props.isFinal) {

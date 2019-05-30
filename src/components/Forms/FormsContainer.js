@@ -13,7 +13,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 let formData = require('../../constants/constants');
 const MAX_PICTURES = 2;
-const FILL_IN_HERE = "FILLINHERE"
+const FILL_IN_HERE = "FILLINHERE";
 const options = {
     autoClose: 2000,
     hideProgressBar: true,

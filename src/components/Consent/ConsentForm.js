@@ -7,6 +7,12 @@ import {withRouter} from "react-router";
 import ConsentTable from "./ConsentTable";
 import {toast} from "react-toastify";
 
+
+const options = {
+    autoClose: 2000,
+    hideProgressBar: true,
+};
+
 class ConsentForm extends Component {
 
     constructor (props) {
@@ -54,27 +60,40 @@ class ConsentForm extends Component {
         this.props.history.push('/form/' + this.props.formName + '/' + this.props.date)
     }
 
-    changeTableValues(property, value, index) {
-        console.log(property, value);
+    changeTableValues(value, nameText) {
+        let property, index;
+        if (nameText === 'Name of Participant') property = 'participant';
+        else property = 'personObtaining';
+
+        if (value instanceof Date) {
+            index = 1;
+            value = value.toDateString().split(' ').slice(1).join(' ');
+        } else index = 0;
+
         let propertArr = this.state[property];
         propertArr[index] = value;
         this.setState({[property]: propertArr})
     }
 
+    areTableArraysValid() {
+        return 50 > this.state.personObtaining[0].length > 0 || 50 > !this.state.participant[0].length > 0;
+    }
+
     submitTextFields() {
-        console.log()
-        this.state.sigPadRefNames.map((item)=>{
+        this.state.sigPadRefNames.map((item) => {
             try {
-                console.log(item)
-                this[item].trim()
+                if (this[item].isEmpty()) {
+                    toast.warn("Please Sign Below", options)
+                } else if (this.areTableArraysValid) {
+                    toast.warn("Please Fill in all Fields Below", options)
+                } else {
+                    this[item].trim();
+                    this.setState({isFinal: true})
+                }
             }catch (e) {
-                toast.error("Error Showing Signatures.", {
-                    autoClose: 2000,
-                    hideProgressBar: true,
-                });
+                console.log(e)
             }
         });
-        this.setState({isFinal: true})
     }
 
     setConsentTableSigPadRefs(item,ref) {
@@ -126,11 +145,9 @@ class ConsentForm extends Component {
                                             let replacedItem = form.value.replace(/\s/g, '').replace('<br>', '');
                                             if (form.isValidated === undefined && (replacedItem === '<p></p>' || replacedItem === '')) return '';
 
-                                            else if (form.table) return <ConsentTable changeParticipantName={(name) => this.changeTableValues('participant', name, 0)}
-                                                                                      changePersonObtainingName={(name) => this.changeTableValues('personObtaining', name, 0)}
-                                                                                      changeParticipantDate={(name) => this.changeTableValues('participant', name, 1)}
-                                                                                      changePersonObtainingDate={(date) => this.changeTableValues('personObtaining', date, 1)}
-
+                                            else if (form.table) return <ConsentTable
+                                                                                      changeNameDateArray={(value) => this.changeTableValues(value, form.value)}
+                                                                                      key={index}
                                                                                       onRef={(ref) => this.setConsentTableSigPadRefs('consentTable'+index, ref)}
                                                                                       sigPadImage={this.state.sigPad}
                                                                                       nameText={form.value} isFinal={this.state.isFinal}

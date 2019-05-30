@@ -19,6 +19,10 @@ class ConsentTable extends Component {
         this.handleDate(this.state.date);
     }
 
+    componentDidMount() {
+        this.props.onRef(this)
+    }
+
     handleName(name) {
         if (this.props.nameText === 'Name of Participant') {
             this.props.changeParticipantName(name);
@@ -57,12 +61,16 @@ class ConsentTable extends Component {
         }
     }
 
+    trim = () => {
+        this.setState({trimmedDataURL: this.sigPad.getTrimmedCanvas()
+                .toDataURL('image/png')})
+    }
+
     displaySignature() {
         if (!this.props.isFinal) {
-            return  <SignatureCanvas ref={(ref) => { this.sigPad = ref }} penColor='black' canvasProps={{width: 500, height: 200, className: 'sigCanvas'}} />
+            return  <SignatureCanvas ref={(ref) => {this.sigPad = ref;}} penColor='black' canvasProps={{width: 500, height: 200, className: 'sigCanvas'}} />
         } else {
-            return ''
-                // <Image src={this.props.sigPad}/>;
+            return <Image src={this.state.trimmedDataURL}/>;
         }
     }
 
@@ -84,13 +92,13 @@ class ConsentTable extends Component {
                         </td>
                     </tr>
                     <tr>
-                        <td class="name-td">
-                            <div class="doc-border-top">{this.props.nameText}</div>
+                        <td className="name-td">
+                            <div className="doc-border-top">{this.props.nameText}</div>
                         </td>
-                        <td class="signature-td">
-                            <div class="doc-border-top"> Signature </div>
+                        <td className="signature-td">
+                            <div className="doc-border-top"> Signature </div>
                         </td>
-                        <td class="date-td"> <div class="doc-border-top"> Date </div>
+                        <td className="date-td"> <div className="doc-border-top"> Date </div>
                         </td>
                     </tr>
                 </tbody>

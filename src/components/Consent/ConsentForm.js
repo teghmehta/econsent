@@ -5,12 +5,13 @@ import ConsentText from "./ConsentText";
 import {Button, ButtonToolbar} from "react-bootstrap";
 import {withRouter} from "react-router";
 import ConsentTable from "./ConsentTable";
+import {toast} from "react-toastify";
 
 class ConsentForm extends Component {
 
     constructor (props) {
         super(props);
-        this.state = {formData: [], participant: ["", ""], personObtaining: ["", ""], isFinal: false}
+        this.state = {formData: [], participant: ["", ""], personObtaining: ["", ""], isFinal: false, sigPadRefNames: ["", ""]}
     }
 
     componentWillMount () {
@@ -19,7 +20,8 @@ class ConsentForm extends Component {
 
 
     loadJson = () => {
-        const json = window.localStorage.getItem(this.props.formName + ' - ' + new Date(Date.parse(this.props.date)).toDateString().split(' ').slice(1).join(' '));
+        const json = window.localStorage.getItem(this.props.formName + ' - '
+            + new Date(Date.parse(this.props.date)).toDateString().split(' ').slice(1).join(' '));
 
         console.log('ConsentForm', JSON.parse(json));
 
@@ -60,7 +62,27 @@ class ConsentForm extends Component {
     }
 
     submitTextFields() {
+        console.log()
+        this.state.sigPadRefNames.map((item)=>{
+            try {
+                console.log(item)
+                this[item].trim()
+            }catch (e) {
+                toast.error("Error Showing Signatures.", {
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                });
+            }
+        });
         this.setState({isFinal: true})
+    }
+
+    setConsentTableSigPadRefs(item,ref) {
+        console.log(item)
+        this[item] = ref;
+        let sigArray = this.state.sigPadRefNames;
+        sigArray.push(item);
+        this.setState({sigPadRefNames: sigArray})
     }
 
     render() {
@@ -92,17 +114,28 @@ class ConsentForm extends Component {
                                 <td>
                                     <div className="content">
                                         <ImageHeader  base64Images={this.state.formData.find(x => x.base64Images).base64Images}
-                                                      pictures={this.getFileArrFromBase64Images(this.state.formData.find(x => x.base64Images).base64Images, this.state.formData.find(x => x.base64FileNames).base64FileNames)}
+
+                                                      pictures={this.getFileArrFromBase64Images(this.state.formData.find(x => x.base64Images).base64Images,
+                                                          this.state.formData.find(x => x.base64FileNames).base64FileNames)}
+
                                                       base64FileNames={this.state.formData.find(x => x.base64FileNames).base64FileNames}/>
+
                                         <h6 className={'consent-form-title'}>PATIENT INFORMED CONSENT TO PARTICIPATE IN A RESEARCH STUDY</h6>
 
                                         {this.state.formData.map((form, index) => {
                                             let replacedItem = form.value.replace(/\s/g, '').replace('<br>', '');
                                             if (form.isValidated === undefined && (replacedItem === '<p></p>' || replacedItem === '')) return '';
 
-                                            else if (form.table) return <ConsentTable changeParticipantName={(name) => this.changeTableValues('participant', name, 0)} changePersonObtainingName={(name) => this.changeTableValues('personObtaining', name, 0)}
-                                                                                      changeParticipantDate={(name) => this.changeTableValues('participant', name, 1)} changePersonObtainingDate={(date) => this.changeTableValues('personObtaining', date, 1)}
-                                                                                      nameText={form.value} isFinal={this.state.isFinal} participant={this.state.participant} personObtaining={this.state.personObtaining} />;
+                                            else if (form.table) return <ConsentTable changeParticipantName={(name) => this.changeTableValues('participant', name, 0)}
+                                                                                      changePersonObtainingName={(name) => this.changeTableValues('personObtaining', name, 0)}
+                                                                                      changeParticipantDate={(name) => this.changeTableValues('participant', name, 1)}
+                                                                                      changePersonObtainingDate={(date) => this.changeTableValues('personObtaining', date, 1)}
+
+                                                                                      onRef={(ref) => this.setConsentTableSigPadRefs('consentTable'+index, ref)}
+                                                                                      sigPadImage={this.state.sigPad}
+                                                                                      nameText={form.value} isFinal={this.state.isFinal}
+                                                                                      participant={this.state.participant}
+                                                                                      personObtaining={this.state.personObtaining} />;
 
                                             else return <ConsentText table={form.table} key={index} numOfRows={form.numOfRows} heading={form.title} text={form.value}/>
                                         })}

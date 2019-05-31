@@ -130,16 +130,16 @@ class ConsentForm extends Component {
                     <Button media="print" className={'no-print'} variant="danger" onClick={() => this.submitTextFields()}>Submit</Button>
                     <ButtonToolbar/>
                     <div id='consent-form-container' className={'consent-form-container'}>
-                        <table>
+                        <table className={'consent-content-table-block'}>
                             <thead>
-                            <tr>
+                            <tr >
                                 <td>
                                 </td>
                             </tr>
                             </thead>
-                            <tbody>
-                            <tr>
-                                <td>
+                            <tbody className={'consent-content-table-block'}>
+                            <tr className={'consent-content-table-block'}>
+                                <td className={'consent-content-table-block'}>
                                     <div className="content">
                                         <ImageHeader  base64Images={this.state.formData.find(x => x.base64Images).base64Images}
 

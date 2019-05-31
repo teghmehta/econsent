@@ -103,8 +103,7 @@ class FormsContainer extends Component {
                 this.state.localStorageKey,
                 validJson
             );
-
-            console.log(this.state.startDate.getTime() !== new Date(Date.parse(this.props.date)).getTime(), this.state.startDate, new Date(Date.parse(this.props.date)));
+            toast.info("Form Duplicated with new Date.", options);
 
             if (!shouldPush) this.props.history.push('/form/' + encodeURIComponent(this.state.formName) + '/' + encodeURIComponent(this.state.startDate.toString()));
         }
@@ -222,11 +221,11 @@ class FormsContainer extends Component {
             || (this.state.lastPicturesLength === 0 && pictures.length > MAX_PICTURES)
             || (Math.abs(pictures.length - this.state.lastPicturesLength) > MAX_PICTURES)
             || (Math.abs(pictures.length - this.state.lastPicturesLength) > MAX_PICTURES-1 && this.state.base64Images.length === MAX_PICTURES-1)) {
-            alert("You have already reached the image limit.")
+            toast.warn("You have already reached the image limit.", options)
         } else {
 
             if (this.state.base64Images.length === MAX_PICTURES-1 && this.state.base64FileNames[0] === pictures[pictures.length-1].name) {
-                alert('There is already an Image with the same name!');
+                toast.warn("There is already an Image with the same name!", options)
                 return;
             }
 
@@ -253,7 +252,7 @@ class FormsContainer extends Component {
                 console.log(reader.result)
             }.bind(this);
             reader.onerror = function (error) {
-                console.log('Error: ', error);
+                toast.error("Error while loading images", options)
             };
         });
 

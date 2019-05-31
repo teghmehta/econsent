@@ -4,6 +4,7 @@ import ConsentTextArea from "./ConsentTextArea";
 import DatePicker from "react-datepicker";
 import SignatureCanvas from "react-signature-canvas";
 import Image from "react-bootstrap/Image";
+import {Form} from "react-bootstrap";
 class ConsentTable extends Component {
     constructor(props) {
         super(props);
@@ -41,9 +42,10 @@ class ConsentTable extends Component {
     displayConsentAreaText(index) {
         if (!this.props.isFinal) {
             if (index === 0) {
-                return <ConsentTextArea handleChange={(name) => this.props.changeNameDateArray(name)}/>;
+                return <ConsentTextArea label={this.props.nameText} handleChange={(name) => this.props.changeNameDateArray(name)}/>;
             } else {
                 return <DatePicker
+                    className={'consent-date-picker'}
                     selected={this.state.date}
                     onChange={(date) => this.handleDate(date)}
                 />
@@ -66,7 +68,7 @@ class ConsentTable extends Component {
 
     displaySignature() {
         if (!this.props.isFinal) {
-            return  <SignatureCanvas ref={(ref) => {this.sigPad = ref;}} penColor='black' canvasProps={{width: 500, height: 200, className: 'sigCanvas'}} />
+            return  <SignatureCanvas ref={(ref) => {this.sigPad = ref;}} penColor='black' canvasProps={{minWidth: 0.01, className: 'sigCanvas'}} />
         } else {
             return <Image src={this.state.trimmedDataURL}/>;
         }
@@ -74,16 +76,26 @@ class ConsentTable extends Component {
 
 
     render() {
-        console.log(this.props.participant)
-        return (
-            <table className={'consent-table'}>
-                <tbody>
+        console.log(this.props.participant);
+
+        if (!this.props.isFinal) {
+            return (
+                <div className={'isNotFinal-div'}>
+                    <div className={'table-div name-div'}>{this.displayConsentAreaText(0)}</div>
+                    <div className={'table-div sig-div'}><Form.Label>Signature</Form.Label><SignatureCanvas ref={(ref) => {this.sigPad = ref;}} penColor='black' canvasProps={{height: 200, className: 'sigCanvas'}} /></div>
+                    <div className={'table-div date-div'}><Form.Label>Date</Form.Label>{this.displayConsentAreaText(1)}</div>
+                </div>
+            )
+        } else {
+            return (
+                <table className={'consent-table'}>
+                    <tbody>
                     <tr>
                         <td className="name-td">
                             {this.displayConsentAreaText(0)}
                         </td>
                         <td className="signature-td">
-                            {this.displaySignature()}
+                            <Image src={this.state.trimmedDataURL}/>
                         </td>
                         <td className="date-td">
                             {this.displayConsentAreaText(1)}
@@ -99,9 +111,11 @@ class ConsentTable extends Component {
                         <td className="date-td"> <div className="doc-border-top"> Date </div>
                         </td>
                     </tr>
-                </tbody>
-            </table>
-        )
+                    </tbody>
+                </table>
+            )
+        }
+
 
     }
 }

@@ -239,6 +239,14 @@ td .form-group {
     p, li {
         font-size: 0.9em;
     }
+
+    .doc-border-top {
+        padding: 0 0 10px 0;
+    }
+
+    .signature-td img {
+        width: 70%;
+    }
 }
 
 @media print

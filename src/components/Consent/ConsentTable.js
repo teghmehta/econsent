@@ -14,25 +14,12 @@ class ConsentTable extends Component {
             validated: false
         };
 
-        // this.handleName = this.handleName.bind(this);
-        // this.handleDate = this.handleDate.bind(this);
-        this.displaySignature = this.displaySignature.bind(this);
-        // this.handleDate(this.state.date);
         this.handleDate(this.state.date);
     }
 
     componentDidMount() {
         this.props.onRef(this)
     }
-
-    // handleName(name) {
-    //     if (this.props.nameText === 'Name of Participant') {
-    //         this.props.changeParticipantName(name);
-    //     } else {
-    //         this.props.changePersonObtainingName(name);
-    //     }
-    // }
-    //
     handleDate(date) {
         this.setState({date});
         this.props.changeNameDateArray(date)
@@ -65,14 +52,6 @@ class ConsentTable extends Component {
     };
 
     isEmpty() { return this.sigPad.isEmpty();}
-
-    displaySignature() {
-        if (!this.props.isFinal) {
-            return  <SignatureCanvas ref={(ref) => {this.sigPad = ref;}} penColor='black' canvasProps={{minWidth: 0.01, className: 'sigCanvas'}} />
-        } else {
-            return <Image src={this.state.trimmedDataURL}/>;
-        }
-    }
 
 
     render() {

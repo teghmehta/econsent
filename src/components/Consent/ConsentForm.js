@@ -101,6 +101,7 @@ class ConsentForm extends Component {
             toast.warn("Please enter a valid name.", options)
         } else {
             this.setState({isFinal: true})
+            toast.info("Form Signed", options)
         }
     }
 

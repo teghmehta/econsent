@@ -5,9 +5,7 @@ import ConsentText from "./ConsentText";
 import {Button, ButtonToolbar} from "react-bootstrap";
 import {withRouter} from "react-router";
 import ConsentTable from "./ConsentTable";
-import {toast} from "react-toastify";
-
-
+import {toast, ToastContainer} from "react-toastify";
 const options = {
     autoClose: 2000,
     hideProgressBar: true,
@@ -17,7 +15,7 @@ class ConsentForm extends Component {
 
     constructor (props) {
         super(props);
-        this.state = {formData: [], participant: ["", ""], personObtaining: ["", ""], isFinal: false, sigPadRefNames: ["", ""]}
+        this.state = {formData: [], participant: ["", ""], personObtaining: ["", ""], isFinal: false, sigPadRefNames: []}
     }
 
     componentWillMount () {
@@ -75,25 +73,35 @@ class ConsentForm extends Component {
         this.setState({[property]: propertArr})
     }
 
-    areTableArraysValid() {
-        return 50 > this.state.personObtaining[0].length > 0 || 50 > !this.state.participant[0].length > 0;
+    areTableArraysNotValid() {
+        console.log(this.state.personObtaining[0].length, this.state.participant[0].length);
+        let poL = this.state.personObtaining[0].length;
+        let paL =  this.state.participant[0].length;
+        let doesOnlyContainFirstName = this.state.personObtaining[0].split(' ').length === 1 || this.state.participant[0].split(' ').length === 1;
+        return poL === 0 || poL > 50 || paL === 0 || paL > 50 || doesOnlyContainFirstName;
     }
 
     submitTextFields() {
+        let isEmpty, areTableArraysValid;
         this.state.sigPadRefNames.map((item) => {
+            console.log(item)
             try {
-                if (this[item].isEmpty()) {
-                    toast.warn("Please Sign Below", options)
-                } else if (this.areTableArraysValid) {
-                    toast.warn("Please Fill in all Fields Below", options)
-                } else {
+                isEmpty = this[item].isEmpty();
+                areTableArraysValid = this.areTableArraysNotValid();
+                if (!isEmpty && !areTableArraysValid) {
                     this[item].trim();
-                    this.setState({isFinal: true})
                 }
             }catch (e) {
                 console.log(e)
             }
         });
+        if (isEmpty) {
+            toast.warn("Please Sign Below", options)
+        } else if (areTableArraysValid) {
+            toast.warn("Please enter a valid name.", options)
+        } else {
+            this.setState({isFinal: true})
+        }
     }
 
     setConsentTableSigPadRefs(item,ref) {
@@ -115,6 +123,7 @@ class ConsentForm extends Component {
         } else {
             return (
                 <div>
+                    <ToastContainer />
                     <ButtonToolbar/>
                     <Button media="print" className={'no-print'} variant="primary" onClick={() => window.print()} >Save</Button>
                     <Button media="print" className={'no-print'} variant="secondary" onClick={this.push.bind(this)} >Go Back</Button>
@@ -154,7 +163,7 @@ class ConsentForm extends Component {
                                                                                       participant={this.state.participant}
                                                                                       personObtaining={this.state.personObtaining} />;
 
-                                            else return <ConsentText table={form.table} key={index} numOfRows={form.numOfRows} heading={form.title} text={form.value}/>
+                                            else return <ConsentText isFinal={this.state.isFinal} participantName={this.state.participant[0]} table={form.table} key={index} numOfRows={form.numOfRows} heading={form.title} text={form.value}/>
                                         })}
                                     </div>
                                 </td>

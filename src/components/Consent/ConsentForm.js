@@ -155,11 +155,11 @@ class ConsentForm extends Component {
                                             if (form.isValidated === undefined && (replacedItem === '<p></p>' || replacedItem === '')) return '';
 
                                             else if (form.table) return <ConsentTable
-                                                                                      changeNameDateArray={(value) => this.changeTableValues(value, form.value)}
+                                                                                      changeNameDateArray={(value) => this.changeTableValues(value, form.text)}
                                                                                       key={index}
                                                                                       onRef={(ref) => this.setConsentTableSigPadRefs('consentTable'+index, ref)}
                                                                                       sigPadImage={this.state.sigPad}
-                                                                                      nameText={form.value} isFinal={this.state.isFinal}
+                                                                                      nameText={form.text} isFinal={this.state.isFinal}
                                                                                       participant={this.state.participant}
                                                                                       personObtaining={this.state.personObtaining} />;
 

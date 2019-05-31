@@ -167,8 +167,7 @@ class FormsContainer extends Component {
         if (this.areFormsValidated()) {
             event.preventDefault();
             event.stopPropagation();
-            alert("Please fill in all required* fields.")
-            this.saveJson();
+            toast.error("Please Fill in All Fields", options);
         } else {
             this.saveJson(true);
             this.props.history.push('/submit/' + encodeURIComponent(this.props.formName) + '/' + encodeURIComponent(this.state.startDate.toString()));

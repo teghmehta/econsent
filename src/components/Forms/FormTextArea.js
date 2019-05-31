@@ -18,6 +18,7 @@ class FormTextArea extends Component {
 
     handleChange(text) {
         this.setState({formValue: text});
+        console.log(text)
         try {
             this.props.changeValue(text, this.props.index);
         } catch (e) {

@@ -208,3 +208,7 @@ s {
     font-weight: 700;
     text-decoration: none;
 }
+
+.forms-container .date-td {
+    padding-bottom: 10px;
+}

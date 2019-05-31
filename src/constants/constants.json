@@ -141,7 +141,8 @@
 
   {
     "table": "participant",
-    "value": "Name of Participant",
+    "text": "Name of Participant",
+    "value": "<table> <tbody> <tr> <td <div class=\"name-td\"> <div class=\"doc-border-top\"> Name of Participant </div> </td> <td <div class=\"signature-td\"> <div class=\"doc-border-top\"> Signature </div> </td> <td <div class=\"date-td\"> <div class=\"doc-border-top\"> Date </div> </td> </tr> </tbody> </table>",
     "name": "",
     "consentDate": ""
   },
@@ -153,9 +154,10 @@
   },
   {
     "table": "person-obtaining",
-    "value": "Name of Person obtaining consent (print)",
+    "value": "<table> <tbody> <tr> <td <div class=\"name-td\"> <div class=\"doc-border-top\"> Name of Person obtaining consent (print) </div> </td> <td <div class=\"signature-td\"> <div class=\"doc-border-top\"> Signature </div> </td> <td <div class=\"date-td\"> <div class=\"doc-border-top\"> Date </div> </td> </tr> </tbody> </table>",
+    "text": "Name of Person obtaining consent (print)",
     "name": "",
-    "date": ""
+    "consentDate": ""
   },
   {
     "date": "",

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactQuill, {Quill} from "react-quill";
+import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 
 class FormTextArea extends Component {

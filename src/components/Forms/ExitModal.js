@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import '../Forms/Forms.css';
 import {Button, Modal} from "react-bootstrap";
-import ImageUploader from 'react-images-upload';
 
 class ExitModal extends Component {
 

@@ -88,7 +88,7 @@ class ConsentForm extends Component {
     submitTextFields() {
         let isEmpty, areTableArraysValid;
         this.state.sigPadRefNames.map((item) => {
-            console.log(item)
+            console.log(item);
             try {
                 isEmpty = this[item].isEmpty();
                 areTableArraysValid = this.areTableArraysNotValid();

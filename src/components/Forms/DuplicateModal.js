@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../Forms/Forms.css';
-import {Button, ButtonToolbar, Col, Form, Modal, Row} from "react-bootstrap";
+import {Button, ButtonToolbar, Form, Modal, Row} from "react-bootstrap";
 import DatePicker from "react-datepicker";
 
 class DuplicateModal extends Component {

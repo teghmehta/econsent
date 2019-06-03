@@ -55,7 +55,11 @@ class ConsentForm extends Component {
     }
 
     push() {
-        this.props.history.push('/form/' + this.props.formName + '/' + this.props.date)
+        if (this.state.isFinal) {
+            this.setState({isFinal: false})
+        } else {
+            this.props.history.push('/form/' + this.props.formName + '/' + this.props.date)
+        }
     }
 
     changeTableValues(value, nameText) {
@@ -126,8 +130,9 @@ class ConsentForm extends Component {
                 <div>
                     <ToastContainer />
                     <ButtonToolbar/>
-                    <Button media="print" className={'no-print'} variant="primary" onClick={() => window.print()} >Save</Button>
-                    <Button media="print" className={'no-print'} variant="secondary" onClick={this.push.bind(this)} >Go Back</Button>
+                    {this.state.isFinal ? <Button media="print" className={'no-print'} variant="primary" onClick={() => window.print()} >Print</Button> : ""}
+                    <Button media="print" className={'no-print'} variant="secondary" onClick={this.push.bind(this)} >
+                        Go Back {this.state.isFinal ? "and Sign" : "to Form"}</Button>
                     <Button media="print" className={'no-print'} variant="danger" onClick={() => this.submitTextFields()}>Submit</Button>
                     <ButtonToolbar/>
                     <div id='consent-form-container' className={'consent-form-container'}>

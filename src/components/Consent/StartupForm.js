@@ -55,8 +55,14 @@ class StartupForm extends Component {
         let sorted = Object.keys(localStorage).sort();
         console.log(sorted)
         sorted.forEach(function(key, i){
-            let date = new Date(Date.parse(JSON.parse(localStorage.getItem(key)).find(x => x.date !== undefined).date)).toString();
-            let formName = JSON.parse(localStorage.getItem(key)).find(x => x.formName !== undefined).formName;
+            let date = new Date();
+            let formName = '';
+            try {
+                date = new Date(Date.parse(JSON.parse(localStorage.getItem(key)).find(x => x.date !== undefined).date)).toString();
+                formName = JSON.parse(localStorage.getItem(key)).find(x => x.formName !== undefined).formName;
+            } catch (e) {
+
+            }
             rows.push(
                 <div key={i} className={"dropdown-div"}>
                     <Dropdown.Item key={i} href={"/form/" + formName + '/' + date}>Informed Consent Form ({key.length > 30 ? key.substring(0, Math.min(key.length, 70)) + '...'  : key })</Dropdown.Item>
